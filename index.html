@@ -1,0 +1,170 @@
+<html>
+    <head>
+     <title>My Page Title</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800" rel="stylesheet">
+     <link rel="stylesheet" type="text/css"href="styles.css">
+    </head>
+    <body>
+        <div class="headerDiv" id="grad">
+            <div class="headerTxtSmall">Project </div>
+            <div class="headerTxtBig">swergio</div>
+        </div>
+        <div class="goaltxt">
+        <p>"The goal is a framework to <span class="bold">automate</span> the process and production of <span class="bold">analytics</span> for <span class="bold">small data</span> sets"</p>
+        </div>
+        <h2>The Concept</h2>
+        <hr>
+        <div class="row">
+            <div class="col-3">
+                <h3>We want more....</h3>
+            </div> 
+            <div class="col-9">
+                <p>
+                    It is very difficult for one person to know everything and be able to produce all possible analysis.
+                    But in teams, people can complement each other strength to master obstacles easier. <br>
+                    swergio is built on the concept of the collaboration of <span class="bold">autonomous AI agents</span>. 
+                    Therefore not every agent needs to be perfectly trained to know all the answers, but can rather be specialized for a few manageable tasks.
+                </p>
+            </div>
+        </div> 
+
+        <div class="row">
+            <div class="col-3">
+                <h3>Communication is key</h3>
+            </div> 
+            <div class="col-9">
+                <p>
+                        Solving problems in a team without communication isn't possible. swergio AI agents need a clear communication protocol to work efficiently together. <br>
+                        To make the communication in the network easy to access and ready to receive human input and feedback, we want our AI agents to understand and use <span class="bold">natural language</span>.  
+                </p>
+            </div>
+        </div> 
+
+        <div class="row">
+            <div class="col-3">
+                <h3>Never stop learning</h3>
+            </div> 
+            <div class="col-9">
+                <p>
+                    Is it really possible to standardize analytics? 
+                    Can a solution be defined in a static way? 
+                    Expectations are changing, components are heavily influenced by outside factor and there isn't always just the one "right" answer. <br>
+                    We want our agents to be flexible and adaptable in various situation. 
+                    Rather find a new way and approach than a standardized solution. <br>
+                    To achieve this goal the swergio AI agents must be able to <span class="bold">learn continually</span> and optimize their strategies. 
+                    Our approach is to use reinforcement learning methods and immediate <span class="bold">feedback</span> from clients and other agents in the network.                  
+                </p>
+            </div>
+        </div> 
+            
+        <div class="row">
+            <div class="col-3">
+                <h3>Questions?!</h3>
+            </div> 
+            <div class="col-9">
+                <p>
+                Asking questions is essential for learning new things or working in uncertain areas. I
+                t is often easier to ask an expert then try and fail on your own. <br>
+                Using natural language as communication protocol should enable AI agents to <span class="bold">ask experts</span> (humans or other AIs) to clarify uncertainties and improve the learning curve. 
+                </p>
+            </div>
+        </div> 
+
+        <div class="row">
+            <div class="col-3">
+                <h3>Easy like Sunday morning</h3>
+            </div> 
+            <div class="col-9">
+                <p>
+                        The swergio network should be easy to use and flexible enough for multiple problems and settings.
+                        As each component can be started in a <span class="bold">separate container</span>. <br> 
+                        This approach allows a quick setup as well as possible extensions of a running network at any time. 
+                        To start a simple example network look at this docker-compose file.
+                </p>
+            </div>
+        </div> 
+      
+        
+        <h2>Progress and Outlook</h2>
+        <hr/>
+        <div style="margin:30px 15px 45px 15px;">
+        <p><input type="checkbox" checked/> Communication Protocol for separate components</p>
+        <p><input type="checkbox" checked/> Simple example implementation for possible client and worker</p>
+        <p><input type="checkbox" checked/> Example agent using A2C reinforcement learning and VAE-GAN approach</p>
+        <p><input type="checkbox"/> Fully trained example swergio network</p>
+        <p><input type="checkbox" /> Easier way to implement expert trajectories</p>
+        </div>
+        <h2>References</h2>
+        <hr/>
+        <div style="margin:30px 15px 45px 15px;">
+            <p>
+            This project is influenced by several code snippets, libraries, publications and blog posts.
+            These sources and ideas we've been using for code snippets, implementation, and inspiration.
+            </p>
+            <div class="row">
+                <div class="col-3">
+                    <h4>Tensorflow</h4>
+                </div> 
+                <div class="col-9">
+                    <p class="reflink"><a href="https://www.tensorflow.org/">https://www.tensorflow.org/</a></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <h4>Flask-SocketIO</h4>
+                </div> 
+                <div class="col-9">
+                    <p class="reflink"><a href="https://github.com/miguelgrinberg/Flask-SocketIO">https://github.com/miguelgrinberg/Flask-SocketIO</a></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <h4>A2C Model</h4>
+                </div> 
+                <div class="col-9">
+                    <p class="reflink">Publication (<a href="https://arxiv.org/abs/1602.01783">https://arxiv.org/abs/1602.01783</a>)</p>
+                    <p class="reflink">Example implementation in Open AI's  baselines library (<a href="https://www.tensorflow.org/">https://github.com/openai/baselines</a>)</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-3">
+                    <h4>Least Squares GAN (LSGAN)</h4>
+                </div> 
+                <div class="col-9">
+                    <p class="reflink">Publication (<a href="https://arxiv.org/abs/1611.04076v2">https://arxiv.org/abs/1611.04076v2</a>)</p>
+                    <p class="reflink">Blog Post with explanation and implementation from Augustin Kristiadi (<a href="https://wiseodd.github.io/techblog/2017/03/02/least-squares-gan/">https://wiseodd.github.io/techblog/2017/03/02/least-squares-gan/</a>)</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-3">
+                    <h4>MemN2N Model</h4>
+                </div> 
+                <div class="col-9">
+                    <p class="reflink">Publication (<a href="https://arxiv.org/abs/1503.08895v4">https://arxiv.org/abs/1503.08895v4</a>)</p>
+                    <p class="reflink">Example implementation (<a href="https://github.com/carpedm20/MemN2N-tensorflow">https://github.com/carpedm20/MemN2N-tensorflow</a>)</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <h4>VAE-GAN</h4>
+                </div> 
+                <div class="col-9">
+                    <p class="reflink">Publication (<a href="https://arxiv.org/pdf/1512.09300.pdf">https://arxiv.org/pdf/1512.09300.pdf</a>)</p>
+                    <p class="reflink">Example implementation (<a href="https://github.com/timsainb/Tensorflow-MultiGPU-VAE-GAN">https://github.com/timsainb/Tensorflow-MultiGPU-VAE-GAN</a>)</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <h4>Seq2Seq Mode</h4>
+                </div> 
+                <div class="col-9">
+                    <p class="reflink">Explanation and example implementation in tutorial for tensorflow (<a href="https://github.com/tensorflow/nmt">https://github.com/tensorflow/nmt</a>)</p>
+                </div>
+            </div>
+        </div>
+        
+    </body>
+   </html>

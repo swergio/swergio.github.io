@@ -1,0 +1,133 @@
+version: "3.3"
+services:
+  socketioserver:
+    build: ./Utilities/SocketIOServer
+    expose:
+      - "5000"
+    volumes:
+      - type: bind
+        source: ./Utilities/SocketIOServer/Server
+        target: /usr/src/app/Server
+  
+  qatrainer:
+    build: ./Clients/QATrainer
+    links:
+      - socketioserver
+    depends_on:
+      - socketioserver
+      - tina
+    environment:
+      - SOCKETIOSERVER_NAME=socketioserver
+      - SOCKETIOSERVER_PORT=5000
+    volumes:
+      - type: volume
+        source: shared
+        target: /shared
+        volume:
+          nocopy: false
+      - type: bind
+        source: ./Utilities/SwergioUtilityPackage
+        target: /shared/MessageUtilities
+      - type: bind
+        source: ./Clients/QATrainer
+        target: /usr/src/app
+
+  tina:
+    build: ./Agents/A2CGAN
+    ports:
+      - 6006:6006
+    links:
+      - socketioserver
+    depends_on:
+      - socketioserver
+    environment:
+      - SOCKETIOSERVER_NAME=socketioserver
+      - SOCKETIOSERVER_PORT=5000
+      - AGENT_NAMESPACES=QATrainer;TinaBob
+      #- WORKER_NAMESPACES = 
+      #- KNOWLEDGEBASE_NAMESPACES =  
+      - MODELSAVE_PATH=/usr/src/app/savedmodels/tina
+      - LOG_PATH=/usr/src/app/log/tina
+      - EXPERTDATA_PATH=/usr/src/app/Expert.csv
+    volumes:
+      - type: volume
+        source: shared
+        target: /shared
+        volume:
+          nocopy: false
+      - type: bind
+        source: ./Utilities/SwergioUtilityPackage
+        target: /shared/MessageUtilities
+      - type: bind
+        source: ./Agents/A2CGAN/Model
+        target: /usr/src/app/Model
+      - type: bind
+        source: ./Agents/A2CGAN/Runner
+        target: /usr/src/app/Runner
+      #- type: bind
+      #  source: /shared/savedmodels/tina
+      #  target: /usr/src/app/savedmodels/tina
+
+  bob:
+    build: ./Agents/A2CGAN
+    ports:
+      - 6007:6006
+    links:
+      - socketioserver
+    depends_on:
+      - socketioserver
+    environment:
+      - SOCKETIOSERVER_NAME=socketioserver
+      - SOCKETIOSERVER_PORT=5000
+      - AGENT_NAMESPACES=TinaBob
+      - WORKER_NAMESPACES=PythonEvaluation 
+      #- KNOWLEDGEBASE_NAMESPACES = 
+      - MODELSAVE_PATH=/usr/src/app/savedmodels/bob
+      - LOG_PATH=/usr/src/app/log/bob
+      - EXPERTDATA_PATH=/usr/src/app/Expert.csv
+    volumes:
+      - type: volume
+        source: shared
+        target: /shared
+        volume:
+          nocopy: false
+      - type: bind
+        source: ./Utilities/SwergioUtilityPackage
+        target: /shared/MessageUtilities
+      - type: bind
+        source: ./Agents/A2CGAN/Model
+        target: /usr/src/app/Model
+      - type: bind
+        source: ./Agents/A2CGAN/Runner
+        target: /usr/src/app/Runner
+      #- type: bind
+      #  source: /shared/savedmodels/bob
+      #  target: /usr/src/app/savedmodels/bob
+
+  pythoneval:
+    build: ./Workers/PythonEvaluation
+    links:
+      - socketioserver
+    depends_on:
+      - socketioserver
+      - bob
+    environment:
+      - SOCKETIOSERVER_NAME=socketioserver
+      - SOCKETIOSERVER_PORT=5000
+    volumes:
+      - type: volume
+        source: shared
+        target: /shared
+        volume:
+          nocopy: false
+      - type: bind
+        source: ./Utilities/SwergioUtilityPackage
+        target: /shared/MessageUtilities
+      - type: bind
+        source: ./Workers/PythonEvaluation
+        target: /usr/src/app
+
+
+volumes:
+  shared:
+

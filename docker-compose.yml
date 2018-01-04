@@ -1,7 +1,7 @@
 version: "3.3"
 services:
   socketioserver:
-    build: ./Utilities/SocketIOServer
+    image: ishmagurca/swergio_socketiomessageserver
     expose:
       - "5000"
     volumes:
@@ -10,7 +10,7 @@ services:
         target: /usr/src/app/Server
   
   qatrainer:
-    build: ./Clients/QATrainer
+    image: ishmagurca/swergio_client_qatrainer
     links:
       - socketioserver
     depends_on:
@@ -33,7 +33,7 @@ services:
         target: /usr/src/app
 
   tina:
-    build: ./Agents/A2CGAN
+    image: ishmagurca/swergio_agent_a2cgan
     ports:
       - 6006:6006
     links:
@@ -69,7 +69,7 @@ services:
       #  target: /usr/src/app/savedmodels/tina
 
   bob:
-    build: ./Agents/A2CGAN
+    image: ishmagurca/swergio_agent_a2cgan
     ports:
       - 6007:6006
     links:
@@ -105,7 +105,7 @@ services:
       #  target: /usr/src/app/savedmodels/bob
 
   pythoneval:
-    build: ./Workers/PythonEvaluation
+    image: ishmagurca/swergio_worker_pythonevaluation
     links:
       - socketioserver
     depends_on:

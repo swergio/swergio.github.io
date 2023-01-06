@@ -1,0 +1,8 @@
+Packages API
+===============
+
+.. toctree::
+   :maxdepth: 2
+
+   swergio/swergio.rst
+   toolbox/swergio_toolbox.rst

@@ -1,0 +1,49 @@
+How to install
+===============
+
+Swergio Python Package
+----------------------
+
+To install the swergio package directly from Pypi
+
+.. code-block:: shell
+    
+    pip install swergio
+
+For the latest version from github we can use
+
+.. code-block:: shell
+    
+    pip install git+https://github.com/swergio/swergio.git
+
+
+Swergio Python Toolbox Package
+----------------------
+
+To install the toolbox separate from the base swergio package
+
+.. code-block:: shell
+    
+    pip install swergio_toolbox
+
+or the latest version from github
+
+.. code-block:: shell
+    
+    pip install git+https://github.com/swergio/toolbox.git
+
+To install the toolbox together with the swergio package we can use
+
+.. code-block:: shell
+    
+    pip install swergio[toolbox]
+
+
+Swergio Julia Package
+----------------------
+
+The julia package ca be installed from the github repository with:
+
+.. code-block:: shell
+    
+    pkg> add https://github.com/swergio/swergio.jl.git 

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hello World! &mdash; swergio 0.0.1 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Examples" href="../examples/modules.html" />
+    <link rel="prev" title="How to install" href="install.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> swergio
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../modules.html">Swergio</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html">Swergio Project</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="motivation.html">Motivation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install.html">How to install</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Hello World!</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#server-py">Server.py</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#world-py">World.py</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#universe-py">Universe.py</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#run-it-all">Run it all!</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/modules.html">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../package_apis/modules.html">Packages API</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">swergio</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../modules.html">Swergio</a></li>
+          <li class="breadcrumb-item"><a href="modules.html">Swergio Project</a></li>
+      <li class="breadcrumb-item active">Hello World!</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/src/swergio/first_steps.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="hello-world">
+<h1>Hello World!<a class="headerlink" href="#hello-world" title="Permalink to this heading"></a></h1>
+<p class="linemarker linemarker-4">This is a simple “Hello World” example in how to use the swergio package. We will set up a websocket server and two clients to send messages back and forth.</p>
+<section id="server-py">
+<h2>Server.py<a class="headerlink" href="#server-py" title="Permalink to this heading"></a></h2>
+<p class="linemarker linemarker-9">We will first create a <code class="docutils literal notranslate"><span class="pre">server.py</span></code> file, which starts the websocket server to communicate via message in a separate process.</p>
+<p class="linemarker linemarker-11">In the file we need to specify the <strong>IP</strong> and the <strong>PORT</strong> of the server as well as the message <strong>FORMAT</strong> and the <strong>HEADER_LENGTH</strong>.
+All of these information have to stay the same across the server and all clients.</p>
+<p class="linemarker linemarker-14">We can then initiate the swergio server class and start the server.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">socket</span>
+<span class="kn">from</span> <span class="nn">swergio</span> <span class="kn">import</span> <span class="n">Server</span>
+<span class="c1"># Set server PORT to 8080</span>
+<span class="n">PORT</span> <span class="o">=</span> <span class="mi">8080</span>
+<span class="c1"># Get IP of current host</span>
+<span class="n">SERVER</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">gethostbyname</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">gethostname</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">SERVER</span><span class="p">)</span>
+<span class="c1"># Using utf-8 as message format</span>
+<span class="n">FORMAT</span> <span class="o">=</span> <span class="s1">&#39;utf-8&#39;</span>
+<span class="c1"># Message header has a maximum length of 10</span>
+<span class="n">HEADER_LENGTH</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="c1"># Initiate the Server class</span>
+<span class="n">server</span> <span class="o">=</span> <span class="n">Server</span><span class="p">(</span><span class="n">SERVER</span><span class="p">,</span> <span class="n">PORT</span><span class="p">,</span> <span class="n">FORMAT</span><span class="p">,</span> <span class="n">HEADER_LENGTH</span><span class="p">)</span>
+<span class="c1"># Start the server</span>
+<span class="n">server</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="world-py">
+<h2>World.py<a class="headerlink" href="#world-py" title="Permalink to this heading"></a></h2>
+<p class="linemarker linemarker-38">We will now create a <code class="docutils literal notranslate"><span class="pre">world.py</span></code> file, which will contain the logic for our <em>world</em> component.
+It will receive messages from the <em>universe</em> component via the <em>galactic_chat</em> room and replies.</p>
+<p class="linemarker linemarker-41">Let’s first import all necessary packages.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">uuid</span>
+<span class="kn">import</span> <span class="nn">socket</span>
+<span class="kn">from</span> <span class="nn">swergio</span>  <span class="kn">import</span> <span class="n">Client</span><span class="p">,</span> <span class="n">Trigger</span><span class="p">,</span> <span class="n">MESSAGE_TYPE</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-50">We then set the <strong>COMPONENT_NAME</strong> to world, which is use in the communication.</p>
+<p class="linemarker linemarker-52">We also need to specify the <strong>IP</strong> and the <strong>PORT</strong> as well as the message <strong>FORMAT</strong> and the <strong>HEADER_LENGTH</strong>.
+All of these information have to stay the same across the server and all clients.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">COMPONENT_NAME</span> <span class="o">=</span> <span class="s1">&#39;world&#39;</span>
+<span class="n">PORT</span> <span class="o">=</span> <span class="mi">8080</span>
+<span class="n">SERVER</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">gethostbyname</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">gethostname</span><span class="p">())</span>
+<span class="n">FORMAT</span> <span class="o">=</span> <span class="s1">&#39;utf-8&#39;</span>
+<span class="n">HEADER_LENGTH</span> <span class="o">=</span> <span class="mi">10</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-64">Now we  can create the swergio Client by passing the required settings (NAME, SERVER, PORT etc. ).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">COMPONENT_NAME</span><span class="p">,</span> <span class="n">SERVER</span><span class="p">,</span><span class="n">PORT</span><span class="p">,</span><span class="n">FORMAT</span><span class="p">,</span><span class="n">HEADER_LENGTH</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-70">After instantiated the client, we can now add the event handler functions. These functions are executed when we receive a certain type of message.</p>
+<p class="linemarker linemarker-72">We first define the function that will handle our received messages.
+Such a function requires the <em>msg</em> as first parameter, which contains the all message information as dictionary.</p>
+<p class="linemarker linemarker-75">The reply function of our world component will just send back a message including the text “Hello Universe!”.</p>
+<p class="linemarker linemarker-77">We now have to add a new event handler to our client object.
+This includes the defined function that is executed when the handler is active as well as the <strong>MESSAGE_TYPE</strong> and response <strong>ROOM</strong> of our response message. In this our response will be a <strong>DATA.TEXT</strong> type to the <em>galactic_chat</em> room.
+We also need to set the Trigger to define which incoming messages the handler needs to process. In this case we will react to messages of type <strong>DATA.TEXT</strong> in the <em>galactic_chat</em> room.</p>
+<p class="linemarker linemarker-81">Once added the event handler, the client will be added to the message rooms we require.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reply</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="o">.</span><span class="n">hex</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;ID&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span> <span class="s2">&quot;DATA&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello Universe!&quot;</span><span class="p">}</span>
+<span class="n">client</span><span class="o">.</span><span class="n">add_eventHandler</span><span class="p">(</span><span class="n">reply</span><span class="p">,</span><span class="n">MESSAGE_TYPE</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">TEXT</span><span class="p">,</span><span class="n">responseRooms</span><span class="o">=</span><span class="s1">&#39;galactic_chat&#39;</span><span class="p">,</span><span class="n">trigger</span><span class="o">=</span><span class="n">Trigger</span><span class="p">(</span><span class="n">MESSAGE_TYPE</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">TEXT</span><span class="p">,</span> <span class="s1">&#39;galactic_chat&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-91">After setting up all the required logic, we finally start our client to listen to new incoming messages.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">client</span><span class="o">.</span><span class="n">listen</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="universe-py">
+<h2>Universe.py<a class="headerlink" href="#universe-py" title="Permalink to this heading"></a></h2>
+<p class="linemarker linemarker-101">We create a <code class="docutils literal notranslate"><span class="pre">univer.py</span></code> file containing the logic for our <em>universe</em> component.
+It will send the first “Hello World!” message and afterwards receives replies from the <em>world</em> component via the <em>galactic_chat</em> room and send its responses.</p>
+<p class="linemarker linemarker-105">We set up the swergio client in the same way as in the <code class="docutils literal notranslate"><span class="pre">world.py</span></code> file.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">uuid</span>
+<span class="kn">import</span> <span class="nn">socket</span>
+<span class="kn">from</span> <span class="nn">swergio</span>  <span class="kn">import</span> <span class="n">Client</span><span class="p">,</span> <span class="n">Trigger</span><span class="p">,</span> <span class="n">MESSAGE_TYPE</span>
+<span class="n">COMPONENT_NAME</span> <span class="o">=</span> <span class="s1">&#39;universe&#39;</span>
+<span class="n">PORT</span> <span class="o">=</span> <span class="mi">8080</span>
+<span class="n">SERVER</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">gethostbyname</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">gethostname</span><span class="p">())</span>
+<span class="n">FORMAT</span> <span class="o">=</span> <span class="s1">&#39;utf-8&#39;</span>
+<span class="n">HEADER_LENGTH</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">COMPONENT_NAME</span><span class="p">,</span> <span class="n">SERVER</span><span class="p">,</span><span class="n">PORT</span><span class="p">,</span><span class="n">FORMAT</span><span class="p">,</span><span class="n">HEADER_LENGTH</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-119">Similar to the <em>world</em> component we define an event handler to respond to received messages.
+In this case we wait until we get a message in the <em>galactic_chat</em> room and then send a new “Hello World!” message.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reply</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="o">.</span><span class="n">hex</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;ID&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span> <span class="s2">&quot;DATA&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello World!&quot;</span><span class="p">}</span>
+<span class="n">client</span><span class="o">.</span><span class="n">add_eventHandler</span><span class="p">(</span><span class="n">reply</span><span class="p">,</span><span class="n">MESSAGE_TYPE</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">TEXT</span><span class="p">,</span><span class="n">responseRooms</span><span class="o">=</span><span class="s1">&#39;galactic_chat&#39;</span><span class="p">,</span><span class="n">trigger</span><span class="o">=</span><span class="n">Trigger</span><span class="p">(</span><span class="n">MESSAGE_TYPE</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">TEXT</span><span class="p">,</span> <span class="s1">&#39;galactic_chat&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-130">Since the event handlers are only reacting t incoming message, on of the components should send the first message.</p>
+<p class="linemarker linemarker-132">We define our first “Hello World!” message by including a new message id, the message type, the room we want the message to send to as well as the message data.
+Our <em>universe</em> will then send the first message and the <em>world</em> can respond.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">msg</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;ID&#39;</span><span class="p">:</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="o">.</span><span class="n">hex</span><span class="p">,</span>
+    <span class="s1">&#39;TYPE&#39;</span><span class="p">:</span> <span class="n">MESSAGE_TYPE</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">TEXT</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+    <span class="s1">&#39;TO_ROOM&#39;</span><span class="p">:</span> <span class="s1">&#39;galactic_chat&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;DATA&#39;</span><span class="p">:</span> <span class="s2">&quot;Hello World!&quot;</span><span class="p">}</span>
+<span class="n">client</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-144">After setting up all the required logic, we finally start our client to listen to new incoming messages.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">client</span><span class="o">.</span><span class="n">listen</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="run-it-all">
+<h2>Run it all!<a class="headerlink" href="#run-it-all" title="Permalink to this heading"></a></h2>
+<p class="linemarker linemarker-154">We will run each of the three components in a separate python process. First, we will start the server:</p>
+<p class="linemarker linemarker-156"><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">server.py</span></code></p>
+<p class="linemarker linemarker-158">Then we will initiate the world component to be ready to receive and send messages:</p>
+<p class="linemarker linemarker-160"><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">world.py</span></code></p>
+<p class="linemarker linemarker-162">Finally, we will run the universe component to send the first message:</p>
+<p class="linemarker linemarker-164"><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">universe.py</span></code></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="install.html" class="btn btn-neutral float-left" title="How to install" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../examples/modules.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, IshmaGurca.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

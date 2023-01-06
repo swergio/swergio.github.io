@@ -1,0 +1,29 @@
+.. swergio documentation master file, created by
+   sphinx-quickstart on Thu Dec 22 20:29:34 2022.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Welcome to the documentation of the swergio project!
+=====================================================
+
+The swergio project is a prove of concept to enable forward and backward communication between independent machine learning components via websocket.
+This approach allows us to integrate data science and ML models better into the full end-to-end business process.
+The project contains multiple python and julia packages to help us with the implementation as well as a few use case examples.
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+   src/swergio/modules.rst
+   src/examples/modules.rst
+   src/package_apis/modules.rst
+
+
+
+.. Indices and tables
+.. ==================
+
+.. * :ref:`genindex`
+.. * :ref:`modindex`
+.. * :ref:`search`

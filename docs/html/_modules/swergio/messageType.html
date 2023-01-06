@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>swergio.messageType &mdash; swergio 0.0.1 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> swergio
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Swergio</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">swergio</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">swergio.messageType</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for swergio.messageType</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">inspect</span>
+
+<div class="viewcode-block" id="ModelStatusSetting"><a class="viewcode-back" href="../../swergio/swergio.html#swergio.messageType.ModelStatusSetting">[docs]</a><span class="k">class</span> <span class="nc">ModelStatusSetting</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Class for the model status setting.</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize the model status setting.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            id (int): The id of the model status setting.</span>
+<span class="sd">            name (string): The name of the model status setting.</span>
+<span class="sd">        &quot;&quot;&quot;</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span></div>
+
+<div class="viewcode-block" id="MODEL_STATUS"><a class="viewcode-back" href="../../swergio/swergio.html#swergio.messageType.MODEL_STATUS">[docs]</a><span class="k">class</span> <span class="nc">MODEL_STATUS</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        _type_: _description_</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="n">TRAIN</span> <span class="o">=</span> <span class="n">ModelStatusSetting</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;TRAIN&#39;</span><span class="p">)</span>
+    <span class="n">VALIDATE</span> <span class="o">=</span> <span class="n">ModelStatusSetting</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;VALIDATE&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="MODEL_STATUS.by_id"><a class="viewcode-back" href="../../swergio/swergio.html#swergio.messageType.MODEL_STATUS.by_id">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">by_id</span><span class="p">(</span><span class="nb">id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            id (_type_): _description_</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            _type_: _description_</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">MODEL_STATUS</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">ModelStatusSetting</span><span class="p">)</span> <span class="ow">and</span> <span class="n">v</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="nb">id</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">v</span>
+        <span class="k">return</span> <span class="kc">None</span></div></div>
+
+
+<div class="viewcode-block" id="MessageTypeSetting"><a class="viewcode-back" href="../../swergio/swergio.html#swergio.messageType.MessageTypeSetting">[docs]</a><span class="k">class</span> <span class="nc">MessageTypeSetting</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;_summary_</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="nb">id</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">required_fields</span><span class="p">,</span><span class="n">optional_fields</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            id (_type_): _description_</span>
+<span class="sd">            name (_type_): _description_</span>
+<span class="sd">            required_fields (_type_): _description_</span>
+<span class="sd">            optional_fields (_type_): _description_</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">required_fields</span> <span class="o">=</span> <span class="n">required_fields</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">optional_fields</span> <span class="o">=</span> <span class="n">optional_fields</span>
+
+<div class="viewcode-block" id="MessageTypeSetting.check_fields"><a class="viewcode-back" href="../../swergio/swergio.html#swergio.messageType.MessageTypeSetting.check_fields">[docs]</a>    <span class="k">def</span> <span class="nf">check_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">msg_content</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            msg_content (_type_): _description_</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            _type_: _description_</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">required_fields</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">field</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">msg_content</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">True</span></div></div>
+
+<div class="viewcode-block" id="MessageMainType"><a class="viewcode-back" href="../../swergio/swergio.html#swergio.messageType.MessageMainType">[docs]</a><span class="k">class</span> <span class="nc">MessageMainType</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        _type_: _description_</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+<div class="viewcode-block" id="MessageMainType.by_id"><a class="viewcode-back" href="../../swergio/swergio.html#swergio.messageType.MessageMainType.by_id">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">by_id</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            id (_type_): _description_</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            _type_: _description_</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">MessageTypeSetting</span><span class="p">)</span> <span class="ow">and</span> <span class="n">v</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="nb">id</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">v</span>
+        <span class="k">return</span> <span class="kc">None</span></div></div>
+
+<div class="viewcode-block" id="DATA"><a class="viewcode-back" href="../../swergio/swergio.html#swergio.messageType.DATA">[docs]</a><span class="k">class</span> <span class="nc">DATA</span><span class="p">(</span><span class="n">MessageMainType</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        MessageMainType (_type_): _description_</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="n">FORWARD</span> <span class="o">=</span> <span class="n">MessageTypeSetting</span><span class="p">(</span><span class="s1">&#39;DATA/FORWARD&#39;</span><span class="p">,</span><span class="s1">&#39;FORWARD&#39;</span><span class="p">,[</span><span class="s1">&#39;DATA&#39;</span><span class="p">],[</span><span class="s1">&#39;ROOM&#39;</span><span class="p">])</span>
+    <span class="n">GRADIENT</span> <span class="o">=</span> <span class="n">MessageTypeSetting</span><span class="p">(</span><span class="s1">&#39;DATA/GRADIENT&#39;</span><span class="p">,</span><span class="s1">&#39;GRADIENT&#39;</span><span class="p">,[</span><span class="s1">&#39;DATA&#39;</span><span class="p">],[</span><span class="s1">&#39;ROOM&#39;</span><span class="p">])</span>
+    <span class="n">REWARD</span> <span class="o">=</span> <span class="n">MessageTypeSetting</span><span class="p">(</span><span class="s1">&#39;DATA/REWARD&#39;</span><span class="p">,</span><span class="s1">&#39;REWARD&#39;</span><span class="p">,[</span><span class="s1">&#39;DATA&#39;</span><span class="p">],[</span><span class="s1">&#39;ROOM&#39;</span><span class="p">])</span>
+    <span class="n">TEXT</span> <span class="o">=</span> <span class="n">MessageTypeSetting</span><span class="p">(</span><span class="s1">&#39;DATA/TEXT&#39;</span><span class="p">,</span><span class="s1">&#39;TEXT&#39;</span><span class="p">,[</span><span class="s1">&#39;DATA&#39;</span><span class="p">],[</span><span class="s1">&#39;ROOM&#39;</span><span class="p">])</span>
+    <span class="n">CUSTOM</span> <span class="o">=</span> <span class="n">MessageTypeSetting</span><span class="p">(</span><span class="s1">&#39;DATA/CUSTOM&#39;</span><span class="p">,</span><span class="s1">&#39;CUSTOM&#39;</span><span class="p">,[],[])</span></div>
+
+<div class="viewcode-block" id="COMMAND"><a class="viewcode-back" href="../../swergio/swergio.html#swergio.messageType.COMMAND">[docs]</a><span class="k">class</span> <span class="nc">COMMAND</span><span class="p">(</span><span class="n">MessageMainType</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        MessageMainType (_type_): _description_</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="n">REGISTER</span> <span class="o">=</span> <span class="n">MessageTypeSetting</span><span class="p">(</span><span class="s1">&#39;COMMAND/REGISTER&#39;</span><span class="p">,</span><span class="s1">&#39;REGISTER&#39;</span><span class="p">,[</span><span class="s1">&#39;NAME&#39;</span><span class="p">],[])</span>
+    <span class="n">DISCONNECT</span> <span class="o">=</span> <span class="n">MessageTypeSetting</span><span class="p">(</span><span class="s1">&#39;COMMAND/DISCONNECT&#39;</span><span class="p">,</span><span class="s1">&#39;DISCONNECT&#39;</span><span class="p">,[],[])</span>
+    <span class="n">JOINROOM</span> <span class="o">=</span> <span class="n">MessageTypeSetting</span><span class="p">(</span><span class="s1">&#39;COMMAND/JOINROOM&#39;</span><span class="p">,</span><span class="s1">&#39;JOINROOM&#39;</span><span class="p">,[</span><span class="s1">&#39;ROOM&#39;</span><span class="p">],[])</span>
+    <span class="n">LEAVEROOM</span> <span class="o">=</span> <span class="n">MessageTypeSetting</span><span class="p">(</span><span class="s1">&#39;COMMAND/LEAVEROOM&#39;</span><span class="p">,</span><span class="s1">&#39;LEAVEROOM&#39;</span><span class="p">,[</span><span class="s1">&#39;ROOM&#39;</span><span class="p">],[])</span>
+    <span class="n">ENABLELOGGING</span> <span class="o">=</span> <span class="n">MessageTypeSetting</span><span class="p">(</span><span class="s1">&#39;COMMAND/ENABLELOGGING&#39;</span><span class="p">,</span><span class="s1">&#39;ENABLELOGGING&#39;</span><span class="p">,[],[</span><span class="s1">&#39;COMPONENT&#39;</span><span class="p">])</span>
+    <span class="n">DISABLELOGGING</span> <span class="o">=</span> <span class="n">MessageTypeSetting</span><span class="p">(</span><span class="s1">&#39;COMMAND/DISABLELOGGING&#39;</span><span class="p">,</span><span class="s1">&#39;DISABLELOGGING&#39;</span><span class="p">,[],[</span><span class="s1">&#39;COMPONENT&#39;</span><span class="p">])</span>
+    <span class="n">SAVEMODELWEIGHTS</span> <span class="o">=</span> <span class="n">MessageTypeSetting</span><span class="p">(</span><span class="s1">&#39;COMMAND/SAVEMODELWEIGHTS&#39;</span><span class="p">,</span><span class="s1">&#39;SAVEMODELWEIGHTS&#39;</span><span class="p">,[],[</span><span class="s1">&#39;WEIGHTS&#39;</span><span class="p">,</span><span class="s1">&#39;COMPONENT&#39;</span><span class="p">])</span>
+    <span class="n">LOADMODELWEIGHTS</span> <span class="o">=</span> <span class="n">MessageTypeSetting</span><span class="p">(</span><span class="s1">&#39;COMMAND/LOADMODELWEIGHTS&#39;</span><span class="p">,</span><span class="s1">&#39;LOADMODELWEIGHTS&#39;</span><span class="p">,[],[</span><span class="s1">&#39;WEIGHTS&#39;</span><span class="p">,</span><span class="s1">&#39;COMPONENT&#39;</span><span class="p">])</span>
+    <span class="n">SAVESETTINGS</span> <span class="o">=</span> <span class="n">MessageTypeSetting</span><span class="p">(</span><span class="s1">&#39;COMMAND/SAVESETTINGS&#39;</span><span class="p">,</span><span class="s1">&#39;SAVESETTINGS&#39;</span><span class="p">,[</span><span class="s1">&#39;SETTINGS&#39;</span><span class="p">],[</span><span class="s1">&#39;COMPONENT&#39;</span><span class="p">])</span>
+    <span class="n">LOADSETTINGS</span> <span class="o">=</span> <span class="n">MessageTypeSetting</span><span class="p">(</span><span class="s1">&#39;COMMAND/LOADSETTINGS&#39;</span><span class="p">,</span><span class="s1">&#39;LOADSETTINGS&#39;</span><span class="p">,[</span><span class="s1">&#39;SETTINGS&#39;</span><span class="p">],[</span><span class="s1">&#39;COMPONENT&#39;</span><span class="p">])</span>
+    <span class="n">CUSTOM</span> <span class="o">=</span> <span class="n">MessageTypeSetting</span><span class="p">(</span><span class="s1">&#39;COMMAND/CUSTOM&#39;</span><span class="p">,</span><span class="s1">&#39;CUSTOM&#39;</span><span class="p">,[],[])</span></div>
+
+<div class="viewcode-block" id="LOG"><a class="viewcode-back" href="../../swergio/swergio.html#swergio.messageType.LOG">[docs]</a><span class="k">class</span> <span class="nc">LOG</span><span class="p">(</span><span class="n">MessageMainType</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        MessageMainType (_type_): _description_</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="n">MODELWEIGHTS</span> <span class="o">=</span> <span class="n">MessageTypeSetting</span><span class="p">(</span><span class="s1">&#39;LOG/MODELWEIGHTS&#39;</span><span class="p">,</span><span class="s1">&#39;MODELWEIGHTS&#39;</span><span class="p">,[</span><span class="s1">&#39;WEIGHTS&#39;</span><span class="p">,</span> <span class="s1">&#39;COMPONENT&#39;</span><span class="p">],[</span><span class="s1">&#39;DM&#39;</span><span class="p">])</span>
+    <span class="n">SETTINGS</span> <span class="o">=</span> <span class="n">MessageTypeSetting</span><span class="p">(</span><span class="s1">&#39;LOG/SETTINGS&#39;</span><span class="p">,</span><span class="s1">&#39;SETTINGS&#39;</span><span class="p">,[</span><span class="s1">&#39;SETTINGS&#39;</span><span class="p">,</span> <span class="s1">&#39;COMPONENT&#39;</span><span class="p">],[</span><span class="s1">&#39;DM&#39;</span><span class="p">])</span>
+    <span class="n">MESSAGE</span> <span class="o">=</span> <span class="n">MessageTypeSetting</span><span class="p">(</span><span class="s1">&#39;LOG/MESSAGES&#39;</span><span class="p">,</span><span class="s1">&#39;MESSAGES&#39;</span><span class="p">,[</span><span class="s1">&#39;MESSAGE&#39;</span><span class="p">,</span> <span class="s1">&#39;SENDER&#39;</span><span class="p">,</span> <span class="s1">&#39;ROOM&#39;</span><span class="p">],[])</span>
+    <span class="n">KPI</span> <span class="o">=</span> <span class="n">MessageTypeSetting</span><span class="p">(</span><span class="s1">&#39;LOG/KPI&#39;</span><span class="p">,</span><span class="s1">&#39;KPI&#39;</span><span class="p">,[</span><span class="s1">&#39;KPI&#39;</span><span class="p">,</span> <span class="s1">&#39;COMPONENT&#39;</span><span class="p">,</span><span class="s1">&#39;TIME&#39;</span><span class="p">,</span><span class="s1">&#39;VALUE&#39;</span><span class="p">],[])</span>
+    <span class="n">RUN</span> <span class="o">=</span> <span class="n">MessageTypeSetting</span><span class="p">(</span><span class="s1">&#39;LOG/RUN&#39;</span><span class="p">,</span><span class="s1">&#39;RUN&#39;</span><span class="p">,[</span><span class="s1">&#39;RUN&#39;</span><span class="p">],[</span><span class="s1">&#39;TYPE&#39;</span><span class="p">,</span><span class="s1">&#39;STARTTIME&#39;</span><span class="p">,</span><span class="s1">&#39;ENDTIME&#39;</span><span class="p">])</span>
+    <span class="n">CUSTOM</span> <span class="o">=</span> <span class="n">MessageTypeSetting</span><span class="p">(</span><span class="s1">&#39;LOG/CUSTOM&#39;</span><span class="p">,</span><span class="s1">&#39;CUSTOM&#39;</span><span class="p">,[],[])</span></div>
+
+<div class="viewcode-block" id="MESSAGE_TYPE"><a class="viewcode-back" href="../../swergio/swergio.html#swergio.messageType.MESSAGE_TYPE">[docs]</a><span class="k">class</span> <span class="nc">MESSAGE_TYPE</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        _type_: _description_</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="n">DATA</span> <span class="o">=</span> <span class="n">DATA</span> 
+    <span class="n">COMMAND</span> <span class="o">=</span> <span class="n">COMMAND</span>
+    <span class="n">LOG</span> <span class="o">=</span> <span class="n">LOG</span>
+
+<div class="viewcode-block" id="MESSAGE_TYPE.by_id"><a class="viewcode-back" href="../../swergio/swergio.html#swergio.messageType.MESSAGE_TYPE.by_id">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">by_id</span><span class="p">(</span><span class="nb">id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;_summary_</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            id (_type_): _description_</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            _type_: _description_</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">MESSAGE_TYPE</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="c1">#if inspect.isclass(v) and v.__name__ in [&#39;DATA&#39;,&#39;COMMAND&#39;,&#39;LOG&#39;]:</span>
+            <span class="c1">#print(v)</span>
+            <span class="c1">#print(inspect.isclass(v))</span>
+            <span class="c1">#if inspect.isclass(v):</span>
+            <span class="c1">#    print(issubclass(v,MessageMainType))</span>
+            <span class="k">if</span> <span class="n">inspect</span><span class="o">.</span><span class="n">isclass</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">MessageMainType</span><span class="p">):</span>
+                <span class="n">messagetype</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">by_id</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+                <span class="c1">#print(messagetype)</span>
+                <span class="k">if</span> <span class="n">messagetype</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">messagetype</span>
+        <span class="k">return</span> <span class="kc">None</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, IshmaGurca.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

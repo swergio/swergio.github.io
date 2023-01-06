@@ -1,0 +1,7 @@
+swergio_toolbox
+===============
+
+.. toctree::
+   :maxdepth: 4
+
+   swergio_toolbox

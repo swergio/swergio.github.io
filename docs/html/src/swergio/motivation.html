@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Motivation &mdash; swergio 0.0.1 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="How to install" href="install.html" />
+    <link rel="prev" title="Swergio Project" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> swergio
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../modules.html">Swergio</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html">Swergio Project</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Motivation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install.html">How to install</a></li>
+<li class="toctree-l3"><a class="reference internal" href="first_steps.html">Hello World!</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/modules.html">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../package_apis/modules.html">Packages API</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">swergio</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../modules.html">Swergio</a></li>
+          <li class="breadcrumb-item"><a href="modules.html">Swergio Project</a></li>
+      <li class="breadcrumb-item active">Motivation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/src/swergio/motivation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="motivation">
+<h1>Motivation<a class="headerlink" href="#motivation" title="Permalink to this heading"></a></h1>
+<p class="linemarker linemarker-4">We are all aware that every machine learning and data science model is just a part of a whole process, the price prediction model, which is later used to control the buying of raw materials, or the customer churn model, which leads to different actions towards customers. Our models are using prepared data and the predictions are consumed by following business processes or even other models, which can make the end-to-end process quite large and complex.</p>
+<p class="linemarker linemarker-6">In general, we’re trying to reduce such complexity by focusing only on the model part. We will use prepared training data and optimize our model to fit an intermediate or approximate goal, e.g., forecast error or accuracy.</p>
+<img alt="../../_images/train.png" src="../../_images/train.png" />
+<p class="linemarker linemarker-10">For model inference we usually integrate the trained model into a given process, receiving live data for the model and sending the model prediction further down the process.</p>
+<img alt="../../_images/inference.png" src="../../_images/inference.png" />
+<p class="linemarker linemarker-14">Also, this approach simplifies the complexity of our data science projects and is often good enough to reach useful results, but it still has a few challenges we need to overcome:</p>
+<ul class="simple">
+<li><p class="linemarker linemarker-16">What is the appropriate goal we should aim for? E.g., is model accuracy the best measure for the overall process outcome?</p></li>
+<li><p class="linemarker linemarker-17">How to incorporate live feedback into the process and how to adjust the model based on live feedback?</p></li>
+<li><p class="linemarker linemarker-18">In what way can we reuse learned models to optimize and control the input parameters of the process?</p></li>
+<li><p class="linemarker linemarker-19">How to effectively monitor the model’s performance?</p></li>
+</ul>
+<p class="linemarker linemarker-21">The challenges are mostly tackled by adding additional complexity to our process e.g., entirely separate components and code to handle feedback, etc.</p>
+<p class="linemarker linemarker-23">A more straightforward approach is to enable a direct feedback mechanism into our forward process, that allows our models and components to get more information on how well their performance is down the line.</p>
+<img alt="../../_images/swergio.png" src="../../_images/swergio.png" />
+<p class="linemarker linemarker-27">Such a mechanism allows us to be used in several settings and scenarios:</p>
+<ul class="simple">
+<li><p class="linemarker linemarker-29">Train our model directly based on a goal down the process (e.g., differentiable programming Trebuchet example)</p></li>
+<li><p class="linemarker linemarker-30">Collect live reward feedback from an environment to train an RL model (RL example)</p></li>
+<li><p class="linemarker linemarker-31">Gather live human feedback to label uncertain data in an active learning approach (Music Generator example)</p></li>
+<li><p class="linemarker linemarker-32">Optimize the input of our process using gradient-based optimization technics (control problems)</p></li>
+</ul>
+<p class="linemarker linemarker-34">The swergio package helps us to implement and enable forward and backward communication between independent components.</p>
+<p class="linemarker linemarker-36">To ensure the independence between the components and not require that all components are aware of each other, communication is implemented via Web Sockets and each component is only aware of certain communication rooms. The components can send and handle incoming messages.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules.html" class="btn btn-neutral float-left" title="Swergio Project" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="install.html" class="btn btn-neutral float-right" title="How to install" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, IshmaGurca.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

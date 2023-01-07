@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>client module &mdash; swergio 0.0.1 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="messagetype module" href="messagetype.html" />
+    <link rel="prev" title="swergio.jl" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> swergio
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../swergio/modules.html">Swergio Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/modules.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../modules.html">Packages API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../swergio/swergio.html">swergio package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../toolbox/swergio_toolbox.html">swergio_toolbox package</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html">swergio.jl</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">client module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="messagetype.html">messagetype module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelstatus.html">modelstatus module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">swergio</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../modules.html">Packages API</a></li>
+          <li class="breadcrumb-item"><a href="modules.html">swergio.jl</a></li>
+      <li class="breadcrumb-item active">client module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/src/package_apis/swergio.jl/client.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="client-module">
+<h1>client module<a class="headerlink" href="#client-module" title="Permalink to this heading"></a></h1>
+<dl class="class"><dt id=ClientModule><em class="property">module </em><code class="descname">ClientModule</code><a class="headerlink" href="#ClientModule" title="Permalink to thismodule"></a></dt><dd class="body"><p></p>
+<dl class="class"><dt id=ClientModule.Client><em class="property">type </em><code class="descname">Client</code><a class="headerlink" href="#ClientModule.Client" title="Permalink to thistype"></a></dt><dd class="body"><p><p class="linemarker linemarker-1">A client, which can be used to connect to a server and send and
+receive messages.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – The name of the client.</p></li>
+<li><p><strong>server</strong> – The IP address of the server.</p></li>
+<li><p><strong>port</strong> – The port number of the server.</p></li>
+<li><p><strong>header_length</strong> – The length of the message header in bytes.</p></li>
+<li><p><strong>eventHandlers</strong> – A set of <cite>EventHandler</cite> instances registered with this client.</p></li>
+<li><p><strong>rooms</strong> – A set of rooms that the client has joined.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Ivar name</dt>
+<dd class="field-even"><p class="linemarker linemarker-11">The name of the client.</p>
+</dd>
+<dt class="field-odd">Ivar server</dt>
+<dd class="field-odd"><p class="linemarker linemarker-12">The IP address of the server.</p>
+</dd>
+<dt class="field-even">Ivar port</dt>
+<dd class="field-even"><p class="linemarker linemarker-13">The port number of the server.</p>
+</dd>
+<dt class="field-odd">Ivar format</dt>
+<dd class="field-odd"><p class="linemarker linemarker-14">The encoding format to use for messages.</p>
+</dd>
+<dt class="field-even">Ivar header_length</dt>
+<dd class="field-even"><p class="linemarker linemarker-15">The length of the message header in bytes.</p>
+</dd>
+<dt class="field-odd">Ivar eventHandlers</dt>
+<dd class="field-odd"><p class="linemarker linemarker-16">A set of <cite>EventHandler</cite> instances registered with this client.</p>
+</dd>
+<dt class="field-even">Ivar rooms</dt>
+<dd class="field-even"><p class="linemarker linemarker-17">A set of rooms that the client has joined.</p>
+</dd>
+<dt class="field-odd">Ivar kwargs</dt>
+<dd class="field-odd"><p class="linemarker linemarker-18">Additional keyword arguments that will be passed to event handler
+functions when they are called.</p>
+</dd>
+<dt class="field-even">Ivar client</dt>
+<dd class="field-even"><p class="linemarker linemarker-20">The socket used to connect to the server.</p>
+</dd>
+</dl>
+</p>
+</dd></dl><dl class="function"><dt id="ClientModule.Client-b2c97b69828a0fc63cf495d25b3a4c34"><em class="property">function </em><code class="descname">Client</code><span class="sig-paren">(</span><em>name</em>, <em>server</em>, <em>port</em>; <em>header_length</em> = <tt>10</tt>, <em>kwargs</em>...<span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.Client-b2c97b69828a0fc63cf495d25b3a4c34" title="Permalink to this function"></a></dt><dd><p></p>
+</dd></dl><dl class="function"><dt id="ClientModule.send-faa551675376233fb3cfec0de5600279"><em class="property">function </em><code class="descname">send</code><span class="sig-paren">(</span><em>client</em>::Client, <em>message</em><span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.send-faa551675376233fb3cfec0de5600279" title="Permalink to this function"></a></dt><dd><p></p>
+</dd></dl><dl class="function"><dt id="ClientModule.register-6767061beca3c293f255c5a52c07adab"><em class="property">function </em><code class="descname">register</code><span class="sig-paren">(</span><em>client</em>::Client<span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.register-6767061beca3c293f255c5a52c07adab" title="Permalink to this function"></a></dt><dd><p></p>
+</dd></dl><dl class="function"><dt id="ClientModule.receive-6767061beca3c293f255c5a52c07adab"><em class="property">function </em><code class="descname">receive</code><span class="sig-paren">(</span><em>client</em>::Client<span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.receive-6767061beca3c293f255c5a52c07adab" title="Permalink to this function"></a></dt><dd><p></p>
+</dd></dl><dl class="function"><dt id="ClientModule.close-6767061beca3c293f255c5a52c07adab"><em class="property">function </em><code class="descname">close</code><span class="sig-paren">(</span><em>client</em>::Client<span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.close-6767061beca3c293f255c5a52c07adab" title="Permalink to this function"></a></dt><dd><p></p>
+</dd></dl><dl class="function"><dt id="ClientModule.add_eventHandler-91c218c1be94d228074df715cbc4768c"><em class="property">function </em><code class="descname">add_eventHandler</code><span class="sig-paren">(</span><em>client</em>::Client, <em>handleFunction</em>, <em>responseType</em>; <em>responseRooms</em> = <tt>nothing</tt>, <em>responseComponent</em> = <tt>nothing</tt>, <em>trigger</em> = <tt>nothing</tt><span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.add_eventHandler-91c218c1be94d228074df715cbc4768c" title="Permalink to this function"></a></dt><dd><p></p>
+</dd></dl><dl class="function"><dt id="ClientModule.join_room-6e4ce646fa67a42ae6a173995a11f892"><em class="property">function </em><code class="descname">join_room</code><span class="sig-paren">(</span><em>client</em>::Client, <em>room</em><span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.join_room-6e4ce646fa67a42ae6a173995a11f892" title="Permalink to this function"></a></dt><dd><p></p>
+</dd></dl><dl class="function"><dt id="ClientModule.listen-6767061beca3c293f255c5a52c07adab"><em class="property">function </em><code class="descname">listen</code><span class="sig-paren">(</span><em>client</em>::Client<span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.listen-6767061beca3c293f255c5a52c07adab" title="Permalink to this function"></a></dt><dd><p></p>
+</dd></dl><dl class="function"><dt id="ClientModule.add_propagated_fields-e76a1231898ae5561c8331aef49204f7"><em class="property">function </em><code class="descname">add_propagated_fields</code><span class="sig-paren">(</span><em>client</em>::Client, <em>message</em>, <em>response</em><span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.add_propagated_fields-e76a1231898ae5561c8331aef49204f7" title="Permalink to this function"></a></dt><dd><p></p>
+</dd></dl><dl class="function"><dt id="ClientModule.filter_dict-7a9a7e899962da5643a1edc587baf223"><em class="property">function </em><code class="descname">filter_dict</code><span class="sig-paren">(</span><em>dict_to_filter</em>, <em>thing_with_kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.filter_dict-7a9a7e899962da5643a1edc587baf223" title="Permalink to this function"></a></dt><dd><p></p>
+</dd></dl><dl class="class"><dt id=ClientModule.EventHandler><em class="property">type </em><code class="descname">EventHandler</code><a class="headerlink" href="#ClientModule.EventHandler" title="Permalink to thistype"></a></dt><dd class="body"><p></p>
+</dd></dl><dl class="function"><dt id="ClientModule.EventHandler-61b38a14a3c07168015a81c439fe1f93"><em class="property">function </em><code class="descname">EventHandler</code><span class="sig-paren">(</span><em>handleFunction</em>, <em>responseType</em>; <em>responseRooms</em> = <tt>nothing</tt>, <em>responseComponent</em> = <tt>nothing</tt>, <em>trigger</em> = <tt>nothing</tt><span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.EventHandler-61b38a14a3c07168015a81c439fe1f93" title="Permalink to this function"></a></dt><dd><p></p>
+</dd></dl><dl class="function"><dt id="ClientModule.is_triggered-1bc228ac71d6d8aa59035906ee87e13b"><em class="property">function </em><code class="descname">is_triggered</code><span class="sig-paren">(</span><em>eventHandler</em>::EventHandler, <em>message</em><span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.is_triggered-1bc228ac71d6d8aa59035906ee87e13b" title="Permalink to this function"></a></dt><dd><p></p>
+</dd></dl><dl class="function"><dt id="ClientModule.handle-fd01128e0e16afd55d4887571a588048"><em class="property">function </em><code class="descname">handle</code><span class="sig-paren">(</span><em>eventHandler</em>::EventHandler, <em>args</em>...; <em>kwargs</em>...<span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.handle-fd01128e0e16afd55d4887571a588048" title="Permalink to this function"></a></dt><dd><p></p>
+</dd></dl><dl class="class"><dt id=ClientModule.Trigger><em class="property">type </em><code class="descname">Trigger</code><a class="headerlink" href="#ClientModule.Trigger" title="Permalink to thistype"></a></dt><dd class="body"><p></p>
+</dd></dl><dl class="function"><dt id="ClientModule.Trigger-e1e686ceff276be2c3cde7325cf05c37"><em class="property">function </em><code class="descname">Trigger</code><span class="sig-paren">(</span><em>types</em>, <em>rooms</em>; <em>directmessages</em> = <tt>false</tt><span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.Trigger-e1e686ceff276be2c3cde7325cf05c37" title="Permalink to this function"></a></dt><dd><p></p>
+</dd></dl><dl class="function"><dt id="ClientModule.is_triggered-c832ad2f98ad2354d3140103a91d79fa"><em class="property">function </em><code class="descname">is_triggered</code><span class="sig-paren">(</span><em>trigger</em>::Trigger, <em>message</em><span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.is_triggered-c832ad2f98ad2354d3140103a91d79fa" title="Permalink to this function"></a></dt><dd><p></p>
+</dd></dl></dd></dl></section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules.html" class="btn btn-neutral float-left" title="swergio.jl" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="messagetype.html" class="btn btn-neutral float-right" title="messagetype module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, IshmaGurca.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

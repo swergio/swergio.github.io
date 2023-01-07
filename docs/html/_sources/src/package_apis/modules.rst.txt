@@ -6,3 +6,4 @@ Packages API
 
    swergio/swergio.rst
    toolbox/swergio_toolbox.rst
+   swergio.jl/modules.rst

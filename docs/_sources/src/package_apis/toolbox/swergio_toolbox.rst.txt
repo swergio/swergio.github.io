@@ -1,8 +1,8 @@
 swergio\_toolbox package
 ========================
 
-Submodules
-----------
+.. Submodules
+.. ----------
 
 swergio\_toolbox.objects module
 -------------------------------
@@ -28,10 +28,10 @@ swergio\_toolbox.swarm\_control copy module
    :undoc-members:
    :show-inheritance:
 
-Module contents
----------------
+.. Module contents
+.. ---------------
 
-.. automodule:: swergio_toolbox
-   :members:
-   :undoc-members:
-   :show-inheritance:
+.. .. automodule:: swergio_toolbox
+..    :members:
+..    :undoc-members:
+..    :show-inheritance:

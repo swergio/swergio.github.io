@@ -1,0 +1,14 @@
+swergio.jl package
+===================
+
+Submodules
+----------
+
+
+.. jl:autofile:: swergio/swergio.jl/src/client.jl
+
+
+.. jl:autofile:: swergio/swergio.jl/src/messagetype.jl
+
+
+.. jl:autofile:: swergio/swergio.jl/src/modelstatus.jl

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction &mdash; swergio 0.0.1 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="01_server.py" href="01_server.html" />
+    <link rel="prev" title="Melody Creator" href="overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> swergio
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../swergio/modules.html">Swergio Project</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../modules.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../Trebuchet/overview.html">Trebuchet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../RL/overview.html">Reinforcement Learning</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="overview.html">Melody Creator</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="overview.html#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#how-to-run-it">How to run it</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="overview.html#details">Details</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="01_server.html">01_server.py</a></li>
+<li class="toctree-l4"><a class="reference internal" href="02_evolutionary.html">02_evolutionary.py</a></li>
+<li class="toctree-l4"><a class="reference internal" href="03_evaluation_net.html">03_evaluation_net.py</a></li>
+<li class="toctree-l4"><a class="reference internal" href="04_active_learner.html">04_active_learner.py</a></li>
+<li class="toctree-l4"><a class="reference internal" href="99_swarm.html">Set up the swarm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="music_generator.html">music_generator.py</a></li>
+<li class="toctree-l4"><a class="reference internal" href="05_user_interface.html">05_user_interface.py</a></li>
+<li class="toctree-l4"><a class="reference internal" href="prelabel_script.html">prelabel_script.py</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../package_apis/modules.html">Packages API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">swergio</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../modules.html">Examples</a></li>
+          <li class="breadcrumb-item"><a href="overview.html">Melody Creator</a></li>
+      <li class="breadcrumb-item active">Introduction</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/src/examples/MelodyCreator/00_introduction.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h1>
+<p>In <a class="reference external" href="https://www.youtube.com/watch?v=aOsET8KapQQ)">this</a> YouTube video <em>Kie Codes</em> demonstrated an example of how to generate a melody using a genetic algorithm.</p>
+<p>The process involves creating a population of genomes that represent a short melody, and then using an evolutionary algorithm to select the best melodies based on user-provided ratings (on a scale of 0 to 5).
+The selected melodies are then mated and mutated to generate a new population.
+The full code for this example can be found on <a class="reference external" href="https://github.com/kiecodes/generate-music">GitHub</a>.</p>
+<p>One of the most time-consuming aspects of Kie’s example is the requirement for the user to rate each generated melody by listening to the result.
+To eliminate this tedious task, we will add an evaluation network that can rate the generated music.</p>
+<p>This network will be trained on a subset of labeled melodies to predict the rating of an unseen piece of music.
+Once the evaluation network is fully trained, the evolutionary algorithm can quickly obtain feedback on the quality of the generated music, without the need for manual rating.</p>
+<img alt="../../../_images/setup01.png" src="../../../_images/setup01.png" />
+<p>Since the approach with an evaluation network still requires a large amount of labeled data for pre-training, we will implement an active learning mechanism.
+This means that the network can be pre-trained with a small amount of data, then as it encounters new data, it tracks how certain the model is in its predictions.
+For the most uncertain melodies, a label is requested from the user, and the model is re-trained based on the new labeled data.
+This allows for more efficient querying of the user, only when deemed necessary.</p>
+<p>By implementing all the components independently (evolutionary algorithm, validation network, and active learner), the waiting time for user input is minimized.
+The evolutionary algorithm continues to improve while the active learner collects labels and retrains the evaluation network.</p>
+<img alt="../../../_images/setup11.png" src="../../../_images/setup11.png" />
+<p>As depicted, we will also include a user interface component to handle the communication for starting and stopping the process, as well as collecting new labels from the user.</p>
+<p>This example illustrates how swergio simplifies the process of enabling independent live training across independent components, as well as incorporating user feedback into the loop.</p>
+<p>In the following sections, we will examine each component in more detail.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="overview.html" class="btn btn-neutral float-left" title="Melody Creator" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="01_server.html" class="btn btn-neutral float-right" title="01_server.py" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, IshmaGurca.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

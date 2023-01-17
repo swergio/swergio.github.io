@@ -78,18 +78,21 @@
 <span class="n">reserved_rooms</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;_command&#39;</span><span class="p">,</span><span class="s1">&#39;_logging&#39;</span><span class="p">]</span>
 
 <div class="viewcode-block" id="Server"><a class="viewcode-back" href="../../src/package_apis/swergio/swergio.html#swergio.server.Server">[docs]</a><span class="k">class</span> <span class="nc">Server</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;_summary_</span>
-<span class="sd">    &quot;&quot;&quot;</span>    
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ip</span><span class="p">,</span><span class="n">port</span><span class="p">,</span> <span class="nb">format</span><span class="p">,</span> <span class="n">header_length</span><span class="p">,</span> <span class="n">enable_logging</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;_summary_</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ip</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">port</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">format</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">header_length</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">enable_logging</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the server instance with given ip, port, format and header length</span>
 
-<span class="sd">        Args:</span>
-<span class="sd">            ip (_type_): _description_</span>
-<span class="sd">            port (_type_): _description_</span>
-<span class="sd">            format (_type_): _description_</span>
-<span class="sd">            header_length (_type_): _description_</span>
-<span class="sd">            enable_logging (bool, optional): _description_. Defaults to True.</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+<span class="sd">        :param ip: IP address of the server</span>
+<span class="sd">        :type ip: str</span>
+<span class="sd">        :param port: Port number of the server</span>
+<span class="sd">        :type port: int</span>
+<span class="sd">        :param format: Format of the message data</span>
+<span class="sd">        :type format: str</span>
+<span class="sd">        :param header_length: Length of the message header</span>
+<span class="sd">        :type header_length: int</span>
+<span class="sd">        :param enable_logging: Flag to enable logging of the messages</span>
+<span class="sd">        :type enable_logging: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ip</span> <span class="o">=</span> <span class="n">ip</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="n">port</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">format</span> <span class="o">=</span> <span class="nb">format</span>
@@ -108,12 +111,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">clients_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
 
 <div class="viewcode-block" id="Server.handle_client"><a class="viewcode-back" href="../../src/package_apis/swergio/swergio.html#swergio.server.Server.handle_client">[docs]</a>    <span class="k">def</span> <span class="nf">handle_client</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">,</span> <span class="n">addr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;_summary_</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handles the incoming client connection and processes the messages</span>
 
-<span class="sd">        Args:</span>
-<span class="sd">            client (_type_): _description_</span>
-<span class="sd">            addr (_type_): _description_</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+<span class="sd">        :param client: Client connection instance</span>
+<span class="sd">        :type client: socket.socket</span>
+<span class="sd">        :param addr: IP address of the client</span>
+<span class="sd">        :type addr: tuple</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[NEW CONNECTION] </span><span class="si">{</span><span class="n">addr</span><span class="si">}</span><span class="s2"> connected.&quot;</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">connected</span> <span class="o">=</span> <span class="kc">True</span>
@@ -122,36 +127,27 @@
                 <span class="n">message_header</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">header_length</span><span class="p">)</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">message_header</span><span class="p">:</span>
                     <span class="k">break</span>
-                <span class="n">message_length</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">message_header</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">))</span>
-                <span class="c1">#message = client.recv(message_length).decode(self.format)</span>
+                <span class="n">message_length</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">message_header</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">))</span> 
 
                 <span class="n">full_message_received</span> <span class="o">=</span> <span class="kc">False</span>
                 <span class="n">message</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span>
                 <span class="n">message_length_left</span> <span class="o">=</span> <span class="n">message_length</span>
                 <span class="k">while</span> <span class="ow">not</span> <span class="n">full_message_received</span><span class="p">:</span>
-                    <span class="n">message</span> <span class="o">+=</span> <span class="n">client</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="n">message_length_left</span><span class="p">)</span> <span class="c1">#.decode(self.format)</span>
+                    <span class="n">message</span> <span class="o">+=</span> <span class="n">client</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="n">message_length_left</span><span class="p">)</span>
                     <span class="n">message_length_left</span> <span class="o">=</span> <span class="n">message_length</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
                     <span class="k">if</span> <span class="n">message_length_left</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
                         <span class="n">full_message_received</span> <span class="o">=</span> <span class="kc">True</span>
             
                 <span class="n">message</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
 
-                <span class="c1">#print(message_length)</span>
-                <span class="c1">#print(message)</span>
-                        
-                <span class="c1"># handle event messages</span>
                 <span class="k">try</span><span class="p">:</span>
                     <span class="n">msg_content</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
                 <span class="k">except</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="n">message_length</span><span class="p">)</span>
                     <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-                <span class="c1">#print(msg_content[&quot;TYPE&quot;])</span>
+
                 <span class="n">msg_type</span> <span class="o">=</span> <span class="n">MESSAGE_TYPE</span><span class="o">.</span><span class="n">by_id</span><span class="p">(</span><span class="n">msg_content</span><span class="p">[</span><span class="s2">&quot;TYPE&quot;</span><span class="p">])</span>
-                <span class="c1">#print(msg_type)</span>
-                <span class="c1">#print(f&quot;[{addr}] {message_length}&quot;)</span>
-                <span class="c1">#print(f&quot;[{addr}] {msg_content}&quot;)</span>
-
-
+                
                 <span class="k">if</span> <span class="n">msg_type</span> <span class="o">==</span> <span class="n">MESSAGE_TYPE</span><span class="o">.</span><span class="n">COMMAND</span><span class="o">.</span><span class="n">DISCONNECT</span><span class="p">:</span>
                     <span class="n">connected</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">disconnect_client</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
                     <span class="k">break</span>
@@ -163,11 +159,9 @@
                 <span class="k">if</span> <span class="n">msg_type</span> <span class="o">==</span> <span class="n">MESSAGE_TYPE</span><span class="o">.</span><span class="n">COMMAND</span><span class="o">.</span><span class="n">JOINROOM</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">join_room</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">msg_content</span><span class="p">)</span>
                     
-                    <span class="c1"># remove from room</span>
                 <span class="k">if</span> <span class="n">msg_type</span> <span class="o">==</span> <span class="n">MESSAGE_TYPE</span><span class="o">.</span><span class="n">COMMAND</span><span class="o">.</span><span class="n">LEAVEROOM</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">leave_room</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">msg_content</span><span class="p">)</span>
                     
-                <span class="c1"># forward message to all clients</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">broadcast_message</span><span class="p">(</span><span class="n">client</span><span class="p">,</span><span class="n">message_header</span><span class="p">,</span><span class="n">message</span><span class="p">,</span> <span class="n">msg_content</span><span class="p">)</span>
 
         <span class="k">finally</span><span class="p">:</span>
@@ -181,15 +175,15 @@
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">addr</span><span class="si">}</span><span class="s2">] Disconnected.&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Server.register_client"><a class="viewcode-back" href="../../src/package_apis/swergio/swergio.html#swergio.server.Server.register_client">[docs]</a>    <span class="k">def</span> <span class="nf">register_client</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">client</span><span class="p">,</span><span class="n">msg_content</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;_summary_</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            client (_type_): _description_</span>
-<span class="sd">            msg_content (_type_): _description_</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            _type_: _description_</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Registers the client with the given name</span>
+<span class="sd">        :param client: Client connection instance</span>
+<span class="sd">        :type client: socket.socket</span>
+<span class="sd">        :param msg_content: Message content containing the name of the client</span>
+<span class="sd">        :type msg_content: dict</span>
+<span class="sd">        :return: Name of the registered client</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[REGISTER] </span><span class="si">{</span><span class="n">msg_content</span><span class="p">[</span><span class="s1">&#39;NAME&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> is registering...&quot;</span><span class="p">)</span>
         <span class="n">name</span> <span class="o">=</span> <span class="n">msg_content</span><span class="p">[</span><span class="s2">&quot;NAME&quot;</span><span class="p">]</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">clients_lock</span><span class="p">:</span>
@@ -197,24 +191,23 @@
         <span class="k">return</span> <span class="n">name</span></div>
 
 <div class="viewcode-block" id="Server.disconnect_client"><a class="viewcode-back" href="../../src/package_apis/swergio/swergio.html#swergio.server.Server.disconnect_client">[docs]</a>    <span class="k">def</span> <span class="nf">disconnect_client</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;_summary_</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            client (_type_): _description_</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            _type_: _description_</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Disconnects the given client from the server</span>
+<span class="sd">        :param client: Client connection instance</span>
+<span class="sd">        :type client: socket.socket</span>
+<span class="sd">        :return: False to indicate disconnection</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="kc">False</span></div>
 
 <div class="viewcode-block" id="Server.join_room"><a class="viewcode-back" href="../../src/package_apis/swergio/swergio.html#swergio.server.Server.join_room">[docs]</a>    <span class="k">def</span> <span class="nf">join_room</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">,</span> <span class="n">msg_content</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;_summary_</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            client (_type_): _description_</span>
-<span class="sd">            msg_content (_type_): _description_</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
-        <span class="c1"># add to room</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds the given client to the specified room</span>
+<span class="sd">        :param client: Client connection instance</span>
+<span class="sd">        :type client: socket.socket</span>
+<span class="sd">        :param msg_content: Message content containing the name of the room</span>
+<span class="sd">        :type msg_content: dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">room</span> <span class="o">=</span> <span class="n">msg_content</span><span class="p">[</span><span class="s2">&quot;ROOM&quot;</span><span class="p">]</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">clients_lock</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">room</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rooms</span><span class="p">:</span>
@@ -225,12 +218,13 @@
                 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[CLIENT ADDED] </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">names</span><span class="p">[</span><span class="n">client</span><span class="p">]</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">room</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Server.leave_room"><a class="viewcode-back" href="../../src/package_apis/swergio/swergio.html#swergio.server.Server.leave_room">[docs]</a>    <span class="k">def</span> <span class="nf">leave_room</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">,</span> <span class="n">msg_content</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;_summary_</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            client (_type_): _description_</span>
-<span class="sd">            msg_content (_type_): _description_</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Removes the given client from the specified room</span>
+<span class="sd">        :param client: Client connection instance</span>
+<span class="sd">        :type client: socket.socket</span>
+<span class="sd">        :param msg_content: Message content containing the name of the room</span>
+<span class="sd">        :type msg_content: dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">room</span> <span class="o">=</span> <span class="n">msg_content</span><span class="p">[</span><span class="s2">&quot;ROOM&quot;</span><span class="p">]</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">clients_lock</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">client</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rooms</span><span class="p">[</span><span class="n">room</span><span class="p">]:</span>
@@ -239,16 +233,18 @@
                     <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">rooms</span><span class="p">[</span><span class="n">room</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="Server.broadcast_message"><a class="viewcode-back" href="../../src/package_apis/swergio/swergio.html#swergio.server.Server.broadcast_message">[docs]</a>    <span class="k">def</span> <span class="nf">broadcast_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">,</span><span class="n">message_header</span><span class="p">,</span><span class="n">message</span><span class="p">,</span> <span class="n">msg_content</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;_summary_</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            client (_type_): _description_</span>
-<span class="sd">            message_header (_type_): _description_</span>
-<span class="sd">            message (_type_): _description_</span>
-<span class="sd">            msg_content (_type_): _description_</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Broadcasts the given message to the intended recipients</span>
+<span class="sd">        :param client: Client connection instance who sent the message</span>
+<span class="sd">        :type client: socket.socket</span>
+<span class="sd">        :param message_header: Header of the message</span>
+<span class="sd">        :type message_header: bytes</span>
+<span class="sd">        :param message: Message data</span>
+<span class="sd">        :type message: str</span>
+<span class="sd">        :param msg_content: Message content containing the recipient details</span>
+<span class="sd">        :type msg_content: dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[BROADCAST] </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">names</span><span class="p">[</span><span class="n">client</span><span class="p">]</span><span class="si">}</span><span class="s2"> sent a message.&quot;</span><span class="p">)</span>
-        <span class="c1">#print(msg_content)</span>
         <span class="k">if</span> <span class="s1">&#39;SENT_BY&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">msg_content</span><span class="p">:</span>
             <span class="n">msg_content</span><span class="p">[</span><span class="s1">&#39;SENT_BY&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">names</span><span class="p">[</span><span class="n">client</span><span class="p">]</span>
             <span class="n">message</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">msg_content</span><span class="p">)</span>
@@ -273,26 +269,23 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">send_message_log</span><span class="p">(</span><span class="n">msg_content</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Server.send_message_log"><a class="viewcode-back" href="../../src/package_apis/swergio/swergio.html#swergio.server.Server.send_message_log">[docs]</a>    <span class="k">def</span> <span class="nf">send_message_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg_content</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;_summary_</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            msg_content (_type_): _description_</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sends the given message to the logging room</span>
+<span class="sd">        :param msg_content: Message content to be logged</span>
+<span class="sd">        :type msg_content: dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[LOGGING] </span><span class="si">{</span><span class="n">msg_content</span><span class="p">[</span><span class="s1">&#39;SENT_BY&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> sent a message.&quot;</span><span class="p">)</span>
         <span class="n">msg</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;ID&#39;</span><span class="p">:</span> <span class="n">uuid4</span><span class="p">()</span><span class="o">.</span><span class="n">hex</span><span class="p">,</span> <span class="s1">&#39;TO_ROOM&#39;</span><span class="p">:</span> <span class="s1">&#39;_logging&#39;</span><span class="p">,</span> <span class="s1">&#39;TYPE&#39;</span><span class="p">:</span> <span class="n">MESSAGE_TYPE</span><span class="o">.</span><span class="n">LOG</span><span class="o">.</span><span class="n">MESSAGE</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="s1">&#39;MESSAGE&#39;</span><span class="p">:</span> <span class="n">msg_content</span><span class="p">}</span>
         <span class="n">msg</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
         <span class="n">message_encoded</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
         <span class="n">message_header</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">message_encoded</span><span class="p">)</span><span class="si">:</span><span class="s2">&lt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">header_length</span><span class="si">}}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
-        <span class="c1">#print(message_header)</span>
-        <span class="c1">#print(f&quot;{msg_content[&#39;SENT_BY&#39;]}: {msg_content[&#39;TYPE&#39;]} {msg_content[&#39;ID&#39;]}&quot;)        </span>
         <span class="k">for</span> <span class="n">client</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rooms</span><span class="p">[</span><span class="s1">&#39;_logging&#39;</span><span class="p">]:</span>
             <span class="n">client</span><span class="o">.</span><span class="n">sendall</span><span class="p">(</span><span class="n">message_header</span> <span class="o">+</span> <span class="n">message_encoded</span><span class="p">)</span></div>
-            <span class="c1">#client.sendall(message_encoded)</span>
-            <span class="c1">#client.sendall(msg.encode(self.format))</span>
 
 <div class="viewcode-block" id="Server.start"><a class="viewcode-back" href="../../src/package_apis/swergio/swergio.html#swergio.server.Server.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;_summary_</span>
-<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Starts the server and listens for incoming client connections</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[STARTING] Server is starting...&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">listen</span><span class="p">()</span>
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>client module &mdash; swergio 0.0.1 documentation</title>
@@ -88,63 +88,246 @@
 <dl class="class"><dt id=ClientModule.Client><em class="property">type </em><code class="descname">Client</code><a class="headerlink" href="#ClientModule.Client" title="Permalink to thistype"></a></dt><dd class="body"><p><p class="linemarker linemarker-1">A client, which can be used to connect to a server and send and
 receive messages.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><strong>client</strong> – TCPSocket to connect the client to the server.</p></li>
 <li><p><strong>name</strong> – The name of the client.</p></li>
 <li><p><strong>server</strong> – The IP address of the server.</p></li>
 <li><p><strong>port</strong> – The port number of the server.</p></li>
 <li><p><strong>header_length</strong> – The length of the message header in bytes.</p></li>
 <li><p><strong>eventHandlers</strong> – A set of <cite>EventHandler</cite> instances registered with this client.</p></li>
 <li><p><strong>rooms</strong> – A set of rooms that the client has joined.</p></li>
+<li><p><strong>kwargs</strong> – Additional keyword arguments that will be passed to event handler
+functions when they are called.</p></li>
 </ul>
-</dd>
-<dt class="field-even">Ivar name</dt>
-<dd class="field-even"><p class="linemarker linemarker-11">The name of the client.</p>
-</dd>
-<dt class="field-odd">Ivar server</dt>
-<dd class="field-odd"><p class="linemarker linemarker-12">The IP address of the server.</p>
-</dd>
-<dt class="field-even">Ivar port</dt>
-<dd class="field-even"><p class="linemarker linemarker-13">The port number of the server.</p>
-</dd>
-<dt class="field-odd">Ivar format</dt>
-<dd class="field-odd"><p class="linemarker linemarker-14">The encoding format to use for messages.</p>
-</dd>
-<dt class="field-even">Ivar header_length</dt>
-<dd class="field-even"><p class="linemarker linemarker-15">The length of the message header in bytes.</p>
-</dd>
-<dt class="field-odd">Ivar eventHandlers</dt>
-<dd class="field-odd"><p class="linemarker linemarker-16">A set of <cite>EventHandler</cite> instances registered with this client.</p>
-</dd>
-<dt class="field-even">Ivar rooms</dt>
-<dd class="field-even"><p class="linemarker linemarker-17">A set of rooms that the client has joined.</p>
-</dd>
-<dt class="field-odd">Ivar kwargs</dt>
-<dd class="field-odd"><p class="linemarker linemarker-18">Additional keyword arguments that will be passed to event handler
-functions when they are called.</p>
-</dd>
-<dt class="field-even">Ivar client</dt>
-<dd class="field-even"><p class="linemarker linemarker-20">The socket used to connect to the server.</p>
 </dd>
 </dl>
 </p>
-</dd></dl><dl class="function"><dt id="ClientModule.Client-b2c97b69828a0fc63cf495d25b3a4c34"><em class="property">function </em><code class="descname">Client</code><span class="sig-paren">(</span><em>name</em>, <em>server</em>, <em>port</em>; <em>header_length</em> = <tt>10</tt>, <em>kwargs</em>...<span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.Client-b2c97b69828a0fc63cf495d25b3a4c34" title="Permalink to this function"></a></dt><dd><p></p>
-</dd></dl><dl class="function"><dt id="ClientModule.send-faa551675376233fb3cfec0de5600279"><em class="property">function </em><code class="descname">send</code><span class="sig-paren">(</span><em>client</em>::Client, <em>message</em><span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.send-faa551675376233fb3cfec0de5600279" title="Permalink to this function"></a></dt><dd><p></p>
-</dd></dl><dl class="function"><dt id="ClientModule.register-6767061beca3c293f255c5a52c07adab"><em class="property">function </em><code class="descname">register</code><span class="sig-paren">(</span><em>client</em>::Client<span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.register-6767061beca3c293f255c5a52c07adab" title="Permalink to this function"></a></dt><dd><p></p>
-</dd></dl><dl class="function"><dt id="ClientModule.receive-6767061beca3c293f255c5a52c07adab"><em class="property">function </em><code class="descname">receive</code><span class="sig-paren">(</span><em>client</em>::Client<span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.receive-6767061beca3c293f255c5a52c07adab" title="Permalink to this function"></a></dt><dd><p></p>
-</dd></dl><dl class="function"><dt id="ClientModule.close-6767061beca3c293f255c5a52c07adab"><em class="property">function </em><code class="descname">close</code><span class="sig-paren">(</span><em>client</em>::Client<span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.close-6767061beca3c293f255c5a52c07adab" title="Permalink to this function"></a></dt><dd><p></p>
-</dd></dl><dl class="function"><dt id="ClientModule.add_eventHandler-91c218c1be94d228074df715cbc4768c"><em class="property">function </em><code class="descname">add_eventHandler</code><span class="sig-paren">(</span><em>client</em>::Client, <em>handleFunction</em>, <em>responseType</em>; <em>responseRooms</em> = <tt>nothing</tt>, <em>responseComponent</em> = <tt>nothing</tt>, <em>trigger</em> = <tt>nothing</tt><span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.add_eventHandler-91c218c1be94d228074df715cbc4768c" title="Permalink to this function"></a></dt><dd><p></p>
-</dd></dl><dl class="function"><dt id="ClientModule.join_room-6e4ce646fa67a42ae6a173995a11f892"><em class="property">function </em><code class="descname">join_room</code><span class="sig-paren">(</span><em>client</em>::Client, <em>room</em><span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.join_room-6e4ce646fa67a42ae6a173995a11f892" title="Permalink to this function"></a></dt><dd><p></p>
-</dd></dl><dl class="function"><dt id="ClientModule.listen-6767061beca3c293f255c5a52c07adab"><em class="property">function </em><code class="descname">listen</code><span class="sig-paren">(</span><em>client</em>::Client<span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.listen-6767061beca3c293f255c5a52c07adab" title="Permalink to this function"></a></dt><dd><p></p>
-</dd></dl><dl class="function"><dt id="ClientModule.add_propagated_fields-e76a1231898ae5561c8331aef49204f7"><em class="property">function </em><code class="descname">add_propagated_fields</code><span class="sig-paren">(</span><em>client</em>::Client, <em>message</em>, <em>response</em><span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.add_propagated_fields-e76a1231898ae5561c8331aef49204f7" title="Permalink to this function"></a></dt><dd><p></p>
-</dd></dl><dl class="function"><dt id="ClientModule.filter_dict-7a9a7e899962da5643a1edc587baf223"><em class="property">function </em><code class="descname">filter_dict</code><span class="sig-paren">(</span><em>dict_to_filter</em>, <em>thing_with_kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.filter_dict-7a9a7e899962da5643a1edc587baf223" title="Permalink to this function"></a></dt><dd><p></p>
-</dd></dl><dl class="class"><dt id=ClientModule.EventHandler><em class="property">type </em><code class="descname">EventHandler</code><a class="headerlink" href="#ClientModule.EventHandler" title="Permalink to thistype"></a></dt><dd class="body"><p></p>
-</dd></dl><dl class="function"><dt id="ClientModule.EventHandler-61b38a14a3c07168015a81c439fe1f93"><em class="property">function </em><code class="descname">EventHandler</code><span class="sig-paren">(</span><em>handleFunction</em>, <em>responseType</em>; <em>responseRooms</em> = <tt>nothing</tt>, <em>responseComponent</em> = <tt>nothing</tt>, <em>trigger</em> = <tt>nothing</tt><span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.EventHandler-61b38a14a3c07168015a81c439fe1f93" title="Permalink to this function"></a></dt><dd><p></p>
-</dd></dl><dl class="function"><dt id="ClientModule.is_triggered-1bc228ac71d6d8aa59035906ee87e13b"><em class="property">function </em><code class="descname">is_triggered</code><span class="sig-paren">(</span><em>eventHandler</em>::EventHandler, <em>message</em><span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.is_triggered-1bc228ac71d6d8aa59035906ee87e13b" title="Permalink to this function"></a></dt><dd><p></p>
-</dd></dl><dl class="function"><dt id="ClientModule.handle-fd01128e0e16afd55d4887571a588048"><em class="property">function </em><code class="descname">handle</code><span class="sig-paren">(</span><em>eventHandler</em>::EventHandler, <em>args</em>...; <em>kwargs</em>...<span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.handle-fd01128e0e16afd55d4887571a588048" title="Permalink to this function"></a></dt><dd><p></p>
-</dd></dl><dl class="class"><dt id=ClientModule.Trigger><em class="property">type </em><code class="descname">Trigger</code><a class="headerlink" href="#ClientModule.Trigger" title="Permalink to thistype"></a></dt><dd class="body"><p></p>
-</dd></dl><dl class="function"><dt id="ClientModule.Trigger-e1e686ceff276be2c3cde7325cf05c37"><em class="property">function </em><code class="descname">Trigger</code><span class="sig-paren">(</span><em>types</em>, <em>rooms</em>; <em>directmessages</em> = <tt>false</tt><span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.Trigger-e1e686ceff276be2c3cde7325cf05c37" title="Permalink to this function"></a></dt><dd><p></p>
-</dd></dl><dl class="function"><dt id="ClientModule.is_triggered-c832ad2f98ad2354d3140103a91d79fa"><em class="property">function </em><code class="descname">is_triggered</code><span class="sig-paren">(</span><em>trigger</em>::Trigger, <em>message</em><span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.is_triggered-c832ad2f98ad2354d3140103a91d79fa" title="Permalink to this function"></a></dt><dd><p></p>
+</dd></dl><dl class="function"><dt id="ClientModule.Client-b2c97b69828a0fc63cf495d25b3a4c34"><em class="property">function </em><code class="descname">Client</code><span class="sig-paren">(</span><em>name</em>, <em>server</em>, <em>port</em>; <em>header_length</em> = <tt>10</tt>, <em>kwargs</em>...<span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.Client-b2c97b69828a0fc63cf495d25b3a4c34" title="Permalink to this function"></a></dt><dd><p><p class="linemarker linemarker-1">Function to create a client struct</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – The name of the client.</p></li>
+<li><p><strong>server</strong> – The IP address of the server.</p></li>
+<li><p><strong>port</strong> – The port number of the server.</p></li>
+<li><p><strong>header_length</strong> – The length of the message header in bytes.</p></li>
+<li><p><strong>kwargs</strong> – Additional keyword arguments that will be passed to event handler
+functions when they are called.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The created client</p>
+</dd>
+</dl>
+</p>
+</dd></dl><dl class="function"><dt id="ClientModule.send-faa551675376233fb3cfec0de5600279"><em class="property">function </em><code class="descname">send</code><span class="sig-paren">(</span><em>client</em>::Client, <em>message</em><span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.send-faa551675376233fb3cfec0de5600279" title="Permalink to this function"></a></dt><dd><p><p class="linemarker linemarker-1">Send the given message to the server.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>client</strong> – Used client struct.</p></li>
+<li><p><strong>message</strong> – The message to send.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl><dl class="function"><dt id="ClientModule.register-6767061beca3c293f255c5a52c07adab"><em class="property">function </em><code class="descname">register</code><span class="sig-paren">(</span><em>client</em>::Client<span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.register-6767061beca3c293f255c5a52c07adab" title="Permalink to this function"></a></dt><dd><p><p class="linemarker linemarker-1">Register this client with the server. This will send a REGISTER command message
+to the server and join the reserved rooms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>client</strong> – Used client struct.</p>
+</dd>
+</dl>
+</p>
+</dd></dl><dl class="function"><dt id="ClientModule.receive-6767061beca3c293f255c5a52c07adab"><em class="property">function </em><code class="descname">receive</code><span class="sig-paren">(</span><em>client</em>::Client<span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.receive-6767061beca3c293f255c5a52c07adab" title="Permalink to this function"></a></dt><dd><p><p class="linemarker linemarker-1">Receive a message from the server.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>client</strong> – Used client struct.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The received message, or False if an error occurred.</p>
+</dd>
+</dl>
+</p>
+</dd></dl><dl class="function"><dt id="ClientModule.close-6767061beca3c293f255c5a52c07adab"><em class="property">function </em><code class="descname">close</code><span class="sig-paren">(</span><em>client</em>::Client<span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.close-6767061beca3c293f255c5a52c07adab" title="Permalink to this function"></a></dt><dd><p><p class="linemarker linemarker-1">Close the connection to the server. This will send a DISCONNECT command message
+to the server and close the socket.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>client</strong> – Used client struct.</p>
+</dd>
+</dl>
+</p>
+</dd></dl><dl class="function"><dt id="ClientModule.add_eventHandler-91c218c1be94d228074df715cbc4768c"><em class="property">function </em><code class="descname">add_eventHandler</code><span class="sig-paren">(</span><em>client</em>::Client, <em>handleFunction</em>, <em>responseType</em>; <em>responseRooms</em> = <tt>nothing</tt>, <em>responseComponent</em> = <tt>nothing</tt>, <em>trigger</em> = <tt>nothing</tt><span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.add_eventHandler-91c218c1be94d228074df715cbc4768c" title="Permalink to this function"></a></dt><dd><p><p class="linemarker linemarker-1">Add a new event handler to this client.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>client</strong> – Used client struct.</p></li>
+<li><p><strong>handleFunction</strong> – The function to call when a message is handled by this event
+handler. This function should take the same arguments as the
+<cite>handle</cite> method of the <cite>EventHandler</cite> class and return a
+response message, or None if no response is needed.</p></li>
+<li><p><strong>responseType</strong> – The type of the response message.</p></li>
+<li><p><strong>responseRooms</strong> – A list of room IDs where the response message should be sent.
+If not specified, the response will be sent to the same room as
+the original message.</p></li>
+<li><p><strong>responseComponent</strong> – The component ID where the response message should be sent.</p></li>
+<li><p><strong>trigger</strong> – A <cite>Trigger</cite> instance that specifies the criteria for triggering this
+event handler. If not specified, the event handler will never be
+triggered.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl><dl class="function"><dt id="ClientModule.join_room-6e4ce646fa67a42ae6a173995a11f892"><em class="property">function </em><code class="descname">join_room</code><span class="sig-paren">(</span><em>client</em>::Client, <em>room</em><span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.join_room-6e4ce646fa67a42ae6a173995a11f892" title="Permalink to this function"></a></dt><dd><p><p class="linemarker linemarker-1">Join the given room. This will send a JOINROOM command message to the server.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>client</strong> – Used client struct.</p></li>
+<li><p><strong>room</strong> – The ID of the room to join.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl><dl class="function"><dt id="ClientModule.listen-6767061beca3c293f255c5a52c07adab"><em class="property">function </em><code class="descname">listen</code><span class="sig-paren">(</span><em>client</em>::Client<span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.listen-6767061beca3c293f255c5a52c07adab" title="Permalink to this function"></a></dt><dd><p><p class="linemarker linemarker-1">Listen for incoming messages from the server and handle them using the registered
+event handlers. This method will block until the connection to the server is closed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>client</strong> – Used client struct.</p>
+</dd>
+</dl>
+</p>
+</dd></dl><dl class="function"><dt id="ClientModule.add_propagated_fields-e76a1231898ae5561c8331aef49204f7"><em class="property">function </em><code class="descname">add_propagated_fields</code><span class="sig-paren">(</span><em>client</em>::Client, <em>message</em>, <em>response</em><span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.add_propagated_fields-e76a1231898ae5561c8331aef49204f7" title="Permalink to this function"></a></dt><dd><p><p class="linemarker linemarker-1">Add the fields from the original message that should be propagated to the response
+message. This includes the root ID, the model status of the original message as 
+well as the name of the sender.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>client</strong> – Used client struct.</p></li>
+<li><p><strong>message</strong> – The original message.</p></li>
+<li><p><strong>response</strong> – The response message.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The updated response message.</p>
+</dd>
+</dl>
+</p>
+</dd></dl><dl class="class"><dt id=ClientModule.EventHandler><em class="property">type </em><code class="descname">EventHandler</code><a class="headerlink" href="#ClientModule.EventHandler" title="Permalink to thistype"></a></dt><dd class="body"><p><p class="linemarker linemarker-1">This typ defines an event handler, which can be used to handle messages that match
+certain criteria.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>handleFunction</strong> – The function to call when a message is handled by this event
+handler. This function should take the same arguments as the
+<cite>handle</cite> method of this class and return a response message, or
+None if no response is needed.</p></li>
+<li><p><strong>responseType</strong> – The type of the response message.</p></li>
+<li><p><strong>responseRooms</strong> – A list of room IDs where the response message should be sent. If
+not specified, the response will be sent to the same room as the
+original message.</p></li>
+<li><p><strong>responseComponent</strong> – The component ID where the response message should be sent.</p></li>
+<li><p><strong>trigger</strong> – A <cite>Trigger</cite> instance that specifies the criteria for triggering this
+event handler. If not specified, the event handler will never be
+triggered.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl><dl class="function"><dt id="ClientModule.EventHandler-61b38a14a3c07168015a81c439fe1f93"><em class="property">function </em><code class="descname">EventHandler</code><span class="sig-paren">(</span><em>handleFunction</em>, <em>responseType</em>; <em>responseRooms</em> = <tt>nothing</tt>, <em>responseComponent</em> = <tt>nothing</tt>, <em>trigger</em> = <tt>nothing</tt><span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.EventHandler-61b38a14a3c07168015a81c439fe1f93" title="Permalink to this function"></a></dt><dd><p><p class="linemarker linemarker-1">Function to create a EventHandler.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>handleFunction</strong> – The function to call when a message is handled by this event
+handler. This function should take the same arguments as the
+<cite>handle</cite> method of this class and return a response message, or
+None if no response is needed.</p></li>
+<li><p><strong>responseType</strong> – The type of the response message.</p></li>
+<li><p><strong>responseRooms</strong> – A list of room IDs where the response message should be sent. If
+not specified, the response will be sent to the same room as the
+original message.</p></li>
+<li><p><strong>responseComponent</strong> – The component ID where the response message should be sent.</p></li>
+<li><p><strong>trigger</strong> – A <cite>Trigger</cite> instance that specifies the criteria for triggering this
+event handler. If not specified, the event handler will never be
+triggered..</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Created EventHandler struct.</p>
+</dd>
+</dl>
+</p>
+</dd></dl><dl class="function"><dt id="ClientModule.is_triggered-1bc228ac71d6d8aa59035906ee87e13b"><em class="property">function </em><code class="descname">is_triggered</code><span class="sig-paren">(</span><em>eventHandler</em>::EventHandler, <em>message</em><span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.is_triggered-1bc228ac71d6d8aa59035906ee87e13b" title="Permalink to this function"></a></dt><dd><p><p class="linemarker linemarker-1">Check if this event handler is triggered by the given message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>eventHandler</strong> – Used EventHandler.</p></li>
+<li><p><strong>message</strong> – The message to check.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the message matches the criteria specified for this event handler,
+False otherwise.</p>
+</dd>
+</dl>
+</p>
+</dd></dl><dl class="function"><dt id="ClientModule.handle-fd01128e0e16afd55d4887571a588048"><em class="property">function </em><code class="descname">handle</code><span class="sig-paren">(</span><em>eventHandler</em>::EventHandler, <em>args</em>...; <em>kwargs</em>...<span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.handle-fd01128e0e16afd55d4887571a588048" title="Permalink to this function"></a></dt><dd><p><p class="linemarker linemarker-1">Handle the given message by calling the <cite>handleFunction</cite> specified in the
+constructor, and return a response message if needed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>eventHandler</strong> – Used EventHandler.</p></li>
+<li><p><strong>args</strong> – Positional arguments to pass to <cite>handleFunction</cite>.</p></li>
+<li><p><strong>kwargs</strong> – Keyword arguments to pass to <cite>handleFunction</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A response message, or None if no response is needed.</p>
+</dd>
+</dl>
+</p>
+</dd></dl><dl class="class"><dt id=ClientModule.Trigger><em class="property">type </em><code class="descname">Trigger</code><a class="headerlink" href="#ClientModule.Trigger" title="Permalink to thistype"></a></dt><dd class="body"><p><p class="linemarker linemarker-1">This type defines a trigger, which can be used to check if a given message matches
+certain criteria.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>types</strong> – A list of message types that should trigger this trigger.</p></li>
+<li><p><strong>rooms</strong> – A list of room IDs that should trigger this trigger. If not specified,
+the trigger will be triggered by messages in any room.</p></li>
+<li><p><strong>directmessage</strong> – A boolean indicating whether direct messages (messages not
+sent to a specific room) should trigger this trigger.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl><dl class="function"><dt id="ClientModule.Trigger-e1e686ceff276be2c3cde7325cf05c37"><em class="property">function </em><code class="descname">Trigger</code><span class="sig-paren">(</span><em>types</em>, <em>rooms</em>; <em>directmessages</em> = <tt>false</tt><span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.Trigger-e1e686ceff276be2c3cde7325cf05c37" title="Permalink to this function"></a></dt><dd><p><p class="linemarker linemarker-1">Function to create a Trigger</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>types</strong> – A list of message types that should trigger this trigger.</p></li>
+<li><p><strong>rooms</strong> – A list of room IDs that should trigger this trigger. If not specified,
+the trigger will be triggered by messages in any room.</p></li>
+<li><p><strong>directmessage</strong> – A boolean indicating whether direct messages (messages not
+sent to a specific room) should trigger this trigger.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Cretated Trigger.</p>
+</dd>
+</dl>
+</p>
+</dd></dl><dl class="function"><dt id="ClientModule.is_triggered-c832ad2f98ad2354d3140103a91d79fa"><em class="property">function </em><code class="descname">is_triggered</code><span class="sig-paren">(</span><em>trigger</em>::Trigger, <em>message</em><span class="sig-paren">)</span><a class="headerlink" href="#ClientModule.is_triggered-c832ad2f98ad2354d3140103a91d79fa" title="Permalink to this function"></a></dt><dd><p><p class="linemarker linemarker-1">Check if this trigger is triggered by the given message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>trigger</strong> – Used Trigger.</p></li>
+<li><p><strong>message</strong> – The message to check.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the message matches the criteria specified for this trigger, False
+otherwise.</p>
+</dd>
+</dl>
+</p>
 </dd></dl></dd></dl></section>
 
 

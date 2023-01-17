@@ -1,3 +1,21 @@
 Trebuchet
 ===============
 
+
+
+Requirements
+------------
+
+
+How to run it
+-------------
+
+
+Details
+-------
+
+.. toctree::
+   :maxdepth: 2
+
+   introduction.rst
+   server.rst

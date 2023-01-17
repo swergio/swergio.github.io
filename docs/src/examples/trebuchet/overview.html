@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Trebuchet &mdash; swergio 0.0.1 documentation</title>
@@ -20,7 +20,7 @@
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Reinforcement Learning" href="../RL/overview.html" />
+    <link rel="next" title="Introduction" href="00_introduction.html" />
     <link rel="prev" title="Examples" href="../modules.html" /> 
 </head>
 
@@ -43,7 +43,21 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../swergio/modules.html">Swergio Project</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../modules.html">Examples</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Trebuchet</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Trebuchet</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-run-it">How to run it</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#details">Details</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="00_introduction.html">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="01_server.html">01_server.py</a></li>
+<li class="toctree-l4"><a class="reference internal" href="02_controlmodel.html">02_controlmodel.py</a></li>
+<li class="toctree-l4"><a class="reference internal" href="03_trebuchet.html">03_trebuchet.jl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="04_training.html">04_training.py</a></li>
+<li class="toctree-l4"><a class="reference internal" href="99_swarm.html">Set up the swarm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="05_run_and_inference.html">05_run_and_inference.py</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../RL/overview.html">Reinforcement Learning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../MelodyCreator/overview.html">Melody Creator</a></li>
 </ul>
@@ -68,7 +82,7 @@
           <li class="breadcrumb-item"><a href="../modules.html">Examples</a></li>
       <li class="breadcrumb-item active">Trebuchet</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../../../_sources/src/examples/trebuchet/overview.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../../_sources/src/examples/Trebuchet/overview.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -78,6 +92,53 @@
              
   <section id="trebuchet">
 <h1>Trebuchet<a class="headerlink" href="#trebuchet" title="Permalink to this heading"></a></h1>
+<p>This example demonstrates the use of the swergio project to control the accuracy of a medieval trebuchet.
+It is based on the <a class="reference external" href="https://github.com/JuliaComputing/ODSC2019/blob/master/03-Differentiable-trebuchet-Zygote.ipynb">example</a> provided by the zygote.jl team, which is written entirely in Julia.</p>
+<p>In our example, only the trebuchet logic itself is represented as differentiable Julia code, while all other components, particularly the control network, are implemented in Python/Pytorch.</p>
+<p>Our goal is to train a control network to determine the optimal angle and counterweight for the trebuchet to hit a given target with a given wind speed.</p>
+<p>We can then run inference on the trained model to aim at previously unseen targets.</p>
+<p>The full source code of the example can be found on <a class="reference external" href="https://github.com/swergio/Examples/tree/main/Trebuchet">GitHub</a>.</p>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h2>
+<p>To run this example we need to run Python as well as Julia code.</p>
+<dl class="simple">
+<dt>For the python part of the code the easiest way to set it up is to:</dt><dd><ol class="arabic simple">
+<li><p>Install Python &gt; 3.8 (<a class="reference external" href="https://www.python.org/downloads/">https://www.python.org/downloads/</a>)</p></li>
+<li><p>If required install python3-venv <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">python3-venv</span></code></p></li>
+<li><p>Create a virtual environment in the example folder <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">venv</span> <span class="pre">/venv</span></code></p></li>
+<li><p>Activate the virtual environment <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">\env\bin\activate</span></code></p></li>
+<li><p>Install required packages to virtual environment <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">requirements.txt</span></code></p></li>
+</ol>
+</dd>
+<dt>To run the julia part of the example we will have to install julia as well as instantiate the project environment:</dt><dd><ol class="arabic simple">
+<li><p>Install Julia (<a class="reference external" href="https://julialang.org/downloads/">https://julialang.org/downloads/</a>)</p></li>
+<li><p>Activate the project environment in the example folder <code class="docutils literal notranslate"><span class="pre">(v1.0)</span> <span class="pre">pkg&gt;</span> <span class="pre">activate</span> <span class="pre">.</span></code></p></li>
+<li><p>Instantiate the project environment <code class="docutils literal notranslate"><span class="pre">(Trebuchet)</span> <span class="pre">pkg&gt;</span> <span class="pre">instantiate</span></code></p></li>
+</ol>
+</dd>
+</dl>
+</section>
+<section id="how-to-run-it">
+<h2>How to run it<a class="headerlink" href="#how-to-run-it" title="Permalink to this heading"></a></h2>
+<p>This example can be run by executing separate code blocks either through interactive Python in VSCode from the <code class="docutils literal notranslate"><span class="pre">05_run_and_inference.py</span></code> file or as a Jupyter notebook <code class="docutils literal notranslate"><span class="pre">05_run_and_inference.ipynb</span></code>.</p>
+<p>The code is divided into two parts: one that starts all components and initiates training, and another that sets up a new client to communicate inference data.
+Since the components are independent, training and testing can be run in parallel, but it may be advisable to wait until training is finished before running the inference code to obtain more accurate results.</p>
+<p>The final code block in the files will shut down all the components.</p>
+</section>
+<section id="details">
+<h2>Details<a class="headerlink" href="#details" title="Permalink to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="00_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_server.html">01_server.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_controlmodel.html">02_controlmodel.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_trebuchet.html">03_trebuchet.jl</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_training.html">04_training.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99_swarm.html">Set up the swarm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_run_and_inference.html">05_run_and_inference.py</a></li>
+</ul>
+</div>
+</section>
 </section>
 
 
@@ -85,7 +146,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../modules.html" class="btn btn-neutral float-left" title="Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../RL/overview.html" class="btn btn-neutral float-right" title="Reinforcement Learning" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="00_introduction.html" class="btn btn-neutral float-right" title="Introduction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

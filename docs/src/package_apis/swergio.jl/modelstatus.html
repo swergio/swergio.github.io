@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>modelstatus module &mdash; swergio 0.0.1 documentation</title>
@@ -93,7 +93,7 @@
 </p>
 <dl class="class"><dt id=modelstatus.ModelStatusSetting><em class="property">type </em><code class="descname">ModelStatusSetting</code><a class="headerlink" href="#modelstatus.ModelStatusSetting" title="Permalink to thistype"></a></dt><dd class="body"><p><p>This type represents a setting for a model’s status.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>id</strong> – The unique identifier for the model status setting.</p></li>
 <li><p><strong>name</strong> – The name of the model status setting.</p></li>
@@ -103,7 +103,7 @@
 </p>
 </dd></dl><dl class="class"><dt id=modelstatus.modelstatus_struct><em class="property">type </em><code class="descname">modelstatus_struct</code><a class="headerlink" href="#modelstatus.modelstatus_struct" title="Permalink to thistype"></a></dt><dd class="body"><p><p>The type to define the possible settings for a model’s status.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>TRAIN</strong> – ModelStatusSetting for training.</p></li>
 <li><p><strong>VALIDATE</strong> – ModelStatusSetting for validation.</p></li>
@@ -113,13 +113,13 @@
 </p>
 </dd></dl><dl class="function"><dt id="modelstatus.by_id-e8f6931eb2d20e2793a137af54d3b4e4"><em class="property">function </em><code class="descname">by_id</code><span class="sig-paren">(</span><em>cls</em>::modelstatus_struct, <em>id</em>::Int<span class="sig-paren">)</span><a class="headerlink" href="#modelstatus.by_id-e8f6931eb2d20e2793a137af54d3b4e4" title="Permalink to this function"></a></dt><dd><p><p>Returns the model status setting with the given id, or None if no such setting exists.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>cls</strong> – A modelstatus_struct type.</p></li>
 <li><p><strong>id</strong> – The unique identifier of the model status setting to return.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The model status setting with the given id, or None if no such setting exists.</p>
 </dd>
 </dl>

@@ -67,7 +67,7 @@ Now we  can create the swergio Client by passing the required settings (NAME, SE
 
     client = Client(COMPONENT_NAME, SERVER,PORT,FORMAT,HEADER_LENGTH)
 
-After instantiated the client, we can now add the event handler functions. These functions are executed when we receive a certain type of message.
+After instantiating the client, we can now add the event handler functions. These functions are executed when we receive a certain type of message.
 
 We first define the function that will handle our received messages. 
 Such a function requires the *msg* as first parameter, which contains the all message information as dictionary.
@@ -98,7 +98,7 @@ After setting up all the required logic, we finally start our client to listen t
 Universe.py
 -----------
 
-We create a ``univer.py`` file containing the logic for our *universe* component. 
+We create a ``universe.py`` file containing the logic for our *universe* component. 
 It will send the first "Hello World!" message and afterwards receives replies from the *world* component via the *galactic_chat* room and send its responses.
 
 

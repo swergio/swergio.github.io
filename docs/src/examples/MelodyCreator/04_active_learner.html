@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>04_active_learner.py &mdash; swergio 0.0.1 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Set up the swarm" href="99_swarm.html" />
+    <link rel="prev" title="03_evaluation_net.py" href="03_evaluation_net.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> swergio
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../swergio/modules.html">Swergio Project</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../modules.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../Trebuchet/overview.html">Trebuchet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../RL/overview.html">Reinforcement Learning</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="overview.html">Melody Creator</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="overview.html#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#how-to-run-it">How to run it</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="overview.html#details">Details</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="00_introduction.html">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="01_server.html">01_server.py</a></li>
+<li class="toctree-l4"><a class="reference internal" href="02_evolutionary.html">02_evolutionary.py</a></li>
+<li class="toctree-l4"><a class="reference internal" href="03_evaluation_net.html">03_evaluation_net.py</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">04_active_learner.py</a></li>
+<li class="toctree-l4"><a class="reference internal" href="99_swarm.html">Set up the swarm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="music_generator.html">music_generator.py</a></li>
+<li class="toctree-l4"><a class="reference internal" href="05_user_interface.html">05_user_interface.py</a></li>
+<li class="toctree-l4"><a class="reference internal" href="prelabel_script.html">prelabel_script.py</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../package_apis/modules.html">Packages API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">swergio</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../modules.html">Examples</a></li>
+          <li class="breadcrumb-item"><a href="overview.html">Melody Creator</a></li>
+      <li class="breadcrumb-item active">04_active_learner.py</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/src/examples/MelodyCreator/04_active_learner.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="active-learner-py">
+<h1>04_active_learner.py<a class="headerlink" href="#active-learner-py" title="Permalink to this heading"></a></h1>
+<p>Previously we defined a neural network that should be able to evaluate a melody and give a score about the quality. To train this network in a efficient way we will implement an active learning algorithm.
+This means instead of using a large amount of labeled data, we’ll try to label the data in a smart way and only when we assume the new information the data will provide is sufficient.</p>
+<p>We can therefore look at this component in two ways, the one part where we will train the evaluation network based on a given set of labeled data and the second part the process on how we obtain more labeled data.</p>
+<p>Let’s create a <code class="docutils literal notranslate"><span class="pre">04_active_learner.py</span></code> file and import all the packages.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">socket</span>
+<span class="kn">import</span> <span class="nn">uuid</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">ast</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">islice</span>
+<span class="kn">from</span> <span class="nn">swergio</span> <span class="kn">import</span> <span class="n">Client</span><span class="p">,</span> <span class="n">Trigger</span><span class="p">,</span> <span class="n">MESSAGE_TYPE</span><span class="p">,</span> <span class="n">MODEL_STATUS</span>
+<span class="kn">from</span> <span class="nn">swergio_toolbox.objects</span> <span class="kn">import</span> <span class="n">MutableNumber</span><span class="p">,</span> <span class="n">MutableBool</span>
+</pre></div>
+</div>
+<p>Let’s as always start to set the component name and then specify the IP and the port as well as the message format and the header length.
+All of these information have to stay the same across the server and all clients.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">COMPONENT_NAME</span> <span class="o">=</span> <span class="s1">&#39;trainer&#39;</span>
+<span class="n">PORT</span> <span class="o">=</span> <span class="mi">8080</span>
+<span class="n">SERVER</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">gethostbyname</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">gethostname</span><span class="p">())</span>
+<span class="n">ADDR</span> <span class="o">=</span> <span class="p">(</span><span class="n">SERVER</span><span class="p">,</span> <span class="n">PORT</span><span class="p">)</span>
+<span class="n">FORMAT</span> <span class="o">=</span> <span class="s1">&#39;utf-8&#39;</span>
+<span class="n">HEADER_LENGTH</span> <span class="o">=</span> <span class="mi">10</span>
+</pre></div>
+</div>
+<p>Now we have to define a couple of constant or mutable variables.</p>
+<p>As constant variables we will set the number of unlabeled data we want to collect before we ask for new labels and the number of data points we want to actively label as well as the file name we use to store all labeled data.</p>
+<p>For the training we define the epoch and bach size for each training run.</p>
+<p>We will use mutable variables to track the epoch and batch number as well as the number of batches we have available in the labeled dataset and a flag if we are currently training.</p>
+<p>To store the unlabeled and labeled data we use dictionaries as well as a memory dictionary for our training process.</p>
+<p>After defining the loss function we use for our training we can finally create the swergio client.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">NR_OF_UNLABELED_DATA</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">ACTIVE_LABELS</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">LABELED_FILE</span> <span class="o">=</span> <span class="s2">&quot;data.csv&quot;</span>
+<span class="n">EPOCHS</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">BATCH_SIZE</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">epoch_counter</span> <span class="o">=</span> <span class="n">MutableNumber</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">batch_counter</span> <span class="o">=</span> <span class="n">MutableNumber</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">nr_of_batches</span> <span class="o">=</span> <span class="n">MutableNumber</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">istraining</span> <span class="o">=</span> <span class="n">MutableBool</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">dict_unlabeled</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">dict_labeled</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">memory</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">l_fn</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">COMPONENT_NAME</span><span class="p">,</span><span class="n">SERVER</span><span class="p">,</span><span class="n">PORT</span><span class="p">,</span><span class="n">FORMAT</span><span class="p">,</span><span class="n">HEADER_LENGTH</span><span class="p">,</span>
+                <span class="n">dict_unlabeled</span> <span class="o">=</span> <span class="n">dict_unlabeled</span><span class="p">,</span>
+                <span class="n">dict_labeled</span> <span class="o">=</span> <span class="n">dict_labeled</span><span class="p">,</span>
+                <span class="n">epoch_counter</span> <span class="o">=</span> <span class="n">epoch_counter</span><span class="p">,</span>
+                <span class="n">batch_counter</span> <span class="o">=</span> <span class="n">batch_counter</span><span class="p">,</span>
+                <span class="n">nr_of_batches</span> <span class="o">=</span> <span class="n">nr_of_batches</span><span class="p">,</span>
+                <span class="n">istraining</span> <span class="o">=</span> <span class="n">istraining</span>
+                <span class="p">)</span>
+</pre></div>
+</div>
+<p>We will also define two helper functions.
+One two read the CSV file with already labeled data an the other to be able to split our stored labeled data dictionary into separate batches.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">## LOAD LABELD DATA</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">LABELED_FILE</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">myFile</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">myFile</span><span class="p">)</span>
+    <span class="n">dict_labeled</span> <span class="o">=</span> <span class="p">{</span><span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span><span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">take</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">iterable</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+    <span class="s2">&quot;Return first n items of the iterable as a list&quot;</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span><span class="n">s</span><span class="p">,</span> <span class="n">s</span> <span class="o">+</span> <span class="n">n</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Let’s first define the logic to handle the training loop including sending training data to the evaluation network and providing gradient feedback based on the actual label.</p>
+<p>We therefore define a helper function that generates a new massage.
+I will take a batch out of our dictionary with the labeled data and then sends the data to <em>traininput</em>,
+while storing the label in memory.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">new_msg</span><span class="p">(</span><span class="n">dict_labeled</span><span class="p">,</span> <span class="n">batch_counter</span><span class="p">):</span>
+    <span class="n">batch</span> <span class="o">=</span> <span class="n">take</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">BATCH_SIZE</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">dict_labeled</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">-</span> <span class="n">batch_counter</span><span class="o">.</span><span class="n">value</span><span class="o">*</span><span class="n">BATCH_SIZE</span><span class="p">),</span><span class="n">dict_labeled</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span><span class="n">batch_counter</span><span class="o">.</span><span class="n">value</span><span class="o">*</span><span class="n">BATCH_SIZE</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">]</span>
+    <span class="n">target</span> <span class="o">=</span> <span class="p">[</span><span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">]</span>
+    <span class="n">data_id</span> <span class="o">=</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="o">.</span><span class="n">hex</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;ROOT_ID&#39;</span><span class="p">:</span><span class="n">data_id</span><span class="p">,</span>
+        <span class="s1">&#39;ID&#39;</span><span class="p">:</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="o">.</span><span class="n">hex</span><span class="p">,</span>
+        <span class="s1">&#39;TYPE&#39;</span><span class="p">:</span> <span class="n">MESSAGE_TYPE</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">FORWARD</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+        <span class="s1">&#39;DATA&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">,</span>
+        <span class="s1">&#39;TO_ROOM&#39;</span><span class="p">:</span> <span class="s1">&#39;traininput&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;MODEL_STATUS&#39;</span><span class="p">:</span> <span class="n">MODEL_STATUS</span><span class="o">.</span><span class="n">TRAIN</span><span class="o">.</span><span class="n">id</span>
+    <span class="p">}</span>
+    <span class="n">memory</span><span class="p">[</span><span class="n">data_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">target</span>
+    <span class="k">return</span> <span class="n">d</span>
+</pre></div>
+</div>
+<p>To send new batches of training data we set up a handler that will trigger when we receive the final gradient from the prior step in the <em>traininput</em> room and then send a new batch.</p>
+<p>We will keep track of the current batch and epoch until we reach our epoch goal.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">new_data</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span><span class="n">dict_unlabeled</span><span class="p">,</span> <span class="n">dict_labeled</span><span class="p">,</span> <span class="n">batch_counter</span><span class="p">,</span> <span class="n">nr_of_batches</span><span class="p">,</span> <span class="n">epoch_counter</span><span class="p">,</span> <span class="n">istraining</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">epoch_counter</span><span class="o">.</span><span class="n">value</span> <span class="o">&lt;</span>  <span class="n">EPOCHS</span><span class="p">:</span>
+        <span class="n">batch_counter</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">batch_counter</span><span class="o">.</span><span class="n">value</span><span class="o">&lt;</span> <span class="n">nr_of_batches</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">new_msg</span><span class="p">(</span><span class="n">dict_labeled</span><span class="p">,</span> <span class="n">batch_counter</span><span class="p">)</span>
+            <span class="k">return</span>  <span class="n">d</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">batch_counter</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">epoch_counter</span><span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">new_msg</span><span class="p">(</span><span class="n">dict_labeled</span><span class="p">,</span> <span class="n">batch_counter</span><span class="p">)</span>
+            <span class="k">return</span>  <span class="n">d</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">dict_unlabeled</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="n">istraining</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+<span class="n">client</span><span class="o">.</span><span class="n">add_eventHandler</span><span class="p">(</span><span class="n">new_data</span><span class="p">,</span><span class="n">MESSAGE_TYPE</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">FORWARD</span><span class="p">,</span><span class="n">responseRooms</span><span class="o">=</span><span class="s1">&#39;traininput&#39;</span><span class="p">,</span><span class="n">trigger</span><span class="o">=</span><span class="n">Trigger</span><span class="p">(</span><span class="n">MESSAGE_TYPE</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">GRADIENT</span><span class="p">,</span><span class="s1">&#39;traininput&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>To provide the gradient feedback to the evaluation network we will add a event handler that will take the result from the <em>trainoutput</em>,
+calculates the loss based on the actual label we stored in our memory dict and then return the gradient in respect to the predicted label.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">backward</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
+    <span class="n">pred</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">FloatTensor</span><span class="p">(</span><span class="n">msg</span><span class="p">[</span><span class="s2">&quot;DATA&quot;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">msg</span><span class="p">[</span><span class="s2">&quot;ROOT_ID&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">memory</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">return</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">memory</span><span class="p">[</span><span class="n">msg</span><span class="p">[</span><span class="s2">&quot;ROOT_ID&quot;</span><span class="p">]]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">long</span><span class="p">()</span>
+    <span class="n">memory</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">msg</span><span class="p">[</span><span class="s2">&quot;ROOT_ID&quot;</span><span class="p">])</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="n">l_fn</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">l_gradient</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">autograd</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">jacobian</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">l_fn</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">),</span><span class="n">pred</span><span class="p">)</span>
+    <span class="n">l_gradient</span>  <span class="o">=</span> <span class="n">l_gradient</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;ID&quot;</span><span class="p">:</span><span class="n">msg</span><span class="p">[</span><span class="s2">&quot;ID&quot;</span><span class="p">],</span><span class="s2">&quot;DATA&quot;</span><span class="p">:</span><span class="n">l_gradient</span><span class="p">}</span>
+<span class="n">client</span><span class="o">.</span><span class="n">add_eventHandler</span><span class="p">(</span><span class="n">backward</span><span class="p">,</span><span class="n">MESSAGE_TYPE</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">GRADIENT</span><span class="p">,</span><span class="n">responseRooms</span><span class="o">=</span><span class="s1">&#39;trainoutput&#39;</span><span class="p">,</span><span class="n">trigger</span><span class="o">=</span><span class="n">Trigger</span><span class="p">(</span><span class="n">MESSAGE_TYPE</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">FORWARD</span><span class="p">,</span><span class="s1">&#39;trainoutput&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>To perform th active labeling process we will first define a few helper functions.</p>
+<p>The first will calculate an uncertainty measure for our model prediction based on the class probability.</p>
+<p>The second function will retrieve unlabeled data we want to label from the stored dictionary based on the uncertainty of each prediction.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">uncertainty</span><span class="p">(</span><span class="n">probs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="nb">max</span><span class="p">(</span><span class="n">probs</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_unlabeled_for_labeling</span><span class="p">(</span><span class="n">dict_unlabeled</span><span class="p">):</span>
+    <span class="n">sorted_unlabeled</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">dict_unlabeled</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">item</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="n">n_items</span> <span class="o">=</span> <span class="n">take</span><span class="p">(</span><span class="n">ACTIVE_LABELS</span><span class="p">,</span> <span class="n">sorted_unlabeled</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">n_items</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Now we can define the handler that will ask for new labels from the user.</p>
+<p>We will monitor the message in <em>evolution</em> and will store the results of the evaluation model in our unlabeled data dictionary including the calculated uncertainty of the prediction.</p>
+<p>Once this dictionary has the desired amount of data, we will pick the data points with highest uncertainty and send them to be labeled to the <em>user</em>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">label_data</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">dict_unlabeled</span><span class="p">,</span> <span class="n">dict_labeled</span><span class="p">,</span> <span class="n">batch_counter</span><span class="p">,</span><span class="n">nr_of_batches</span><span class="p">,</span> <span class="n">istraining</span> <span class="p">):</span>
+    <span class="k">if</span> <span class="s1">&#39;PROBS&#39;</span> <span class="ow">in</span> <span class="n">msg</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">genomes</span> <span class="o">=</span> <span class="n">msg</span><span class="p">[</span><span class="s2">&quot;GENOMES&quot;</span><span class="p">]</span>
+        <span class="n">probs</span> <span class="o">=</span> <span class="n">msg</span><span class="p">[</span><span class="s2">&quot;PROBS&quot;</span><span class="p">]</span>
+        <span class="c1">## Add to unlabeled dict</span>
+        <span class="k">for</span> <span class="n">g</span><span class="p">,</span><span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">genomes</span><span class="p">,</span><span class="n">probs</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dict_labeled</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">dict_unlabeled</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">g</span><span class="p">)]</span> <span class="o">=</span> <span class="n">uncertainty</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;GATHERED &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dict_unlabeled</span><span class="o">.</span><span class="n">keys</span><span class="p">())))</span>
+        <span class="c1">### if unlabeled full start active learning process</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dict_unlabeled</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">&gt;=</span> <span class="n">NR_OF_UNLABELED_DATA</span> <span class="ow">and</span> <span class="n">istraining</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TRAIN&quot;</span><span class="p">)</span>
+            <span class="n">istraining</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">get_unlabeled_for_labeling</span><span class="p">(</span><span class="n">dict_unlabeled</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;GENOMES&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">}</span>
+<span class="n">client</span><span class="o">.</span><span class="n">add_eventHandler</span><span class="p">(</span><span class="n">label_data</span><span class="p">,</span><span class="n">MESSAGE_TYPE</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">CUSTOM</span><span class="p">,</span><span class="n">responseRooms</span><span class="o">=</span><span class="s1">&#39;user&#39;</span><span class="p">,</span><span class="n">trigger</span><span class="o">=</span><span class="n">Trigger</span><span class="p">(</span><span class="n">MESSAGE_TYPE</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">CUSTOM</span><span class="p">,</span><span class="s1">&#39;evolution&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>When we receive the newly labeled data back from the user, we will start a new training loop including all labeled data we collected to this point.</p>
+<p>We therefore define a train function that sets the according training counter, calculates the number of available batches in our labeled dataset and send the first batch of data to the <em>modelinput</em> room.</p>
+<p>We also define the handler to react on the incoming labeled data from the <em>user</em>.
+The handler adds the newly labeled data to the dictionary as well as in the permanent CSV file.</p>
+<p>Before starting the training, we will shuffle the labeled data.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="n">dict_labeled</span><span class="p">,</span> <span class="n">batch_counter</span><span class="p">,</span><span class="n">nr_of_batches</span><span class="p">,</span> <span class="n">epoch_counter</span><span class="p">):</span>
+    <span class="c1"># start trainning</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dict_labeled</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="n">epoch_counter</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">batch_counter</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">nr_of_batches</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">l</span><span class="o">/</span><span class="n">BATCH_SIZE</span><span class="p">))</span>
+    <span class="c1"># SEND BATCH TO MODEL</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">new_msg</span><span class="p">(</span><span class="n">dict_labeled</span><span class="p">,</span> <span class="n">batch_counter</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">### WHEN GETTING BACK NEW LABELD DATA START TRAINING ROUND</span>
+<span class="k">def</span> <span class="nf">start_training</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span><span class="n">dict_unlabeled</span><span class="p">,</span> <span class="n">dict_labeled</span><span class="p">,</span> <span class="n">batch_counter</span><span class="p">,</span><span class="n">nr_of_batches</span><span class="p">,</span> <span class="n">epoch_counter</span><span class="p">):</span>
+    <span class="k">if</span> <span class="s2">&quot;FITNESS&quot;</span> <span class="ow">in</span> <span class="n">msg</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">genomes</span> <span class="o">=</span> <span class="n">msg</span><span class="p">[</span><span class="s2">&quot;GENOMES&quot;</span><span class="p">]</span>
+        <span class="n">fitness</span> <span class="o">=</span> <span class="n">msg</span><span class="p">[</span><span class="s2">&quot;FITNESS&quot;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">genomes</span><span class="p">,</span><span class="n">fitness</span><span class="p">):</span>
+            <span class="n">dict_labeled</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">k</span><span class="p">)]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="c1"># add to data CSV</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">LABELED_FILE</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">myFile</span><span class="p">:</span>
+            <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">myFile</span><span class="p">)</span>
+            <span class="p">[</span><span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">((</span><span class="nb">tuple</span><span class="p">(</span><span class="n">k</span><span class="p">),</span><span class="n">v</span><span class="p">))</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">genomes</span><span class="p">,</span><span class="n">fitness</span><span class="p">)]</span>
+
+        <span class="n">random_dict_labeled</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">dict_labeled</span><span class="p">)</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">random_dict_labeled</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span>
+        <span class="n">dict_labeled</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+            <span class="n">dict_labeled</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">random_dict_labeled</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+
+        <span class="n">train</span><span class="p">(</span><span class="n">dict_labeled</span><span class="p">,</span> <span class="n">batch_counter</span><span class="p">,</span><span class="n">nr_of_batches</span><span class="p">,</span> <span class="n">epoch_counter</span><span class="p">)</span>
+<span class="n">client</span><span class="o">.</span><span class="n">add_eventHandler</span><span class="p">(</span><span class="n">start_training</span><span class="p">,</span><span class="n">MESSAGE_TYPE</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">CUSTOM</span><span class="p">,</span><span class="n">responseRooms</span><span class="o">=</span><span class="s1">&#39;user&#39;</span><span class="p">,</span><span class="n">trigger</span><span class="o">=</span><span class="n">Trigger</span><span class="p">(</span><span class="n">MESSAGE_TYPE</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">CUSTOM</span><span class="p">,</span><span class="s1">&#39;user&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Up to this point the model is only trained once we already collected a bunch of data and labeled it.
+To speed up the initial training process, we will pre-train our model based on the given data in the CSV file.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pre-train if labeled data avaialable</span>
+<span class="k">if</span>  <span class="nb">len</span><span class="p">(</span><span class="n">dict_labeled</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PRE-TRAIN&quot;</span><span class="p">)</span>
+    <span class="n">train</span><span class="p">(</span><span class="n">dict_labeled</span><span class="p">,</span> <span class="n">batch_counter</span><span class="p">,</span><span class="n">nr_of_batches</span><span class="p">,</span> <span class="n">epoch_counter</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After setting up all the required logic, we finally start our client to listen to new incoming messages.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">client</span><span class="o">.</span><span class="n">listen</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="03_evaluation_net.html" class="btn btn-neutral float-left" title="03_evaluation_net.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="99_swarm.html" class="btn btn-neutral float-right" title="Set up the swarm" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, IshmaGurca.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

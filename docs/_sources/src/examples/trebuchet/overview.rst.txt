@@ -1,3 +1,55 @@
 Trebuchet
 ===============
 
+This example demonstrates the use of the swergio project to control the accuracy of a medieval trebuchet. 
+It is based on the `example <https://github.com/JuliaComputing/ODSC2019/blob/master/03-Differentiable-trebuchet-Zygote.ipynb>`_ provided by the zygote.jl team, which is written entirely in Julia. 
+
+In our example, only the trebuchet logic itself is represented as differentiable Julia code, while all other components, particularly the control network, are implemented in Python/Pytorch. 
+
+Our goal is to train a control network to determine the optimal angle and counterweight for the trebuchet to hit a given target with a given wind speed. 
+
+We can then run inference on the trained model to aim at previously unseen targets.
+
+The full source code of the example can be found on `GitHub <https://github.com/swergio/Examples/tree/main/Trebuchet>`_.
+
+Requirements
+------------
+
+To run this example we need to run Python as well as Julia code. 
+
+For the python part of the code the easiest way to set it up is to:
+   1. Install Python > 3.8 (https://www.python.org/downloads/)
+   2. If required install python3-venv ``sudo apt install python3-venv``
+   3. Create a virtual environment in the example folder ``python3 -m venv /venv``
+   4. Activate the virtual environment ``source \env\bin\activate``
+   5. Install required packages to virtual environment ``pip install -r requirements.txt``
+
+To run the julia part of the example we will have to install julia as well as instantiate the project environment:
+   1. Install Julia (https://julialang.org/downloads/) 
+   2. Activate the project environment in the example folder ``(v1.0) pkg> activate .``
+   3. Instantiate the project environment ``(Trebuchet) pkg> instantiate``
+
+How to run it 
+-------------
+
+This example can be run by executing separate code blocks either through interactive Python in VSCode from the ``05_run_and_inference.py`` file or as a Jupyter notebook ``05_run_and_inference.ipynb``. 
+
+The code is divided into two parts: one that starts all components and initiates training, and another that sets up a new client to communicate inference data. 
+Since the components are independent, training and testing can be run in parallel, but it may be advisable to wait until training is finished before running the inference code to obtain more accurate results. 
+
+The final code block in the files will shut down all the components.
+
+Details
+-------
+
+.. toctree::
+   :maxdepth: 2
+
+   00_introduction.rst
+   01_server.rst
+   02_controlmodel.rst
+   03_trebuchet.rst
+   04_training.rst
+   99_swarm.rst
+   05_run_and_inference.rst
+   

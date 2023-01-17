@@ -79,20 +79,23 @@
 <span class="sd">    :param filepath: The file path of the component.</span>
 <span class="sd">    :type filepath: str</span>
 
-<span class="sd">    :param projectpath: The project path of the component, if applicable.</span>
-<span class="sd">    :type projectpath: str</span>
+<span class="sd">    :param envpath: Path to environment used to execute python or julia code. </span>
+<span class="sd">    :type envpath: str</span>
 
 <span class="sd">    :param delay: The delay in seconds before starting the component.</span>
 <span class="sd">    :type delay: int or float</span>
 
-<span class="sd">    :param terminal: Whether to start the component in a terminal or not.</span>
-<span class="sd">    :type terminal: bool</span>
+<span class="sd">    :param terminal_cmd: Command used to start the component in a terminal. When None no terminal is used. </span>
+<span class="sd">    :type terminal_cmd: str</span>
+<span class="sd">    </span>
+<span class="sd">    :param python_cmd: Command to run python file. Default &quot;python&quot;.</span>
+<span class="sd">    :type python_cmd: str</span>
 
 <span class="sd">    :ivar filepath: The file path of the component.</span>
 <span class="sd">    :vartype filepath: str</span>
 
-<span class="sd">    :ivar projectpath: The project path of the component, if applicable.</span>
-<span class="sd">    :vartype projectpath: str</span>
+<span class="sd">    :ivar envpath: Path to environment used to execute python or julia code. </span>
+<span class="sd">    :vartype envpath: str</span>
 
 <span class="sd">    :ivar delay: The delay in seconds before starting the component.</span>
 <span class="sd">    :vartype delay: int or float</span>
@@ -100,15 +103,19 @@
 <span class="sd">    :ivar process: The subprocess object representing the running component.</span>
 <span class="sd">    :vartype process: subprocess.Popen</span>
 
-<span class="sd">    :ivar terminal: Whether the component is started in a terminal or not.</span>
-<span class="sd">    :vartype terminal: bool</span>
+<span class="sd">    :ivar terminal_cmd: Command used to start the component in a terminal. When None no terminal is used. </span>
+<span class="sd">    :vartype terminal_cmd: str</span>
+<span class="sd">    </span>
+<span class="sd">    :ivar python_cmd: Command to run python file. Default &quot;python&quot;.</span>
+<span class="sd">    :vartype python_cmd: str</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">,</span> <span class="n">projectpath</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">delay</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">terminal</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">,</span> <span class="n">envpath</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">delay</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">terminal_cmd</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">python_cmd</span> <span class="o">=</span> <span class="s2">&quot;python&quot;</span> <span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">filepath</span> <span class="o">=</span> <span class="n">filepath</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">projectpath</span> <span class="o">=</span> <span class="n">projectpath</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">envpath</span> <span class="o">=</span> <span class="n">envpath</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">delay</span> <span class="o">=</span> <span class="n">delay</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">process</span> <span class="o">=</span> <span class="kc">None</span> 
-        <span class="bp">self</span><span class="o">.</span><span class="n">terminal</span> <span class="o">=</span> <span class="n">terminal</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">terminal_cmd</span> <span class="o">=</span> <span class="n">terminal_cmd</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">python_cmd</span> <span class="o">=</span> <span class="n">python_cmd</span>
         
 <div class="viewcode-block" id="Component.start"><a class="viewcode-back" href="../../src/package_apis/toolbox/swergio_toolbox.html#swergio_toolbox.swarm_control.Component.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -118,22 +125,25 @@
 <span class="sd">        :rtype: int or float or None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">filepath</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;py&quot;</span><span class="p">:</span>
-            <span class="n">lang</span> <span class="o">=</span> <span class="s2">&quot;python3&quot;</span>
+            <span class="n">lang</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">python_cmd</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">filepath</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;jl&quot;</span><span class="p">:</span>
             <span class="n">lang</span> <span class="o">=</span> <span class="s2">&quot;julia&quot;</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
         
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">projectpath</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">lang</span> <span class="o">==</span> <span class="s2">&quot;julia&quot;</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">projectpath</span> <span class="o">==</span> <span class="s2">&quot;.&quot;</span><span class="p">:</span>
-                <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="n">lang</span><span class="p">,</span><span class="s2">&quot;--project&quot;</span><span class="p">,</span><span class="s2">&quot;-i&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">filepath</span><span class="p">]</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="n">lang</span><span class="p">,</span><span class="s2">&quot;--project&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">projectpath</span><span class="p">,</span><span class="s2">&quot;-i&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">filepath</span><span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">envpath</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">lang</span> <span class="o">==</span> <span class="s2">&quot;julia&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">envpath</span> <span class="o">==</span> <span class="s2">&quot;.&quot;</span><span class="p">:</span>
+                    <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="n">lang</span><span class="p">,</span><span class="s2">&quot;--project&quot;</span><span class="p">,</span><span class="s2">&quot;-i&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">filepath</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="n">lang</span><span class="p">,</span><span class="s2">&quot;--project&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">envpath</span><span class="p">,</span><span class="s2">&quot;-i&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">filepath</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="n">lang</span> <span class="o">==</span> <span class="s2">&quot;python&quot;</span><span class="p">:</span>
+                <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">envpath</span> <span class="o">+</span> <span class="n">lang</span><span class="p">,</span><span class="s2">&quot;-i&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">filepath</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="n">lang</span><span class="p">,</span><span class="s2">&quot;-i&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">filepath</span><span class="p">]</span>
         
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">terminal</span><span class="p">:</span>
-            <span class="n">command</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;xterm&quot;</span><span class="p">,</span> <span class="s2">&quot;-fs&quot;</span><span class="p">,</span>  <span class="s2">&quot;14&quot;</span><span class="p">,</span> <span class="s2">&quot;-fa&quot;</span><span class="p">,</span> <span class="s2">&quot;DejaVuSansMono&quot;</span><span class="p">,</span> <span class="s2">&quot;-hold&quot;</span><span class="p">,</span> <span class="s2">&quot;-e&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">cmd</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">terminal_cmd</span>  <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">command</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">terminal_cmd</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">cmd</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">command</span> <span class="o">=</span> <span class="n">cmd</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
@@ -172,13 +182,31 @@
             <span class="n">config_file</span> <span class="o">=</span> <span class="s1">&#39;swarm.yaml&#39;</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">stream</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">julia_envpath</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;settings&#39;</span><span class="p">][</span><span class="s1">&#39;julia_envpath&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;julia_envpath&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;settings&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">python_envpath</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;settings&#39;</span><span class="p">][</span><span class="s1">&#39;python_envpath&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;python_envpath&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;settings&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">python_cmd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;settings&#39;</span><span class="p">][</span><span class="s1">&#39;python_cmd&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;python_cmd&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;settings&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;python&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">terminal_cmd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;settings&#39;</span><span class="p">][</span><span class="s1">&#39;terminal_cmd&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;terminal_cmd&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;settings&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">else</span> <span class="kc">None</span>
+        
         <span class="bp">self</span><span class="o">.</span><span class="n">components</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;components&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            
+            <span class="k">if</span> <span class="s1">&#39;envpath&#39;</span> <span class="ow">in</span> <span class="n">v</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">envpath</span> <span class="o">=</span> <span class="n">envpath</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;filepath&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;py&quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">python_envpath</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">envpath</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">python_envpath</span>
+                <span class="k">elif</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;filepath&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;jl&quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">julia_envpath</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">envpath</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">julia_envpath</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">envpath</span> <span class="o">=</span> <span class="kc">None</span>
+    
             <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span>
                 <span class="n">v</span><span class="p">[</span><span class="s1">&#39;filepath&#39;</span><span class="p">],</span>
-                <span class="n">projectpath</span><span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;projectpath&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;projectpath&#39;</span> <span class="ow">in</span> <span class="n">v</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="n">envpath</span><span class="o">=</span> <span class="n">envpath</span><span class="p">,</span>
                 <span class="n">delay</span><span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;delay&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;delay&#39;</span> <span class="ow">in</span> <span class="n">v</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
-                <span class="n">terminal</span><span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;terminal&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;terminal&#39;</span> <span class="ow">in</span> <span class="n">v</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">else</span> <span class="kc">True</span>
+                <span class="n">terminal_cmd</span><span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;terminal_cmd&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;terminal_cmd&#39;</span> <span class="ow">in</span> <span class="n">v</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">terminal_cmd</span><span class="p">,</span>
+                <span class="n">python_cmd</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;python_cmd&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;python_cmd&#39;</span> <span class="ow">in</span> <span class="n">v</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">python_cmd</span><span class="p">,</span>
             <span class="p">)</span>
                 
 <div class="viewcode-block" id="Swarm.start"><a class="viewcode-back" href="../../src/package_apis/toolbox/swergio_toolbox.html#swergio_toolbox.swarm_control.Swarm.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">components</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
@@ -218,7 +246,7 @@
             <span class="n">delay</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span></div>
 
     
-<div class="viewcode-block" id="Swarm.add"><a class="viewcode-back" href="../../src/package_apis/toolbox/swergio_toolbox.html#swergio_toolbox.swarm_control.Swarm.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span> <span class="n">filepath</span><span class="p">,</span><span class="n">projectpath</span> <span class="o">=</span> <span class="kc">None</span> <span class="p">,</span><span class="n">delay</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">terminal</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="Swarm.add"><a class="viewcode-back" href="../../src/package_apis/toolbox/swergio_toolbox.html#swergio_toolbox.swarm_control.Swarm.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span> <span class="n">filepath</span><span class="p">,</span><span class="n">envpath</span> <span class="o">=</span> <span class="kc">None</span> <span class="p">,</span><span class="n">delay</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">terminal_cmd</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">python_cmd</span> <span class="o">=</span> <span class="s2">&quot;python&quot;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Add a new component to the swarm.</span>
 
@@ -228,22 +256,36 @@
 <span class="sd">        :param filepath: The file path of the new component.</span>
 <span class="sd">        :type filepath: str</span>
 
-<span class="sd">        :param projectpath: The project path of the new component, if applicable.</span>
-<span class="sd">        :type projectpath: str</span>
+<span class="sd">        :param envpath: Path to environment used to execute python or julia code. </span>
+<span class="sd">        :type envpath: str</span>
 
 <span class="sd">        :param delay: The delay in seconds before starting the new component.</span>
 <span class="sd">        :type delay: int or float</span>
 
-<span class="sd">        :param terminal: Whether to start the new component in a terminal or not.</span>
-<span class="sd">        :type terminal: bool</span>
+<span class="sd">        :param terminal_cmd: Command used to start the component in a terminal. When None no terminal is used. If terminal_cmd is &quot;&quot;, the terminal_cmd of the swarm will be used.</span>
+<span class="sd">        :type terminal_cmd: str</span>
+<span class="sd">        </span>
+<span class="sd">        :param python_cmd: Command to run python file. Default &quot;python&quot;. If python_cmd is &quot;&quot;, the python_cmd of the swarm will be used.</span>
+<span class="sd">        :type python_cmd: str</span>
 
 <span class="sd">        :return: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">envpath</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">envpath</span> <span class="o">=</span> <span class="n">envpath</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">filepath</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;py&quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">python_envpath</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">envpath</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">python_envpath</span>
+            <span class="k">elif</span> <span class="n">filepath</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;jl&quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">julia_envpath</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">envpath</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">julia_envpath</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">envpath</span> <span class="o">=</span> <span class="kc">None</span>
+                
         <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span>
                 <span class="n">filepath</span><span class="p">,</span>
-                <span class="n">projectpath</span><span class="o">=</span> <span class="n">projectpath</span><span class="p">,</span>
+                <span class="n">envpath</span><span class="o">=</span> <span class="n">envpath</span><span class="p">,</span>
                 <span class="n">delay</span><span class="o">=</span> <span class="n">delay</span><span class="p">,</span>
-                <span class="n">terminal</span><span class="o">=</span> <span class="n">terminal</span>
+                <span class="n">terminal_cmd</span><span class="o">=</span> <span class="n">terminal_cmd</span> <span class="k">if</span> <span class="n">terminal_cmd</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">terminal_cmd</span><span class="p">,</span>
+                <span class="n">python_cmd</span> <span class="o">=</span> <span class="n">python_cmd</span> <span class="k">if</span> <span class="n">python_cmd</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">python_cmd</span>
             <span class="p">)</span></div></div>
 
     

@@ -20,14 +20,6 @@ swergio\_toolbox.swarm\_control module
    :undoc-members:
    :show-inheritance:
 
-swergio\_toolbox.swarm\_control copy module
--------------------------------------------
-
-.. automodule:: swergio_toolbox.swarm_control copy
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 .. Module contents
 .. ---------------
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Reinforcement Learning &mdash; swergio 0.0.1 documentation</title>
@@ -20,8 +20,8 @@
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Melody Creator" href="../MelodyCreator/overview.html" />
-    <link rel="prev" title="Trebuchet" href="../trebuchet/overview.html" /> 
+    <link rel="next" title="Introduction" href="00_introduction.html" />
+    <link rel="prev" title="05_run_and_inference.py" href="../Trebuchet/05_run_and_inference.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -43,8 +43,23 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../swergio/modules.html">Swergio Project</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../modules.html">Examples</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../trebuchet/overview.html">Trebuchet</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Reinforcement Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Trebuchet/overview.html">Trebuchet</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Reinforcement Learning</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-run-it">How to run it</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#details">Details</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="00_introduction.html">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="01_server.html">01_server.py</a></li>
+<li class="toctree-l4"><a class="reference internal" href="02_model.html">02_model.py</a></li>
+<li class="toctree-l4"><a class="reference internal" href="03_aggregation.html">03_aggregation.py</a></li>
+<li class="toctree-l4"><a class="reference internal" href="04_gym_env.html">04_gym_env.py</a></li>
+<li class="toctree-l4"><a class="reference internal" href="05_evolutionary.html">05_evolutionary.py</a></li>
+<li class="toctree-l4"><a class="reference internal" href="99_swarm.html">Set up the swarm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="06_control.html">06_control.py</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../MelodyCreator/overview.html">Melody Creator</a></li>
 </ul>
 </li>
@@ -78,14 +93,57 @@
              
   <section id="reinforcement-learning">
 <h1>Reinforcement Learning<a class="headerlink" href="#reinforcement-learning" title="Permalink to this heading"></a></h1>
+<p>This example will demonstrate how to utilize the swergio project in a reinforcement learning (RL) setup.</p>
+<p>We will set up an RL agent that will take actions in the <a class="reference external" href="https://gymnasium.farama.org/environments/classic_control/cart_pole">CartPole-v1 gym environment</a>.
+The agent component will communicate its predicted actions to the environment component based on observations received, and in return, the environment will provide a reward feedback.</p>
+<p>To improve the model performance, this example extends the setup to enable selection of actions based on input from multiple models.
+To accomplish this, we will implement a separate component that will aggregate the outputs of all models to produce a combined action distribution.
+Additionally, we will use an evolutionary algorithm to find the best RL agent by ranking each model based on its contribution to the selected actions, then mating and mutating the best models to generate a new set of agents.</p>
+<p>The full source code of the example can be found on <a class="reference external" href="https://github.com/swergio/Examples/tree/main/RLGym">GitHub</a>.</p>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h2>
+<dl class="simple">
+<dt>To run this example we need to run Python code, the easiest way to set it up is to:</dt><dd><ol class="arabic simple">
+<li><p>Install Python &gt; 3.8 (<a class="reference external" href="https://www.python.org/downloads/">https://www.python.org/downloads/</a>)</p></li>
+<li><p>If required install python3-venv <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">python3-venv</span></code></p></li>
+<li><p>Create a virtual environment in the example folder <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">venv</span> <span class="pre">/venv</span></code></p></li>
+<li><p>Activate the virtual environment <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">\env\bin\activate</span></code></p></li>
+<li><p>Install required packages to virtual environment <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">requirements.txt</span></code></p></li>
+</ol>
+</dd>
+</dl>
+</section>
+<section id="how-to-run-it">
+<h2>How to run it<a class="headerlink" href="#how-to-run-it" title="Permalink to this heading"></a></h2>
+<p>To execute this example, which includes starting the environment and performing an evolutionary step,
+separate code blocks can be run either through interactive python in vscode from the <code class="docutils literal notranslate"><span class="pre">06_control.py</span></code> file or as a jupyter notebook  <code class="docutils literal notranslate"><span class="pre">06_control.ipynb</span></code>.</p>
+<p>The code will first initialize all necessary components and then create a client to communicate commands to run episodes in the environment and initiate an evolutionary step for the models.
+Using this client, a loop can be written to train the models through RL by running episodes and interleaving with selecting better models using an evolutionary algorithm.</p>
+<p>The final code block in the files will shut down all the components.</p>
+</section>
+<section id="details">
+<h2>Details<a class="headerlink" href="#details" title="Permalink to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="00_introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_server.html">01_server.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_model.html">02_model.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_aggregation.html">03_aggregation.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_gym_env.html">04_gym_env.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_evolutionary.html">05_evolutionary.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="99_swarm.html">Set up the swarm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_control.html">06_control.py</a></li>
+</ul>
+</div>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../trebuchet/overview.html" class="btn btn-neutral float-left" title="Trebuchet" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../MelodyCreator/overview.html" class="btn btn-neutral float-right" title="Melody Creator" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../Trebuchet/05_run_and_inference.html" class="btn btn-neutral float-left" title="05_run_and_inference.py" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="00_introduction.html" class="btn btn-neutral float-right" title="Introduction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

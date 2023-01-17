@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>swergio_toolbox package &mdash; swergio 0.0.1 documentation</title>
@@ -81,7 +81,7 @@
 <dd><p class="linemarker linemarker-1">Bases: <a class="reference internal" href="#swergio_toolbox.objects.MutableObject" title="swergio_toolbox.objects.MutableObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">MutableObject</span></code></a></p>
 <p class="linemarker linemarker-1">A class representing a mutable boolean value.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>value</strong> (<em>bool</em>) – The initial value of the boolean.</p>
 </dd>
 </dl>
@@ -93,7 +93,7 @@
 <dd><p class="linemarker linemarker-1">Bases: <a class="reference internal" href="#swergio_toolbox.objects.MutableObject" title="swergio_toolbox.objects.MutableObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">MutableObject</span></code></a></p>
 <p class="linemarker linemarker-1">A class representing a mutable number value.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>value</strong> (<em>int</em><em> or </em><em>float</em>) – The initial value of the number.</p>
 </dd>
 </dl>
@@ -105,10 +105,10 @@
 <dd><p class="linemarker linemarker-1">Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p class="linemarker linemarker-1">A class representing a mutable object with a value.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>value</strong> (<em>Any</em>) – The value of the object.</p>
 </dd>
-<dt class="field-even">Variables</dt>
+<dt class="field-even">Variables<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>value</strong> (<em>Any</em>) – The value of the object.</p>
 </dd>
 </dl>
@@ -117,7 +117,7 @@
 <span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio_toolbox/objects.html#MutableObject.set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio_toolbox.objects.MutableObject.set" title="Permalink to this definition"></a></dt>
 <dd><p class="linemarker linemarker-1">Set the value of the object.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>value</strong> (<em>Any</em>) – The new value of the object.</p>
 </dd>
 </dl>
@@ -134,7 +134,7 @@
 <dd><p class="linemarker linemarker-1">Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p class="linemarker linemarker-1">A class representing a component that can be started and stopped.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>filepath</strong> (<em>str</em>) – The file path of the component.</p></li>
 <li><p><strong>projectpath</strong> (<em>str</em>) – The project path of the component, if applicable.</p></li>
@@ -142,7 +142,7 @@
 <li><p><strong>terminal</strong> (<em>bool</em>) – Whether to start the component in a terminal or not.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Variables</dt>
+<dt class="field-even">Variables<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>filepath</strong> (<em>str</em>) – The file path of the component.</p></li>
 <li><p><strong>projectpath</strong> (<em>str</em>) – The project path of the component, if applicable.</p></li>
@@ -157,10 +157,10 @@
 <span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio_toolbox/swarm_control.html#Component.start"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio_toolbox.swarm_control.Component.start" title="Permalink to this definition"></a></dt>
 <dd><p class="linemarker linemarker-1">Start the component.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The delay in seconds before starting the component, or None if the file extension is not recognized.</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>int or float or None</p>
 </dd>
 </dl>
@@ -180,10 +180,10 @@
 <dd><p class="linemarker linemarker-1">Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p class="linemarker linemarker-1">A class representing a swarm of components that can be started and stopped as a group.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>config_file</strong> (<em>str</em>) – The file path of the configuration file.</p>
 </dd>
-<dt class="field-even">Variables</dt>
+<dt class="field-even">Variables<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>config</strong> (<em>dict</em>) – The configuration for the swarm.</p></li>
 <li><p><strong>components</strong> (<em>dict</em>) – The components in the swarm.</p></li>
@@ -195,7 +195,7 @@
 <span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projectpath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">terminal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio_toolbox/swarm_control.html#Swarm.add"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio_toolbox.swarm_control.Swarm.add" title="Permalink to this definition"></a></dt>
 <dd><p class="linemarker linemarker-1">Add a new component to the swarm.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> (<em>str</em>) – The name of the new component.</p></li>
 <li><p><strong>filepath</strong> (<em>str</em>) – The file path of the new component.</p></li>
@@ -204,7 +204,7 @@
 <li><p><strong>terminal</strong> (<em>bool</em>) – Whether to start the new component in a terminal or not.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -215,10 +215,10 @@
 <span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio_toolbox/swarm_control.html#Swarm.start"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio_toolbox.swarm_control.Swarm.start" title="Permalink to this definition"></a></dt>
 <dd><p class="linemarker linemarker-1">Start the specified components in the swarm.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>components</strong> (<em>list</em><em> of </em><em>str</em><em> or </em><em>str</em><em> or </em><em>None</em>) – The names of the components to start. If not provided, all components will be started.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -229,10 +229,10 @@
 <span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio_toolbox/swarm_control.html#Swarm.stop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio_toolbox.swarm_control.Swarm.stop" title="Permalink to this definition"></a></dt>
 <dd><p class="linemarker linemarker-1">Stop the specified components in the swarm.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>components</strong> (<em>list</em><em> of </em><em>str</em><em> or </em><em>str</em><em> or </em><em>None</em>) – The names of the components to stop. If not provided, all components will be stopped.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>

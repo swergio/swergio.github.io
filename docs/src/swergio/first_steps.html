@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hello World! &mdash; swergio 0.0.1 documentation</title>
@@ -133,7 +133,7 @@ All of these information have to stay the same across the server and all clients
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">COMPONENT_NAME</span><span class="p">,</span> <span class="n">SERVER</span><span class="p">,</span><span class="n">PORT</span><span class="p">,</span><span class="n">FORMAT</span><span class="p">,</span><span class="n">HEADER_LENGTH</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>After instantiated the client, we can now add the event handler functions. These functions are executed when we receive a certain type of message.</p>
+<p>After instantiating the client, we can now add the event handler functions. These functions are executed when we receive a certain type of message.</p>
 <p>We first define the function that will handle our received messages.
 Such a function requires the <em>msg</em> as first parameter, which contains the all message information as dictionary.</p>
 <p>The reply function of our world component will just send back a message including the text “Hello Universe!”.</p>
@@ -155,7 +155,7 @@ We also need to set the Trigger to define which incoming messages the handler ne
 </section>
 <section id="universe-py">
 <h2>Universe.py<a class="headerlink" href="#universe-py" title="Permalink to this heading"></a></h2>
-<p>We create a <code class="docutils literal notranslate"><span class="pre">univer.py</span></code> file containing the logic for our <em>universe</em> component.
+<p>We create a <code class="docutils literal notranslate"><span class="pre">universe.py</span></code> file containing the logic for our <em>universe</em> component.
 It will send the first “Hello World!” message and afterwards receives replies from the <em>world</em> component via the <em>galactic_chat</em> room and send its responses.</p>
 <p>We set up the swergio client in the same way as in the <code class="docutils literal notranslate"><span class="pre">world.py</span></code> file.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">uuid</span>

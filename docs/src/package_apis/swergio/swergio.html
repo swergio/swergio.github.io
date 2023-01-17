@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>swergio package &mdash; swergio 0.0.1 documentation</title>
@@ -82,7 +82,7 @@
 <p>This class defines a client, which can be used to connect to a server and send and
 receive messages.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> – The name of the client.</p></li>
 <li><p><strong>server</strong> – The IP address of the server.</p></li>
@@ -93,7 +93,7 @@ receive messages.</p>
 functions when they are called.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Variables</dt>
+<dt class="field-even">Variables<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>name</strong> – The name of the client.</p></li>
 <li><p><strong>server</strong> – The IP address of the server.</p></li>
@@ -113,7 +113,7 @@ functions when they are called.</p></li>
 <span class="sig-name descname"><span class="pre">add_eventHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">handleFunction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">responseType</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">responseRooms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">responseComponent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trigger</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/client.html#Client.add_eventHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.client.Client.add_eventHandler" title="Permalink to this definition"></a></dt>
 <dd><p>Add a new event handler to this client.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>handleFunction</strong> – The function to call when a message is handled by this event
 handler. This function should take the same arguments as the
@@ -139,13 +139,13 @@ triggered.</p></li>
 message. This includes the root ID, the model status of the original message as 
 well as the name of the sender.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>message</strong> – The original message.</p></li>
 <li><p><strong>response</strong> – The response message.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The updated response message.</p>
 </dd>
 </dl>
@@ -163,13 +163,13 @@ to the server and close the socket.</p>
 <span class="sig-name descname"><span class="pre">connect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">server</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/client.html#Client.connect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.client.Client.connect" title="Permalink to this definition"></a></dt>
 <dd><p>Connect to the server at the given IP address and port number.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>server</strong> – The IP address of the server.</p></li>
 <li><p><strong>port</strong> – The port number of the server.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The socket used to connect to the server.</p>
 </dd>
 </dl>
@@ -181,14 +181,14 @@ to the server and close the socket.</p>
 <dd><p>Filter the given dictionary and return a new dictionary containing only the keys
 that correspond to arguments of the given function.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>dictionary</strong> – The dictionary to filter.</p></li>
 <li><p><strong>function</strong> – The function whose arguments should be used to filter the
 dictionary.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The filtered dictionary.</p>
 </dd>
 </dl>
@@ -199,7 +199,7 @@ dictionary.</p></li>
 <span class="sig-name descname"><span class="pre">join_room</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">room</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/client.html#Client.join_room"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.client.Client.join_room" title="Permalink to this definition"></a></dt>
 <dd><p>Join the given room. This will send a JOINROOM command message to the server.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>room</strong> – The ID of the room to join.</p>
 </dd>
 </dl>
@@ -217,7 +217,7 @@ event handlers. This method will block until the connection to the server is clo
 <span class="sig-name descname"><span class="pre">receive</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/client.html#Client.receive"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.client.Client.receive" title="Permalink to this definition"></a></dt>
 <dd><p>Receive a message from the server.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The received message, or False if an error occurred.</p>
 </dd>
 </dl>
@@ -235,7 +235,7 @@ to the server and join the reserved rooms.</p>
 <span class="sig-name descname"><span class="pre">send</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/client.html#Client.send"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.client.Client.send" title="Permalink to this definition"></a></dt>
 <dd><p>Send the given message to the server.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>message</strong> – The message to send.</p>
 </dd>
 </dl>
@@ -250,7 +250,7 @@ to the server and join the reserved rooms.</p>
 <p>This class defines an event handler, which can be used to handle messages that match
 certain criteria.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>handleFunction</strong> – The function to call when a message is handled by this event
 handler. This function should take the same arguments as the
@@ -266,7 +266,7 @@ event handler. If not specified, the event handler will never be
 triggered.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Variables</dt>
+<dt class="field-even">Variables<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>handleFunction</strong> – The function to call when a message is handled by this event
 handler.</p></li>
@@ -284,13 +284,13 @@ event handler.</p></li>
 <dd><p>Handle the given message by calling the <cite>handleFunction</cite> specified in the
 constructor, and return a response message if needed.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>args</strong> – Positional arguments to pass to <cite>handleFunction</cite>.</p></li>
 <li><p><strong>kwargs</strong> – Keyword arguments to pass to <cite>handleFunction</cite>.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A response message, or None if no response is needed.</p>
 </dd>
 </dl>
@@ -301,10 +301,10 @@ constructor, and return a response message if needed.</p>
 <span class="sig-name descname"><span class="pre">is_triggered</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/client.html#EventHandler.is_triggered"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.client.EventHandler.is_triggered" title="Permalink to this definition"></a></dt>
 <dd><p>Check if this event handler is triggered by the given message.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>message</strong> – The message to check.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>True if the message matches the criteria specified for this event handler,
 False otherwise.</p>
 </dd>
@@ -320,7 +320,7 @@ False otherwise.</p>
 <p>This class defines a trigger, which can be used to check if a given message matches
 certain criteria.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>types</strong> – A list of message types that should trigger this trigger.</p></li>
 <li><p><strong>rooms</strong> – A list of room IDs that should trigger this trigger. If not specified,
@@ -329,7 +329,7 @@ the trigger will be triggered by messages in any room.</p></li>
 sent to a specific room) should trigger this trigger.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Variables</dt>
+<dt class="field-even">Variables<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>types</strong> – A list of message types that should trigger this trigger.</p></li>
 <li><p><strong>rooms</strong> – A list of room IDs that should trigger this trigger.</p></li>
@@ -343,10 +343,10 @@ trigger.</p></li>
 <span class="sig-name descname"><span class="pre">is_triggered</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/client.html#Trigger.is_triggered"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.client.Trigger.is_triggered" title="Permalink to this definition"></a></dt>
 <dd><p>Check if this trigger is triggered by the given message.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>message</strong> – The message to check.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>True if the message matches the criteria specified for this trigger, False
 otherwise.</p>
 </dd>
@@ -630,13 +630,13 @@ otherwise.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/messageType.html#MESSAGE_TYPE.by_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.messageType.MESSAGE_TYPE.by_id" title="Permalink to this definition"></a></dt>
 <dd><p>Returns the message type setting with the given id, or None if no such setting exists.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>id</strong> – The unique identifier of the message type setting to return.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The message type setting with the given id, or None if no such setting exists.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#swergio.messageType.MessageTypeSetting" title="swergio.messageType.MessageTypeSetting">MessageTypeSetting</a> or None</p>
 </dd>
 </dl>
@@ -664,13 +664,13 @@ otherwise.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/messageType.html#MODEL_STATUS.by_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.messageType.MODEL_STATUS.by_id" title="Permalink to this definition"></a></dt>
 <dd><p>Returns the model status setting with the given id, or None if no such setting exists.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>id</strong> – The unique identifier of the model status setting to return.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The model status setting with the given id, or None if no such setting exists.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#swergio.messageType.ModelStatusSetting" title="swergio.messageType.ModelStatusSetting">ModelStatusSetting</a> or None</p>
 </dd>
 </dl>
@@ -687,16 +687,16 @@ otherwise.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/messageType.html#MessageMainType.by_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.messageType.MessageMainType.by_id" title="Permalink to this definition"></a></dt>
 <dd><p>Returns the message type setting with the given id from the given class, or None if no such setting exists.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>id</strong> – The unique identifier of the message type setting to return.</p></li>
 <li><p><strong>cls</strong> – The class to search for the message type setting.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The message type setting with the given id, or None if no such setting exists.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#swergio.messageType.MessageTypeSetting" title="swergio.messageType.MessageTypeSetting">MessageTypeSetting</a> or None</p>
 </dd>
 </dl>
@@ -710,7 +710,7 @@ otherwise.</p>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>This class represents a setting for a message type.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>id</strong> – The unique identifier for the message type setting.</p></li>
 <li><p><strong>name</strong> – The name of the message type setting.</p></li>
@@ -724,13 +724,13 @@ otherwise.</p>
 <span class="sig-name descname"><span class="pre">check_fields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg_content</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/messageType.html#MessageTypeSetting.check_fields"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.messageType.MessageTypeSetting.check_fields" title="Permalink to this definition"></a></dt>
 <dd><p>Checks if the given message content contains all of the required fields for this message type.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>msg_content</strong> – A dictionary containing the fields and values for the message.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>True if the message content contains all of the required fields, False otherwise.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
@@ -744,7 +744,7 @@ otherwise.</p>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>This class represents a setting for a model’s status.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>id</strong> – The unique identifier for the model status setting.</p></li>
 <li><p><strong>name</strong> – The name of the model status setting.</p></li>
@@ -789,7 +789,7 @@ otherwise.</p>
 <span class="sig-name descname"><span class="pre">handle_client</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">addr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/server.html#Server.handle_client"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.server.Server.handle_client" title="Permalink to this definition"></a></dt>
 <dd><p>Handles the incoming client connection and processes the messages</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>client</strong> (<em>socket.socket</em>) – Client connection instance</p></li>
 <li><p><strong>addr</strong> (<em>tuple</em>) – IP address of the client</p></li>

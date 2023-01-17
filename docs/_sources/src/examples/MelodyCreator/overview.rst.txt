@@ -1,3 +1,49 @@
 Melody Creator
 ===============
 
+In `this <https://www.youtube.com/watch?v=aOsET8KapQQ)>`_ YouTube video, *Kie Codes* demonstrated a method for generating melodies using a genetic algorithm. The code for this example can be found on `Github <https://github.com/kiecodes/generate-music>`_.
+
+The current example requires the user to evaluate each generated melody, which can be a time-consuming task. To improve this process, we will use a separate evaluation network to predict a rating for each melody, allowing the evolutionary algorithm to run more efficiently.
+
+Furthermore, we will implement an active learning approach to train the evaluation network. This means that when the network is uncertain about a melody's rating, we will ask the user to provide a label and retrain the network with this new data.
+
+By using swergio, we will be able to communicate between the independent components (Evolutionary Algorithm, Evaluation Network, and Active Learner) and streamline the process of collecting user feedback.
+
+The full source code of the example can be found on `GitHub <https://github.com/swergio/Examples/tree/main/MelodyCreator>`_.
+
+Requirements
+------------
+
+For this example we need to run Python code and the easiest way to set it up is to:
+   1. Install Python > 3.8 (https://www.python.org/downloads/)
+   2. If required install python3-venv ``sudo apt install python3-venv``
+   3. Create a virtual environment in the example folder ``python3 -m venv /venv``
+   4. Activate the virtual environment ``source \env\bin\activate``
+   5. Install required packages to virtual environment ``pip install -r requirements.txt``
+
+How to run it 
+-------------
+
+To execute this example, which includes training the evaluation network and providing active labels for new data, 
+we can run separate code blocks either through interactive python in VSCode from the ``05_user_interface.py`` file or as a Jupyter notebook ``05_user_interface.ipynb`. 
+
+The script will start all necessary components and set up another swergio client to communicate the labeling of the new data as well as sending the starting command. 
+
+The final code block in the files will shut down all the components.
+
+
+Details
+-------
+
+.. toctree::
+   :maxdepth: 2
+
+   00_introduction.rst
+   01_server.rst
+   02_evolutionary.rst
+   03_evaluation_net.rst
+   04_active_learner.rst
+   99_swarm.rst
+   music_generator.rst
+   05_user_interface.rst
+   prelabel_script.rst

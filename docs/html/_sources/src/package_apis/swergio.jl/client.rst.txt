@@ -2,5 +2,5 @@ client module
 ===================
 
 
-.. jl:autofile:: ./swergio.jl/src/client.jl
+.. jl:autofile:: ./swergio//swergio.jl/src/client.jl
 

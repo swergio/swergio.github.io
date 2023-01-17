@@ -1,3 +1,50 @@
 Reinforcement Learning
-===============
+======================
 
+This example will demonstrate how to utilize the swergio project in a reinforcement learning (RL) setup. 
+
+We will set up an RL agent that will take actions in the `CartPole-v1 gym environment <https://gymnasium.farama.org/environments/classic_control/cart_pole>`_. 
+The agent component will communicate its predicted actions to the environment component based on observations received, and in return, the environment will provide a reward feedback.
+
+To improve the model performance, this example extends the setup to enable selection of actions based on input from multiple models. 
+To accomplish this, we will implement a separate component that will aggregate the outputs of all models to produce a combined action distribution. 
+Additionally, we will use an evolutionary algorithm to find the best RL agent by ranking each model based on its contribution to the selected actions, then mating and mutating the best models to generate a new set of agents.
+
+The full source code of the example can be found on `GitHub <https://github.com/swergio/Examples/tree/main/RLGym>`_.
+
+Requirements
+------------
+
+To run this example we need to run Python code, the easiest way to set it up is to:
+   1. Install Python > 3.8 (https://www.python.org/downloads/)
+   2. If required install python3-venv ``sudo apt install python3-venv``
+   3. Create a virtual environment in the example folder ``python3 -m venv /venv``
+   4. Activate the virtual environment ``source \env\bin\activate``
+   5. Install required packages to virtual environment ``pip install -r requirements.txt``
+
+
+How to run it 
+-------------
+
+To execute this example, which includes starting the environment and performing an evolutionary step, 
+separate code blocks can be run either through interactive python in vscode from the ``06_control.py`` file or as a jupyter notebook  ``06_control.ipynb``. 
+
+The code will first initialize all necessary components and then create a client to communicate commands to run episodes in the environment and initiate an evolutionary step for the models. 
+Using this client, a loop can be written to train the models through RL by running episodes and interleaving with selecting better models using an evolutionary algorithm. 
+
+The final code block in the files will shut down all the components.
+
+Details
+-------
+
+.. toctree::
+   :maxdepth: 2
+
+   00_introduction.rst
+   01_server.rst
+   02_model.rst
+   03_aggregation.rst
+   04_gym_env.rst
+   05_evolutionary.rst
+   99_swarm.rst
+   06_control.rst

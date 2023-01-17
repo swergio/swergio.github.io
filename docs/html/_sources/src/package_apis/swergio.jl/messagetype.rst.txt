@@ -2,5 +2,5 @@ messagetype module
 ===================
 
 
-.. jl:autofile:: swergio/swergio.jl/src/messagetype.jl
+.. jl:autofile:: ./swergio//swergio.jl/src/messagetype.jl
 

@@ -1,0 +1,164 @@
+Hello World!
+===============
+
+This is a simple "Hello World" example in how to use the swergio package. We will set up a websocket server and two clients to send messages back and forth.
+
+Server.py
+-----------
+
+We will first create a ``server.py`` file, which starts the websocket server to communicate via message in a separate process. 
+
+In the file we need to specify the **IP** and the **PORT** of the server as well as the message **FORMAT** and the **HEADER_LENGTH**. 
+All of these information have to stay the same across the server and all clients.
+
+We can then initiate the swergio server class and start the server.
+
+.. code-block:: python
+    
+    import socket
+    from swergio import Server
+    # Set server PORT to 8080
+    PORT = 8080
+    # Get IP of current host
+    SERVER = socket.gethostbyname(socket.gethostname())
+    print(SERVER)
+    # Using utf-8 as message format
+    FORMAT = 'utf-8'
+    # Message header has a maximum length of 10
+    HEADER_LENGTH = 10
+    # Initiate the Server class
+    server = Server(SERVER, PORT, FORMAT, HEADER_LENGTH)
+    # Start the server
+    server.start()
+
+
+World.py
+-----------
+
+We will now create a ``world.py`` file, which will contain the logic for our *world* component. 
+It will receive messages from the *universe* component via the *galactic_chat* room and replies.
+
+Let's first import all necessary packages.
+
+.. code-block:: python
+
+    import uuid
+    import socket
+    from swergio  import Client, Trigger, MESSAGE_TYPE
+
+
+We then set the **COMPONENT_NAME** to world, which is use in the communication.
+
+We also need to specify the **IP** and the **PORT** as well as the message **FORMAT** and the **HEADER_LENGTH**. 
+All of these information have to stay the same across the server and all clients.
+
+.. code-block:: python
+
+    COMPONENT_NAME = 'world'
+    PORT = 8080
+    SERVER = socket.gethostbyname(socket.gethostname())
+    FORMAT = 'utf-8'
+    HEADER_LENGTH = 10
+
+
+Now we  can create the swergio Client by passing the required settings (NAME, SERVER, PORT etc. ).
+
+.. code-block:: python
+
+    client = Client(COMPONENT_NAME, SERVER,PORT,FORMAT,HEADER_LENGTH)
+
+After instantiating the client, we can now add the event handler functions. These functions are executed when we receive a certain type of message.
+
+We first define the function that will handle our received messages. 
+Such a function requires the *msg* as first parameter, which contains the all message information as dictionary.
+
+The reply function of our world component will just send back a message including the text "Hello Universe!".
+
+We now have to add a new event handler to our client object.
+This includes the defined function that is executed when the handler is active as well as the **MESSAGE_TYPE** and response **ROOM** of our response message. In this our response will be a **DATA.TEXT** type to the *galactic_chat* room.
+We also need to set the Trigger to define which incoming messages the handler needs to process. In this case we will react to messages of type **DATA.TEXT** in the *galactic_chat* room.
+
+Once added the event handler, the client will be added to the message rooms we require. 
+
+.. code-block:: python
+
+    def reply(msg):
+        print(msg)
+        id = uuid.uuid4().hex
+        return {"ID": id, "DATA": "Hello Universe!"}
+    client.add_eventHandler(reply,MESSAGE_TYPE.DATA.TEXT,responseRooms='galactic_chat',trigger=Trigger(MESSAGE_TYPE.DATA.TEXT, 'galactic_chat'))
+
+After setting up all the required logic, we finally start our client to listen to new incoming messages.
+
+.. code-block:: python
+
+    client.listen()
+
+
+Universe.py
+-----------
+
+We create a ``universe.py`` file containing the logic for our *universe* component. 
+It will send the first "Hello World!" message and afterwards receives replies from the *world* component via the *galactic_chat* room and send its responses.
+
+
+We set up the swergio client in the same way as in the ``world.py`` file.
+
+.. code-block:: python
+
+    import uuid
+    import socket
+    from swergio  import Client, Trigger, MESSAGE_TYPE
+    COMPONENT_NAME = 'universe'
+    PORT = 8080
+    SERVER = socket.gethostbyname(socket.gethostname())
+    FORMAT = 'utf-8'
+    HEADER_LENGTH = 10
+    client = Client(COMPONENT_NAME, SERVER,PORT,FORMAT,HEADER_LENGTH)
+
+Similar to the *world* component we define an event handler to respond to received messages. 
+In this case we wait until we get a message in the *galactic_chat* room and then send a new "Hello World!" message.
+
+.. code-block:: python
+
+    def reply(msg):
+        print(msg)
+        id = uuid.uuid4().hex
+        return {"ID": id, "DATA": "Hello World!"}
+    client.add_eventHandler(reply,MESSAGE_TYPE.DATA.TEXT,responseRooms='galactic_chat',trigger=Trigger(MESSAGE_TYPE.DATA.TEXT, 'galactic_chat'))
+
+Since the event handlers are only reacting t incoming message, on of the components should send the first message.
+
+We define our first "Hello World!" message by including a new message id, the message type, the room we want the message to send to as well as the message data.
+Our *universe* will then send the first message and the *world* can respond.
+
+.. code-block:: python
+
+    msg = {
+        'ID': uuid.uuid4().hex, 
+        'TYPE': MESSAGE_TYPE.DATA.TEXT.id, 
+        'TO_ROOM': 'galactic_chat',
+        'DATA': "Hello World!"}
+    client.send(msg)
+
+After setting up all the required logic, we finally start our client to listen to new incoming messages.
+
+.. code-block:: python
+
+    client.listen()
+
+
+Run it all!
+-----------
+
+We will run each of the three components in a separate python process. First, we will start the server:
+
+``python server.py``
+
+Then we will initiate the world component to be ready to receive and send messages:
+
+``python world.py``
+
+Finally, we will run the universe component to send the first message:
+
+``python universe.py``

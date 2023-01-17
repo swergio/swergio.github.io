@@ -1,0 +1,9 @@
+swergio.jl
+=======
+
+.. toctree::
+   :maxdepth: 4
+
+   client
+   messagetype
+   modelstatus

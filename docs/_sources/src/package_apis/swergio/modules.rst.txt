@@ -1,0 +1,7 @@
+swergio
+=======
+
+.. toctree::
+   :maxdepth: 4
+
+   swergio

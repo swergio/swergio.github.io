@@ -1,0 +1,6 @@
+messagetype module
+===================
+
+
+.. jl:autofile:: ./swergio.jl/src/messagetype.jl
+

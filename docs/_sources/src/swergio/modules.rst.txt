@@ -1,0 +1,9 @@
+Swergio Project
+===============
+
+.. toctree::
+   :maxdepth: 4
+
+   motivation
+   install
+   first_steps

@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>swergio package &mdash; swergio 0.0.1 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="swergio_toolbox package" href="../toolbox/swergio_toolbox.html" />
+    <link rel="prev" title="Packages API" href="../modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> swergio
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../swergio/modules.html">Swergio Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/modules.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">Packages API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">swergio</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../modules.html">Packages API</a></li>
+      <li class="breadcrumb-item active">swergio package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/src/package_apis/swergio/swergio.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="swergio-package">
+<h1>swergio package<a class="headerlink" href="#swergio-package" title="Permalink to this heading"></a></h1>
+<section id="module-swergio.client">
+<span id="swergio-client-module"></span><h2>swergio.client module<a class="headerlink" href="#module-swergio.client" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="swergio.client.Client">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">swergio.client.</span></span><span class="sig-name descname"><span class="pre">Client</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'utf-8'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/client.html#Client"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.client.Client" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class defines a client, which can be used to connect to a server and send and
+receive messages.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – The name of the client.</p></li>
+<li><p><strong>server</strong> – The IP address of the server.</p></li>
+<li><p><strong>port</strong> – The port number of the server.</p></li>
+<li><p><strong>format</strong> – The encoding format to use for messages.</p></li>
+<li><p><strong>header_length</strong> – The length of the message header in bytes.</p></li>
+<li><p><strong>kwargs</strong> – Additional keyword arguments that will be passed to event handler
+functions when they are called.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Variables<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>name</strong> – The name of the client.</p></li>
+<li><p><strong>server</strong> – The IP address of the server.</p></li>
+<li><p><strong>port</strong> – The port number of the server.</p></li>
+<li><p><strong>format</strong> – The encoding format to use for messages.</p></li>
+<li><p><strong>header_length</strong> – The length of the message header in bytes.</p></li>
+<li><p><strong>eventHandlers</strong> – A set of <cite>EventHandler</cite> instances registered with this client.</p></li>
+<li><p><strong>rooms</strong> – A set of rooms that the client has joined.</p></li>
+<li><p><strong>kwargs</strong> – Additional keyword arguments that will be passed to event handler
+functions when they are called.</p></li>
+<li><p><strong>client</strong> – The socket used to connect to the server.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="swergio.client.Client.add_eventHandler">
+<span class="sig-name descname"><span class="pre">add_eventHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">handleFunction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">responseType</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">responseRooms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">responseComponent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trigger</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/client.html#Client.add_eventHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.client.Client.add_eventHandler" title="Permalink to this definition"></a></dt>
+<dd><p>Add a new event handler to this client.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>handleFunction</strong> – The function to call when a message is handled by this event
+handler. This function should take the same arguments as the
+<cite>handle</cite> method of the <cite>EventHandler</cite> class and return a
+response message, or None if no response is needed.</p></li>
+<li><p><strong>responseType</strong> – The type of the response message.</p></li>
+<li><p><strong>responseRooms</strong> – A list of room IDs where the response message should be sent.
+If not specified, the response will be sent to the same room as
+the original message.</p></li>
+<li><p><strong>responseComponent</strong> – The component ID where the response message should be sent.</p></li>
+<li><p><strong>trigger</strong> – A <cite>Trigger</cite> instance that specifies the criteria for triggering this
+event handler. If not specified, the event handler will never be
+triggered.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="swergio.client.Client.add_propagated_fields">
+<span class="sig-name descname"><span class="pre">add_propagated_fields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">response</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/client.html#Client.add_propagated_fields"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.client.Client.add_propagated_fields" title="Permalink to this definition"></a></dt>
+<dd><p>Add the fields from the original message that should be propagated to the response
+message. This includes the root ID, the model status of the original message as 
+well as the name of the sender.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>message</strong> – The original message.</p></li>
+<li><p><strong>response</strong> – The response message.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The updated response message.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="swergio.client.Client.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/client.html#Client.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.client.Client.close" title="Permalink to this definition"></a></dt>
+<dd><p>Close the connection to the server. This will send a DISCONNECT command message
+to the server and close the socket.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="swergio.client.Client.connect">
+<span class="sig-name descname"><span class="pre">connect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">server</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/client.html#Client.connect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.client.Client.connect" title="Permalink to this definition"></a></dt>
+<dd><p>Connect to the server at the given IP address and port number.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>server</strong> – The IP address of the server.</p></li>
+<li><p><strong>port</strong> – The port number of the server.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The socket used to connect to the server.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="swergio.client.Client.filter_dict">
+<span class="sig-name descname"><span class="pre">filter_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dictionary</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">function</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/client.html#Client.filter_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.client.Client.filter_dict" title="Permalink to this definition"></a></dt>
+<dd><p>Filter the given dictionary and return a new dictionary containing only the keys
+that correspond to arguments of the given function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dictionary</strong> – The dictionary to filter.</p></li>
+<li><p><strong>function</strong> – The function whose arguments should be used to filter the
+dictionary.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The filtered dictionary.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="swergio.client.Client.join_room">
+<span class="sig-name descname"><span class="pre">join_room</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">room</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/client.html#Client.join_room"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.client.Client.join_room" title="Permalink to this definition"></a></dt>
+<dd><p>Join the given room. This will send a JOINROOM command message to the server.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>room</strong> – The ID of the room to join.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="swergio.client.Client.listen">
+<span class="sig-name descname"><span class="pre">listen</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/client.html#Client.listen"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.client.Client.listen" title="Permalink to this definition"></a></dt>
+<dd><p>Listen for incoming messages from the server and handle them using the registered
+event handlers. This method will block until the connection to the server is closed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="swergio.client.Client.receive">
+<span class="sig-name descname"><span class="pre">receive</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/client.html#Client.receive"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.client.Client.receive" title="Permalink to this definition"></a></dt>
+<dd><p>Receive a message from the server.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The received message, or False if an error occurred.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="swergio.client.Client.register">
+<span class="sig-name descname"><span class="pre">register</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/client.html#Client.register"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.client.Client.register" title="Permalink to this definition"></a></dt>
+<dd><p>Register this client with the server. This will send a REGISTER command message
+to the server and join the reserved rooms.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="swergio.client.Client.send">
+<span class="sig-name descname"><span class="pre">send</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/client.html#Client.send"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.client.Client.send" title="Permalink to this definition"></a></dt>
+<dd><p>Send the given message to the server.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>message</strong> – The message to send.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="swergio.client.EventHandler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">swergio.client.</span></span><span class="sig-name descname"><span class="pre">EventHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">handleFunction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">responseType</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">responseRooms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">responseComponent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trigger</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/client.html#EventHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.client.EventHandler" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class defines an event handler, which can be used to handle messages that match
+certain criteria.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>handleFunction</strong> – The function to call when a message is handled by this event
+handler. This function should take the same arguments as the
+<cite>handle</cite> method of this class and return a response message, or
+None if no response is needed.</p></li>
+<li><p><strong>responseType</strong> – The type of the response message.</p></li>
+<li><p><strong>responseRooms</strong> – A list of room IDs where the response message should be sent. If
+not specified, the response will be sent to the same room as the
+original message.</p></li>
+<li><p><strong>responseComponent</strong> – The component ID where the response message should be sent.</p></li>
+<li><p><strong>trigger</strong> – A <cite>Trigger</cite> instance that specifies the criteria for triggering this
+event handler. If not specified, the event handler will never be
+triggered.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Variables<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>handleFunction</strong> – The function to call when a message is handled by this event
+handler.</p></li>
+<li><p><strong>responseType</strong> – The type of the response message.</p></li>
+<li><p><strong>responseRooms</strong> – A list of room IDs where the response message should be sent.</p></li>
+<li><p><strong>responseComponent</strong> – The component ID where the response message should be sent.</p></li>
+<li><p><strong>trigger</strong> – A <cite>Trigger</cite> instance that specifies the criteria for triggering this
+event handler.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="swergio.client.EventHandler.handle">
+<span class="sig-name descname"><span class="pre">handle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/client.html#EventHandler.handle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.client.EventHandler.handle" title="Permalink to this definition"></a></dt>
+<dd><p>Handle the given message by calling the <cite>handleFunction</cite> specified in the
+constructor, and return a response message if needed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> – Positional arguments to pass to <cite>handleFunction</cite>.</p></li>
+<li><p><strong>kwargs</strong> – Keyword arguments to pass to <cite>handleFunction</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A response message, or None if no response is needed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="swergio.client.EventHandler.is_triggered">
+<span class="sig-name descname"><span class="pre">is_triggered</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/client.html#EventHandler.is_triggered"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.client.EventHandler.is_triggered" title="Permalink to this definition"></a></dt>
+<dd><p>Check if this event handler is triggered by the given message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>message</strong> – The message to check.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the message matches the criteria specified for this event handler,
+False otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="swergio.client.Trigger">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">swergio.client.</span></span><span class="sig-name descname"><span class="pre">Trigger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">types</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rooms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directmessage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/client.html#Trigger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.client.Trigger" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class defines a trigger, which can be used to check if a given message matches
+certain criteria.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>types</strong> – A list of message types that should trigger this trigger.</p></li>
+<li><p><strong>rooms</strong> – A list of room IDs that should trigger this trigger. If not specified,
+the trigger will be triggered by messages in any room.</p></li>
+<li><p><strong>directmessage</strong> – A boolean indicating whether direct messages (messages not
+sent to a specific room) should trigger this trigger.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Variables<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>types</strong> – A list of message types that should trigger this trigger.</p></li>
+<li><p><strong>rooms</strong> – A list of room IDs that should trigger this trigger.</p></li>
+<li><p><strong>directmessage</strong> – A boolean indicating whether direct messages should trigger this
+trigger.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="swergio.client.Trigger.is_triggered">
+<span class="sig-name descname"><span class="pre">is_triggered</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/client.html#Trigger.is_triggered"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.client.Trigger.is_triggered" title="Permalink to this definition"></a></dt>
+<dd><p>Check if this trigger is triggered by the given message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>message</strong> – The message to check.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the message matches the criteria specified for this trigger, False
+otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-swergio.messageType">
+<span id="swergio-messagetype-module"></span><h2>swergio.messageType module<a class="headerlink" href="#module-swergio.messageType" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="swergio.messageType.COMMAND">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">swergio.messageType.</span></span><span class="sig-name descname"><span class="pre">COMMAND</span></span><a class="reference internal" href="../../../_modules/swergio/messageType.html#COMMAND"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.messageType.COMMAND" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#swergio.messageType.MessageMainType" title="swergio.messageType.MessageMainType"><code class="xref py py-class docutils literal notranslate"><span class="pre">MessageMainType</span></code></a></p>
+<p>This class contains the possible settings for a COMMAND message.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.COMMAND.CUSTOM">
+<span class="sig-name descname"><span class="pre">CUSTOM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.COMMAND.CUSTOM" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.COMMAND.DISABLELOGGING">
+<span class="sig-name descname"><span class="pre">DISABLELOGGING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.COMMAND.DISABLELOGGING" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.COMMAND.DISCONNECT">
+<span class="sig-name descname"><span class="pre">DISCONNECT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.COMMAND.DISCONNECT" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.COMMAND.ENABLELOGGING">
+<span class="sig-name descname"><span class="pre">ENABLELOGGING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.COMMAND.ENABLELOGGING" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.COMMAND.JOINROOM">
+<span class="sig-name descname"><span class="pre">JOINROOM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.COMMAND.JOINROOM" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.COMMAND.LEAVEROOM">
+<span class="sig-name descname"><span class="pre">LEAVEROOM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.COMMAND.LEAVEROOM" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.COMMAND.LOADMODELWEIGHTS">
+<span class="sig-name descname"><span class="pre">LOADMODELWEIGHTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.COMMAND.LOADMODELWEIGHTS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.COMMAND.LOADSETTINGS">
+<span class="sig-name descname"><span class="pre">LOADSETTINGS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.COMMAND.LOADSETTINGS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.COMMAND.REGISTER">
+<span class="sig-name descname"><span class="pre">REGISTER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.COMMAND.REGISTER" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.COMMAND.SAVEMODELWEIGHTS">
+<span class="sig-name descname"><span class="pre">SAVEMODELWEIGHTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.COMMAND.SAVEMODELWEIGHTS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.COMMAND.SAVESETTINGS">
+<span class="sig-name descname"><span class="pre">SAVESETTINGS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.COMMAND.SAVESETTINGS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="swergio.messageType.DATA">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">swergio.messageType.</span></span><span class="sig-name descname"><span class="pre">DATA</span></span><a class="reference internal" href="../../../_modules/swergio/messageType.html#DATA"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.messageType.DATA" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#swergio.messageType.MessageMainType" title="swergio.messageType.MessageMainType"><code class="xref py py-class docutils literal notranslate"><span class="pre">MessageMainType</span></code></a></p>
+<p>This class contains the possible settings for a DATA message.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.DATA.CUSTOM">
+<span class="sig-name descname"><span class="pre">CUSTOM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.DATA.CUSTOM" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.DATA.FORWARD">
+<span class="sig-name descname"><span class="pre">FORWARD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.DATA.FORWARD" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.DATA.GRADIENT">
+<span class="sig-name descname"><span class="pre">GRADIENT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.DATA.GRADIENT" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.DATA.REWARD">
+<span class="sig-name descname"><span class="pre">REWARD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.DATA.REWARD" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.DATA.TEXT">
+<span class="sig-name descname"><span class="pre">TEXT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.DATA.TEXT" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="swergio.messageType.LOG">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">swergio.messageType.</span></span><span class="sig-name descname"><span class="pre">LOG</span></span><a class="reference internal" href="../../../_modules/swergio/messageType.html#LOG"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.messageType.LOG" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#swergio.messageType.MessageMainType" title="swergio.messageType.MessageMainType"><code class="xref py py-class docutils literal notranslate"><span class="pre">MessageMainType</span></code></a></p>
+<p>This class contains the possible settings for a LOG message.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.LOG.CUSTOM">
+<span class="sig-name descname"><span class="pre">CUSTOM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.LOG.CUSTOM" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.LOG.KPI">
+<span class="sig-name descname"><span class="pre">KPI</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.LOG.KPI" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.LOG.MESSAGE">
+<span class="sig-name descname"><span class="pre">MESSAGE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.LOG.MESSAGE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.LOG.MODELWEIGHTS">
+<span class="sig-name descname"><span class="pre">MODELWEIGHTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.LOG.MODELWEIGHTS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.LOG.RUN">
+<span class="sig-name descname"><span class="pre">RUN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.LOG.RUN" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.LOG.SETTINGS">
+<span class="sig-name descname"><span class="pre">SETTINGS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.LOG.SETTINGS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="swergio.messageType.MESSAGE_TYPE">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">swergio.messageType.</span></span><span class="sig-name descname"><span class="pre">MESSAGE_TYPE</span></span><a class="reference internal" href="../../../_modules/swergio/messageType.html#MESSAGE_TYPE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.messageType.MESSAGE_TYPE" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class contains the possible settings for a message’s main type.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="swergio.messageType.MESSAGE_TYPE.COMMAND">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">COMMAND</span></span><a class="headerlink" href="#swergio.messageType.MESSAGE_TYPE.COMMAND" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#swergio.messageType.MessageMainType" title="swergio.messageType.MessageMainType"><code class="xref py py-class docutils literal notranslate"><span class="pre">MessageMainType</span></code></a></p>
+<p>This class contains the possible settings for a COMMAND message.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.MESSAGE_TYPE.COMMAND.CUSTOM">
+<span class="sig-name descname"><span class="pre">CUSTOM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.MESSAGE_TYPE.COMMAND.CUSTOM" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.MESSAGE_TYPE.COMMAND.DISABLELOGGING">
+<span class="sig-name descname"><span class="pre">DISABLELOGGING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.MESSAGE_TYPE.COMMAND.DISABLELOGGING" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.MESSAGE_TYPE.COMMAND.DISCONNECT">
+<span class="sig-name descname"><span class="pre">DISCONNECT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.MESSAGE_TYPE.COMMAND.DISCONNECT" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.MESSAGE_TYPE.COMMAND.ENABLELOGGING">
+<span class="sig-name descname"><span class="pre">ENABLELOGGING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.MESSAGE_TYPE.COMMAND.ENABLELOGGING" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.MESSAGE_TYPE.COMMAND.JOINROOM">
+<span class="sig-name descname"><span class="pre">JOINROOM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.MESSAGE_TYPE.COMMAND.JOINROOM" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.MESSAGE_TYPE.COMMAND.LEAVEROOM">
+<span class="sig-name descname"><span class="pre">LEAVEROOM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.MESSAGE_TYPE.COMMAND.LEAVEROOM" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.MESSAGE_TYPE.COMMAND.LOADMODELWEIGHTS">
+<span class="sig-name descname"><span class="pre">LOADMODELWEIGHTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.MESSAGE_TYPE.COMMAND.LOADMODELWEIGHTS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.MESSAGE_TYPE.COMMAND.LOADSETTINGS">
+<span class="sig-name descname"><span class="pre">LOADSETTINGS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.MESSAGE_TYPE.COMMAND.LOADSETTINGS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.MESSAGE_TYPE.COMMAND.REGISTER">
+<span class="sig-name descname"><span class="pre">REGISTER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.MESSAGE_TYPE.COMMAND.REGISTER" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.MESSAGE_TYPE.COMMAND.SAVEMODELWEIGHTS">
+<span class="sig-name descname"><span class="pre">SAVEMODELWEIGHTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.MESSAGE_TYPE.COMMAND.SAVEMODELWEIGHTS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.MESSAGE_TYPE.COMMAND.SAVESETTINGS">
+<span class="sig-name descname"><span class="pre">SAVESETTINGS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.MESSAGE_TYPE.COMMAND.SAVESETTINGS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="swergio.messageType.MESSAGE_TYPE.DATA">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DATA</span></span><a class="headerlink" href="#swergio.messageType.MESSAGE_TYPE.DATA" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#swergio.messageType.MessageMainType" title="swergio.messageType.MessageMainType"><code class="xref py py-class docutils literal notranslate"><span class="pre">MessageMainType</span></code></a></p>
+<p>This class contains the possible settings for a DATA message.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.MESSAGE_TYPE.DATA.CUSTOM">
+<span class="sig-name descname"><span class="pre">CUSTOM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.MESSAGE_TYPE.DATA.CUSTOM" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.MESSAGE_TYPE.DATA.FORWARD">
+<span class="sig-name descname"><span class="pre">FORWARD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.MESSAGE_TYPE.DATA.FORWARD" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.MESSAGE_TYPE.DATA.GRADIENT">
+<span class="sig-name descname"><span class="pre">GRADIENT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.MESSAGE_TYPE.DATA.GRADIENT" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.MESSAGE_TYPE.DATA.REWARD">
+<span class="sig-name descname"><span class="pre">REWARD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.MESSAGE_TYPE.DATA.REWARD" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.MESSAGE_TYPE.DATA.TEXT">
+<span class="sig-name descname"><span class="pre">TEXT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.MESSAGE_TYPE.DATA.TEXT" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="swergio.messageType.MESSAGE_TYPE.LOG">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LOG</span></span><a class="headerlink" href="#swergio.messageType.MESSAGE_TYPE.LOG" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#swergio.messageType.MessageMainType" title="swergio.messageType.MessageMainType"><code class="xref py py-class docutils literal notranslate"><span class="pre">MessageMainType</span></code></a></p>
+<p>This class contains the possible settings for a LOG message.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.MESSAGE_TYPE.LOG.CUSTOM">
+<span class="sig-name descname"><span class="pre">CUSTOM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.MESSAGE_TYPE.LOG.CUSTOM" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.MESSAGE_TYPE.LOG.KPI">
+<span class="sig-name descname"><span class="pre">KPI</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.MESSAGE_TYPE.LOG.KPI" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.MESSAGE_TYPE.LOG.MESSAGE">
+<span class="sig-name descname"><span class="pre">MESSAGE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.MESSAGE_TYPE.LOG.MESSAGE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.MESSAGE_TYPE.LOG.MODELWEIGHTS">
+<span class="sig-name descname"><span class="pre">MODELWEIGHTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.MESSAGE_TYPE.LOG.MODELWEIGHTS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.MESSAGE_TYPE.LOG.RUN">
+<span class="sig-name descname"><span class="pre">RUN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.MESSAGE_TYPE.LOG.RUN" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.MESSAGE_TYPE.LOG.SETTINGS">
+<span class="sig-name descname"><span class="pre">SETTINGS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.MessageTypeSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.MESSAGE_TYPE.LOG.SETTINGS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="swergio.messageType.MESSAGE_TYPE.by_id">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/messageType.html#MESSAGE_TYPE.by_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.messageType.MESSAGE_TYPE.by_id" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the message type setting with the given id, or None if no such setting exists.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>id</strong> – The unique identifier of the message type setting to return.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The message type setting with the given id, or None if no such setting exists.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#swergio.messageType.MessageTypeSetting" title="swergio.messageType.MessageTypeSetting">MessageTypeSetting</a> or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="swergio.messageType.MODEL_STATUS">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">swergio.messageType.</span></span><span class="sig-name descname"><span class="pre">MODEL_STATUS</span></span><a class="reference internal" href="../../../_modules/swergio/messageType.html#MODEL_STATUS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.messageType.MODEL_STATUS" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class contains the possible settings for a model’s status.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.MODEL_STATUS.TRAIN">
+<span class="sig-name descname"><span class="pre">TRAIN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.ModelStatusSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.MODEL_STATUS.TRAIN" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="swergio.messageType.MODEL_STATUS.VALIDATE">
+<span class="sig-name descname"><span class="pre">VALIDATE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;swergio.messageType.ModelStatusSetting</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#swergio.messageType.MODEL_STATUS.VALIDATE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="swergio.messageType.MODEL_STATUS.by_id">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/messageType.html#MODEL_STATUS.by_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.messageType.MODEL_STATUS.by_id" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the model status setting with the given id, or None if no such setting exists.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>id</strong> – The unique identifier of the model status setting to return.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The model status setting with the given id, or None if no such setting exists.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#swergio.messageType.ModelStatusSetting" title="swergio.messageType.ModelStatusSetting">ModelStatusSetting</a> or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="swergio.messageType.MessageMainType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">swergio.messageType.</span></span><span class="sig-name descname"><span class="pre">MessageMainType</span></span><a class="reference internal" href="../../../_modules/swergio/messageType.html#MessageMainType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.messageType.MessageMainType" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="swergio.messageType.MessageMainType.by_id">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/messageType.html#MessageMainType.by_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.messageType.MessageMainType.by_id" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the message type setting with the given id from the given class, or None if no such setting exists.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – The unique identifier of the message type setting to return.</p></li>
+<li><p><strong>cls</strong> – The class to search for the message type setting.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The message type setting with the given id, or None if no such setting exists.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#swergio.messageType.MessageTypeSetting" title="swergio.messageType.MessageTypeSetting">MessageTypeSetting</a> or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="swergio.messageType.MessageTypeSetting">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">swergio.messageType.</span></span><span class="sig-name descname"><span class="pre">MessageTypeSetting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">required_fields</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optional_fields</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/messageType.html#MessageTypeSetting"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.messageType.MessageTypeSetting" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class represents a setting for a message type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – The unique identifier for the message type setting.</p></li>
+<li><p><strong>name</strong> – The name of the message type setting.</p></li>
+<li><p><strong>required_fields</strong> – A list of field names that are required for a message of this type.</p></li>
+<li><p><strong>optional_fields</strong> – A list of field names that are optional for a message of this type.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="swergio.messageType.MessageTypeSetting.check_fields">
+<span class="sig-name descname"><span class="pre">check_fields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg_content</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/messageType.html#MessageTypeSetting.check_fields"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.messageType.MessageTypeSetting.check_fields" title="Permalink to this definition"></a></dt>
+<dd><p>Checks if the given message content contains all of the required fields for this message type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>msg_content</strong> – A dictionary containing the fields and values for the message.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the message content contains all of the required fields, False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="swergio.messageType.ModelStatusSetting">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">swergio.messageType.</span></span><span class="sig-name descname"><span class="pre">ModelStatusSetting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/messageType.html#ModelStatusSetting"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.messageType.ModelStatusSetting" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class represents a setting for a model’s status.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – The unique identifier for the model status setting.</p></li>
+<li><p><strong>name</strong> – The name of the model status setting.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-swergio.server">
+<span id="swergio-server-module"></span><h2>swergio.server module<a class="headerlink" href="#module-swergio.server" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="swergio.server.Server">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">swergio.server.</span></span><span class="sig-name descname"><span class="pre">Server</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ip</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header_length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enable_logging</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/server.html#Server"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.server.Server" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="swergio.server.Server.broadcast_message">
+<span class="sig-name descname"><span class="pre">broadcast_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message_header</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg_content</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/server.html#Server.broadcast_message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.server.Server.broadcast_message" title="Permalink to this definition"></a></dt>
+<dd><p>Broadcasts the given message to the intended recipients
+:param client: Client connection instance who sent the message
+:type client: socket.socket
+:param message_header: Header of the message
+:type message_header: bytes
+:param message: Message data
+:type message: str
+:param msg_content: Message content containing the recipient details
+:type msg_content: dict</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="swergio.server.Server.disconnect_client">
+<span class="sig-name descname"><span class="pre">disconnect_client</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/server.html#Server.disconnect_client"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.server.Server.disconnect_client" title="Permalink to this definition"></a></dt>
+<dd><p>Disconnects the given client from the server
+:param client: Client connection instance
+:type client: socket.socket
+:return: False to indicate disconnection
+:rtype: bool</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="swergio.server.Server.handle_client">
+<span class="sig-name descname"><span class="pre">handle_client</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">addr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/server.html#Server.handle_client"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.server.Server.handle_client" title="Permalink to this definition"></a></dt>
+<dd><p>Handles the incoming client connection and processes the messages</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>client</strong> (<em>socket.socket</em>) – Client connection instance</p></li>
+<li><p><strong>addr</strong> (<em>tuple</em>) – IP address of the client</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="swergio.server.Server.join_room">
+<span class="sig-name descname"><span class="pre">join_room</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg_content</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/server.html#Server.join_room"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.server.Server.join_room" title="Permalink to this definition"></a></dt>
+<dd><p>Adds the given client to the specified room
+:param client: Client connection instance
+:type client: socket.socket
+:param msg_content: Message content containing the name of the room
+:type msg_content: dict</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="swergio.server.Server.leave_room">
+<span class="sig-name descname"><span class="pre">leave_room</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg_content</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/server.html#Server.leave_room"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.server.Server.leave_room" title="Permalink to this definition"></a></dt>
+<dd><p>Removes the given client from the specified room
+:param client: Client connection instance
+:type client: socket.socket
+:param msg_content: Message content containing the name of the room
+:type msg_content: dict</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="swergio.server.Server.register_client">
+<span class="sig-name descname"><span class="pre">register_client</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg_content</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/server.html#Server.register_client"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.server.Server.register_client" title="Permalink to this definition"></a></dt>
+<dd><p>Registers the client with the given name
+:param client: Client connection instance
+:type client: socket.socket
+:param msg_content: Message content containing the name of the client
+:type msg_content: dict
+:return: Name of the registered client
+:rtype: str</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="swergio.server.Server.send_message_log">
+<span class="sig-name descname"><span class="pre">send_message_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg_content</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/server.html#Server.send_message_log"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.server.Server.send_message_log" title="Permalink to this definition"></a></dt>
+<dd><p>Sends the given message to the logging room
+:param msg_content: Message content to be logged
+:type msg_content: dict</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="swergio.server.Server.start">
+<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/swergio/server.html#Server.start"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#swergio.server.Server.start" title="Permalink to this definition"></a></dt>
+<dd><p>Starts the server and listens for incoming client connections</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../modules.html" class="btn btn-neutral float-left" title="Packages API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../toolbox/swergio_toolbox.html" class="btn btn-neutral float-right" title="swergio_toolbox package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, IshmaGurca.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

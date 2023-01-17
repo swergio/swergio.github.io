@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>swergio.client &mdash; swergio 0.0.1 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> swergio
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../src/swergio/modules.html">Swergio Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../src/examples/modules.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../src/package_apis/modules.html">Packages API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">swergio</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">swergio.client</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for swergio.client</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">socket</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">uuid</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">inspect</span>
+<span class="kn">from</span> <span class="nn">.messageType</span> <span class="kn">import</span> <span class="n">MESSAGE_TYPE</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Class for client to connect to server, send and receive messages</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">reserved_rooms</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;_command&#39;</span><span class="p">]</span><span class="c1">#,&#39;_logging&#39;]</span>
+
+<div class="viewcode-block" id="Client"><a class="viewcode-back" href="../../src/package_apis/swergio/swergio.html#swergio.client.Client">[docs]</a><span class="k">class</span> <span class="nc">Client</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class defines a client, which can be used to connect to a server and send and</span>
+<span class="sd">    receive messages.</span>
+
+<span class="sd">    :param name: The name of the client.</span>
+<span class="sd">    :param server: The IP address of the server.</span>
+<span class="sd">    :param port: The port number of the server.</span>
+<span class="sd">    :param format: The encoding format to use for messages.</span>
+<span class="sd">    :param header_length: The length of the message header in bytes.</span>
+<span class="sd">    :param kwargs: Additional keyword arguments that will be passed to event handler</span>
+<span class="sd">                   functions when they are called.</span>
+
+<span class="sd">    :ivar name: The name of the client.</span>
+<span class="sd">    :ivar server: The IP address of the server.</span>
+<span class="sd">    :ivar port: The port number of the server.</span>
+<span class="sd">    :ivar format: The encoding format to use for messages.</span>
+<span class="sd">    :ivar header_length: The length of the message header in bytes.</span>
+<span class="sd">    :ivar eventHandlers: A set of `EventHandler` instances registered with this client.</span>
+<span class="sd">    :ivar rooms: A set of rooms that the client has joined.</span>
+<span class="sd">    :ivar kwargs: Additional keyword arguments that will be passed to event handler</span>
+<span class="sd">                  functions when they are called.</span>
+<span class="sd">    :ivar client: The socket used to connect to the server.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span> <span class="n">server</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">header_length</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize a new `Client` instance with the given parameters.</span>
+
+<span class="sd">        :param name: The name of the client.</span>
+<span class="sd">        :param server: The IP address of the server.</span>
+<span class="sd">        :param port: The port number of the server.</span>
+<span class="sd">        :param format: The encoding format to use for messages.</span>
+<span class="sd">        :param header_length: The length of the message header in bytes.</span>
+<span class="sd">        :param kwargs: Additional keyword arguments that will be passed to event handler</span>
+<span class="sd">                       functions when they are called.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">server</span> <span class="o">=</span> <span class="n">server</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="n">port</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">format</span> <span class="o">=</span> <span class="nb">format</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">header_length</span> <span class="o">=</span> <span class="n">header_length</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eventHandlers</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rooms</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Client.connect"><a class="viewcode-back" href="../../src/package_apis/swergio/swergio.html#swergio.client.Client.connect">[docs]</a>    <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">server</span><span class="p">,</span> <span class="n">port</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Connect to the server at the given IP address and port number.</span>
+
+<span class="sd">        :param server: The IP address of the server.</span>
+<span class="sd">        :param port: The port number of the server.</span>
+<span class="sd">        :return: The socket used to connect to the server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">client</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="n">server</span><span class="p">,</span> <span class="n">port</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">client</span></div>
+
+<div class="viewcode-block" id="Client.register"><a class="viewcode-back" href="../../src/package_apis/swergio/swergio.html#swergio.client.Client.register">[docs]</a>    <span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Register this client with the server. This will send a REGISTER command message</span>
+<span class="sd">        to the server and join the reserved rooms.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">({</span><span class="s1">&#39;ID&#39;</span><span class="p">:</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="o">.</span><span class="n">hex</span> <span class="p">,</span><span class="s1">&#39;TYPE&#39;</span><span class="p">:</span> <span class="n">MESSAGE_TYPE</span><span class="o">.</span><span class="n">COMMAND</span><span class="o">.</span><span class="n">REGISTER</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="s1">&#39;TO_ROOM&#39;</span><span class="p">:</span><span class="s1">&#39;_command&#39;</span><span class="p">})</span>
+        <span class="k">for</span> <span class="n">room</span> <span class="ow">in</span> <span class="n">reserved_rooms</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">join_room</span><span class="p">(</span><span class="n">room</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Client.send"><a class="viewcode-back" href="../../src/package_apis/swergio/swergio.html#swergio.client.Client.send">[docs]</a>    <span class="k">def</span> <span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Send the given message to the server.</span>
+
+<span class="sd">        :param message: The message to send.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">message_encoded</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">message</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">message_encoded</span><span class="p">)</span><span class="si">:</span><span class="s2">&lt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">header_length</span><span class="si">}}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">message_encoded</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Client.receive"><a class="viewcode-back" href="../../src/package_apis/swergio/swergio.html#swergio.client.Client.receive">[docs]</a>    <span class="k">def</span> <span class="nf">receive</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Receive a message from the server.</span>
+
+<span class="sd">        :return: The received message, or False if an error occurred.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">message_header</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">header_length</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">message_header</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="n">message_length</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">message_header</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">))</span>
+            <span class="n">full_message_received</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span>
+            <span class="n">message_length_left</span> <span class="o">=</span> <span class="n">message_length</span>
+            <span class="k">while</span> <span class="ow">not</span> <span class="n">full_message_received</span><span class="p">:</span>
+                <span class="n">message</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="n">message_length_left</span><span class="p">)</span>
+                <span class="n">message_length_left</span> <span class="o">=</span> <span class="n">message_length</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">message_length_left</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">full_message_received</span> <span class="o">=</span> <span class="kc">True</span>
+           
+            <span class="n">message</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">message_length</span> <span class="o">!=</span>  <span class="nb">len</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">)):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+
+
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="Client.close"><a class="viewcode-back" href="../../src/package_apis/swergio/swergio.html#swergio.client.Client.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Close the connection to the server. This will send a DISCONNECT command message</span>
+<span class="sd">        to the server and close the socket.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">({</span><span class="s1">&#39;ID&#39;</span><span class="p">:</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="o">.</span><span class="n">hex</span> <span class="p">,</span><span class="s1">&#39;TYPE&#39;</span><span class="p">:</span> <span class="n">MESSAGE_TYPE</span><span class="o">.</span><span class="n">COMMAND</span><span class="o">.</span><span class="n">DISCONNECT</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="s1">&#39;TO_ROOM&#39;</span><span class="p">:</span><span class="s1">&#39;_command&#39;</span><span class="p">})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Client.add_eventHandler"><a class="viewcode-back" href="../../src/package_apis/swergio/swergio.html#swergio.client.Client.add_eventHandler">[docs]</a>    <span class="k">def</span> <span class="nf">add_eventHandler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">handleFunction</span><span class="p">,</span> <span class="n">responseType</span><span class="p">,</span><span class="n">responseRooms</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">responseComponent</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">trigger</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add a new event handler to this client.</span>
+
+<span class="sd">        :param handleFunction: The function to call when a message is handled by this event</span>
+<span class="sd">                               handler. This function should take the same arguments as the</span>
+<span class="sd">                               `handle` method of the `EventHandler` class and return a</span>
+<span class="sd">                               response message, or None if no response is needed.</span>
+<span class="sd">        :param responseType: The type of the response message.</span>
+<span class="sd">        :param responseRooms: A list of room IDs where the response message should be sent.</span>
+<span class="sd">                              If not specified, the response will be sent to the same room as</span>
+<span class="sd">                              the original message.</span>
+<span class="sd">        :param responseComponent: The component ID where the response message should be sent.</span>
+<span class="sd">        :param trigger: A `Trigger` instance that specifies the criteria for triggering this</span>
+<span class="sd">                        event handler. If not specified, the event handler will never be</span>
+<span class="sd">                        triggered.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">responseRooms</span> <span class="o">=</span> <span class="n">responseRooms</span> <span class="k">if</span> <span class="n">responseRooms</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">responseRooms</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">list</span> <span class="k">else</span> <span class="p">[</span><span class="n">responseRooms</span><span class="p">]</span>
+        
+        <span class="k">if</span> <span class="n">trigger</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">room</span> <span class="ow">in</span> <span class="n">trigger</span><span class="o">.</span><span class="n">rooms</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">join_room</span><span class="p">(</span><span class="n">room</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">responseRooms</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">room</span> <span class="ow">in</span> <span class="n">responseRooms</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">join_room</span><span class="p">(</span><span class="n">room</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eventHandlers</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">EventHandler</span><span class="p">(</span><span class="n">handleFunction</span><span class="p">,</span> <span class="n">responseType</span><span class="p">,</span><span class="n">responseRooms</span><span class="p">,</span><span class="n">responseComponent</span><span class="p">,</span> <span class="n">trigger</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Client.join_room"><a class="viewcode-back" href="../../src/package_apis/swergio/swergio.html#swergio.client.Client.join_room">[docs]</a>    <span class="k">def</span> <span class="nf">join_room</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Join the given room. This will send a JOINROOM command message to the server.</span>
+
+<span class="sd">        :param room: The ID of the room to join.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">room</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rooms</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">({</span><span class="s1">&#39;ID&#39;</span><span class="p">:</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="o">.</span><span class="n">hex</span> <span class="p">,</span><span class="s1">&#39;TYPE&#39;</span><span class="p">:</span> <span class="n">MESSAGE_TYPE</span><span class="o">.</span><span class="n">COMMAND</span><span class="o">.</span><span class="n">JOINROOM</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="s1">&#39;ROOM&#39;</span><span class="p">:</span> <span class="n">room</span><span class="p">,</span><span class="s1">&#39;TO_ROOM&#39;</span><span class="p">:</span><span class="s1">&#39;_command&#39;</span><span class="p">})</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rooms</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">room</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Client.listen"><a class="viewcode-back" href="../../src/package_apis/swergio/swergio.html#swergio.client.Client.listen">[docs]</a>    <span class="k">def</span> <span class="nf">listen</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Listen for incoming messages from the server and handle them using the registered</span>
+<span class="sd">        event handlers. This method will block until the connection to the server is closed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">message</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">False</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">eventHandler</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">eventHandlers</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">eventHandler</span><span class="o">.</span><span class="n">is_triggered</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+                        <span class="n">responses</span> <span class="o">=</span> <span class="n">eventHandler</span><span class="o">.</span><span class="n">handle</span><span class="p">(</span><span class="n">message</span><span class="p">,</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">filter_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">,</span><span class="n">eventHandler</span><span class="o">.</span><span class="n">handleFunction</span><span class="p">))</span>
+                        <span class="k">if</span> <span class="n">responses</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                            <span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="n">responses</span><span class="p">:</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">add_propagated_fields</span><span class="p">(</span><span class="n">message</span><span class="p">,</span><span class="n">response</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                <span class="k">break</span></div>
+
+
+<div class="viewcode-block" id="Client.add_propagated_fields"><a class="viewcode-back" href="../../src/package_apis/swergio/swergio.html#swergio.client.Client.add_propagated_fields">[docs]</a>    <span class="k">def</span> <span class="nf">add_propagated_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add the fields from the original message that should be propagated to the response</span>
+<span class="sd">        message. This includes the root ID, the model status of the original message as </span>
+<span class="sd">        well as the name of the sender.</span>
+
+<span class="sd">        :param message: The original message.</span>
+<span class="sd">        :param response: The response message.</span>
+<span class="sd">        :return: The updated response message.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s1">&#39;ROOT_ID&#39;</span> <span class="ow">in</span> <span class="n">message</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">and</span> <span class="s1">&#39;ROOT_ID&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">response</span><span class="p">[</span><span class="s1">&#39;ROOT_ID&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">message</span><span class="p">[</span><span class="s1">&#39;ROOT_ID&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">&#39;MODEL_STATUS&#39;</span> <span class="ow">in</span> <span class="n">message</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">and</span> <span class="s1">&#39;MODEL_STATUS&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">response</span><span class="p">[</span><span class="s1">&#39;MODEL_STATUS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">message</span><span class="p">[</span><span class="s1">&#39;MODEL_STATUS&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">&#39;SENT_BY&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">response</span><span class="p">[</span><span class="s1">&#39;SENT_BY&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">return</span> <span class="n">response</span></div>
+                        
+    <span class="c1"># def filter_dict(self,dict_to_filter, thing_with_kwargs):</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     Filter the given dictionary and return a new dictionary containing only the keys</span>
+    <span class="c1">#     that correspond to arguments of the given function.</span>
+
+    <span class="c1">#     :param dictionary: The dictionary to filter.</span>
+    <span class="c1">#     :param function: The function whose arguments should be used to filter the</span>
+    <span class="c1">#                      dictionary.</span>
+    <span class="c1">#     :return: The filtered dictionary.</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     sig = inspect.signature(thing_with_kwargs)</span>
+    <span class="c1">#     filter_keys = [param.name for param in sig.parameters.values() if param.kind == param.POSITIONAL_OR_KEYWORD]</span>
+    <span class="c1">#     filtered_dict = {filter_key:dict_to_filter[filter_key] for filter_key in filter_keys if filter_key in dict_to_filter}</span>
+    <span class="c1">#     return filtered_dict</span>
+    
+<div class="viewcode-block" id="Client.filter_dict"><a class="viewcode-back" href="../../src/package_apis/swergio/swergio.html#swergio.client.Client.filter_dict">[docs]</a>    <span class="k">def</span> <span class="nf">filter_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dictionary</span><span class="p">,</span> <span class="n">function</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Filter the given dictionary and return a new dictionary containing only the keys</span>
+<span class="sd">        that correspond to arguments of the given function.</span>
+
+<span class="sd">        :param dictionary: The dictionary to filter.</span>
+<span class="sd">        :param function: The function whose arguments should be used to filter the</span>
+<span class="sd">                         dictionary.</span>
+<span class="sd">        :return: The filtered dictionary.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getfullargspec</span><span class="p">(</span><span class="n">function</span><span class="p">)</span><span class="o">.</span><span class="n">args</span><span class="p">}</span></div></div>
+
+<div class="viewcode-block" id="EventHandler"><a class="viewcode-back" href="../../src/package_apis/swergio/swergio.html#swergio.client.EventHandler">[docs]</a><span class="k">class</span> <span class="nc">EventHandler</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class defines an event handler, which can be used to handle messages that match</span>
+<span class="sd">    certain criteria.</span>
+
+<span class="sd">    :param handleFunction: The function to call when a message is handled by this event</span>
+<span class="sd">                           handler. This function should take the same arguments as the</span>
+<span class="sd">                           `handle` method of this class and return a response message, or</span>
+<span class="sd">                           None if no response is needed.</span>
+<span class="sd">    :param responseType: The type of the response message.</span>
+<span class="sd">    :param responseRooms: A list of room IDs where the response message should be sent. If</span>
+<span class="sd">                          not specified, the response will be sent to the same room as the</span>
+<span class="sd">                          original message.</span>
+<span class="sd">    :param responseComponent: The component ID where the response message should be sent.</span>
+<span class="sd">    :param trigger: A `Trigger` instance that specifies the criteria for triggering this</span>
+<span class="sd">                    event handler. If not specified, the event handler will never be</span>
+<span class="sd">                    triggered.</span>
+
+<span class="sd">    :ivar handleFunction: The function to call when a message is handled by this event</span>
+<span class="sd">                          handler.</span>
+<span class="sd">    :ivar responseType: The type of the response message.</span>
+<span class="sd">    :ivar responseRooms: A list of room IDs where the response message should be sent.</span>
+<span class="sd">    :ivar responseComponent: The component ID where the response message should be sent.</span>
+<span class="sd">    :ivar trigger: A `Trigger` instance that specifies the criteria for triggering this</span>
+<span class="sd">                   event handler.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">handleFunction</span><span class="p">,</span> <span class="n">responseType</span><span class="p">,</span><span class="n">responseRooms</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span><span class="n">responseComponent</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">trigger</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="n">responseRooms</span> <span class="o">=</span> <span class="n">responseRooms</span> <span class="k">if</span> <span class="n">responseRooms</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">responseRooms</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">list</span> <span class="k">else</span> <span class="p">[</span><span class="n">responseRooms</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">handleFunction</span> <span class="o">=</span> <span class="n">handleFunction</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">responseType</span> <span class="o">=</span> <span class="n">responseType</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">responseRooms</span> <span class="o">=</span> <span class="n">responseRooms</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">responseComponent</span> <span class="o">=</span> <span class="n">responseComponent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trigger</span> <span class="o">=</span> <span class="n">trigger</span>
+
+<div class="viewcode-block" id="EventHandler.is_triggered"><a class="viewcode-back" href="../../src/package_apis/swergio/swergio.html#swergio.client.EventHandler.is_triggered">[docs]</a>    <span class="k">def</span> <span class="nf">is_triggered</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check if this event handler is triggered by the given message.</span>
+
+<span class="sd">        :param message: The message to check.</span>
+<span class="sd">        :return: True if the message matches the criteria specified for this event handler,</span>
+<span class="sd">                 False otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">trigger</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">trigger</span><span class="o">.</span><span class="n">is_triggered</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="EventHandler.handle"><a class="viewcode-back" href="../../src/package_apis/swergio/swergio.html#swergio.client.EventHandler.handle">[docs]</a>    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handle the given message by calling the `handleFunction` specified in the</span>
+<span class="sd">        constructor, and return a response message if needed.</span>
+
+<span class="sd">        :param args: Positional arguments to pass to `handleFunction`.</span>
+<span class="sd">        :param kwargs: Keyword arguments to pass to `handleFunction`.</span>
+<span class="sd">        :return: A response message, or None if no response is needed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handleFunction</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">response</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="s1">&#39;ID&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">response</span><span class="p">:</span>
+            <span class="n">response</span><span class="p">[</span><span class="s1">&#39;ID&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="o">.</span><span class="n">hex</span>
+    
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">responseType</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">response</span><span class="p">[</span><span class="s1">&#39;TYPE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">responseType</span><span class="o">.</span><span class="n">id</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">responseComponent</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">response</span><span class="p">[</span><span class="s1">&#39;TO&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">responseComponent</span>
+    
+        <span class="n">responses</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">responseRooms</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">room</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">responseRooms</span><span class="p">:</span>
+                <span class="n">resp</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+                <span class="n">resp</span><span class="p">[</span><span class="s1">&#39;TO_ROOM&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">room</span>
+                <span class="n">responses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">responses</span></div></div>
+
+<div class="viewcode-block" id="Trigger"><a class="viewcode-back" href="../../src/package_apis/swergio/swergio.html#swergio.client.Trigger">[docs]</a><span class="k">class</span> <span class="nc">Trigger</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class defines a trigger, which can be used to check if a given message matches</span>
+<span class="sd">    certain criteria.</span>
+
+<span class="sd">    :param types: A list of message types that should trigger this trigger.</span>
+<span class="sd">    :param rooms: A list of room IDs that should trigger this trigger. If not specified,</span>
+<span class="sd">                  the trigger will be triggered by messages in any room.</span>
+<span class="sd">    :param directmessage: A boolean indicating whether direct messages (messages not</span>
+<span class="sd">                          sent to a specific room) should trigger this trigger.</span>
+
+<span class="sd">    :ivar types: A list of message types that should trigger this trigger.</span>
+<span class="sd">    :ivar rooms: A list of room IDs that should trigger this trigger.</span>
+<span class="sd">    :ivar directmessage: A boolean indicating whether direct messages should trigger this</span>
+<span class="sd">                         trigger.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">types</span><span class="p">,</span> <span class="n">rooms</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">directmessage</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">types</span> <span class="o">=</span> <span class="n">types</span> <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">types</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">list</span> <span class="k">else</span> <span class="p">[</span><span class="n">types</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rooms</span> <span class="o">=</span> <span class="n">rooms</span> <span class="k">if</span> <span class="n">rooms</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">rooms</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">list</span> <span class="k">else</span> <span class="p">[</span><span class="n">rooms</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">directmessage</span> <span class="o">=</span> <span class="n">directmessage</span>
+
+<div class="viewcode-block" id="Trigger.is_triggered"><a class="viewcode-back" href="../../src/package_apis/swergio/swergio.html#swergio.client.Trigger.is_triggered">[docs]</a>    <span class="k">def</span> <span class="nf">is_triggered</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check if this trigger is triggered by the given message.</span>
+
+<span class="sd">        :param message: The message to check.</span>
+<span class="sd">        :return: True if the message matches the criteria specified for this trigger, False</span>
+<span class="sd">                 otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">MESSAGE_TYPE</span><span class="o">.</span><span class="n">by_id</span><span class="p">(</span><span class="n">message</span><span class="p">[</span><span class="s1">&#39;TYPE&#39;</span><span class="p">])</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">types</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rooms</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">message</span><span class="p">[</span><span class="s1">&#39;TO_ROOM&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rooms</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">directmessage</span> <span class="ow">and</span> <span class="s1">&#39;TO_ROOM&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">message</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span></div></div>
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, IshmaGurca.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

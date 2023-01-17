@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction &mdash; swergio 0.0.1 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="01_server.py" href="01_server.html" />
+    <link rel="prev" title="Reinforcement Learning" href="overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> swergio
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../swergio/modules.html">Swergio Project</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../modules.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../Trebuchet/overview.html">Trebuchet</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="overview.html">Reinforcement Learning</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="overview.html#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#how-to-run-it">How to run it</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="overview.html#details">Details</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="01_server.html">01_server.py</a></li>
+<li class="toctree-l4"><a class="reference internal" href="02_model.html">02_model.py</a></li>
+<li class="toctree-l4"><a class="reference internal" href="03_aggregation.html">03_aggregation.py</a></li>
+<li class="toctree-l4"><a class="reference internal" href="04_gym_env.html">04_gym_env.py</a></li>
+<li class="toctree-l4"><a class="reference internal" href="05_evolutionary.html">05_evolutionary.py</a></li>
+<li class="toctree-l4"><a class="reference internal" href="99_swarm.html">Set up the swarm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="06_control.html">06_control.py</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../MelodyCreator/overview.html">Melody Creator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../package_apis/modules.html">Packages API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">swergio</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../modules.html">Examples</a></li>
+          <li class="breadcrumb-item"><a href="overview.html">Reinforcement Learning</a></li>
+      <li class="breadcrumb-item active">Introduction</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/src/examples/RL/00_introduction.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h1>
+<p>In this example, we will train an agent to act within an <a class="reference external" href="https://www.gymlibrary.dev/">OpenAI Gym environment</a>.</p>
+<p>Specifically, we will focus on one of the classic control problems: the cart pole.
+The cart pole is an environment in which a pole is attached to a cart that moves along a frictionless track.
+The goal is to balance the pole by applying forces in the left and right direction on the cart.
+The agent’s task is to balance the pole as long as possible.</p>
+<img alt="https://www.gymlibrary.dev/_images/cart_pole.gif" src="https://www.gymlibrary.dev/_images/cart_pole.gif" />
+<p>In this example, our agent will control the direction of the cart while receiving observations about the cart and the pole’s position.
+The environment rewards the agent +1 for every step the pole remains upright.</p>
+<p>It is typical to train such an agent using reinforcement learning (RL) techniques,
+where the agent uses the rewards received from the environment to determine the optimal actions in a given situation.
+There are various RL algorithms to choose from, and in this example,
+we will train an Advantage Actor Critic (A2C) agent using the implementation from the <a class="reference external" href="https://stable-baselines3.readthedocs.io/en/master/modules/a2c.html">stable-baselines3 package</a>.</p>
+<p>As swergio is designed to facilitate communication between separate components,
+we will also divide this example into two parts: the agent component and the environment component.
+The environment will send the current observations to the agent,
+which will then predict the next best action and send it back to the environment for evaluation.
+The environment will then provide feedback in the form of a reward to the agent.</p>
+<img alt="../../../_images/setup01.png" src="../../../_images/setup01.png" />
+<p>This setup is straightforward; the agent interacts with the environment through actions and learns from the results.
+However, training a single agent can take a significant amount of time.
+To speed up the process, it is common to train multiple agents simultaneously.</p>
+<p>This approach has the drawback that each agent must act independently in the environment,
+which works well in a simulated environment like ours, but may not be practical in real-world scenarios.
+To address this, we will implement a mechanism that collects the proposed actions from each agent
+and aggregates them into a single action to perform in the environment.
+This way, the agents will work together to achieve the desired outcome</p>
+<img alt="../../../_images/setup11.png" src="../../../_images/setup11.png" />
+<p>With this setup, some agents’ proposed actions will be chosen more frequently than others.
+We can use this information to improve the models of these agents by focusing on the agents that contribute more to the final action.</p>
+<p>Our approach is to keep these models and produce new, similar agents.
+To achieve this, we will apply an evolutionary algorithm to select the best models, then mate and mutate them to generate a new set of agents.</p>
+<p>This step will take place after the agents have performed multiple steps in the environment.
+To facilitate this process, we will add a new component that tracks the contribution of each agent to the final action,
+and after generating new models, update each agent component.</p>
+<img alt="../../../_images/setup2.png" src="../../../_images/setup2.png" />
+<p>In the final setup, we will also add a component to send specific commands such as starting episodes in the environment and executing evolutionary steps.</p>
+<p>This example illustrates how swergio can be utilized in a reinforcement learning setup, facilitating communication between agents and the environment,
+and allowing for easy extension with new functionality and components.</p>
+<p>It is worth noting that this setup can be applied to other RL problems and other Gym environments,
+but some adjustments to the input parameters related to action and observation spaces would be required.</p>
+<p>In the following sections, we will examine each component in more detail.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="overview.html" class="btn btn-neutral float-left" title="Reinforcement Learning" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="01_server.html" class="btn btn-neutral float-right" title="01_server.py" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, IshmaGurca.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+Set up the swarm
+========================
+
+To start and run multiple components at the same time we can use the *swarm* functionality from the swergio toolbox.
+
+We therefore need to set up a ``swarm.yaml`` file, that contains all the information about general settings as well as the separate components.
+
+For the general settings we can define the paths to the environments used to execute the python codes.
+
+We can also add the command used to run python files, which is in default mode ``python``, but can be set to ``python3``.
+
+And lastly we can define a command we'll use to run the component in a terminal. If this command is not provided the code is run without of a terminal.
+
+.. code-block:: yaml
+
+    settings:
+        python_envpath: "./venv/bin/" #  path to executable "python" in virtual environment folder 
+        python_cmd: "python" # (default) or "python3"
+        terminal_cmd: "xterm -fs 14 -fa DejaVuSansMono -hold -e" # execution of file will be added
+
+
+Each component need to have a unique name and a provided filepath to the source code.
+
+Optional a *delay* parameter can be provided which will result in a n-second delay until the next component of the list is started. This can be useful to ensure that for example the server is up and running.
+
+We can also add individual settings (*python_envpath*, *python_cmd* or *terminal_cmd*) to the component to overwrite the general settings. 
+
+.. code-block:: yaml
+
+    components:
+        server:
+            filepath: "01_server.py"
+            delay: 5
+        aggregation:
+            filepath: "03_aggregation.py"
+        gym:
+            filepath: "04_gym_env.py"
+        evolution:
+            filepath: "05_evolutionary.py"

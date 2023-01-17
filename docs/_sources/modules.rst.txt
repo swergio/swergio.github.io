@@ -1,9 +1,0 @@
-Swergio
-=======
-
-.. toctree::
-   :maxdepth: 2
-
-   src/swergio/modules.rst
-   src/examples/modules.rst
-   src/package_apis/modules.rst

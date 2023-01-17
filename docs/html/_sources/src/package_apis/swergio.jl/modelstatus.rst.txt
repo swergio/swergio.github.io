@@ -1,4 +1,0 @@
-modelstatus module
-===================
-
-.. jl:autofile:: ./swergio//swergio.jl/src/modelstatus.jl

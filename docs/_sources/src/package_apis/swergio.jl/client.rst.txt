@@ -1,6 +1,0 @@
-client module
-===================
-
-
-.. jl:autofile:: ./swergio.jl/src/client.jl
-
